@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import { RouterView, RouterLink } from 'vue-router'
 </script>
 
 <template>
   <header>
     <h1>Nevypusť duši 5 + 2</h1>
+    <RouterLink to="/">Home</RouterLink>
+    <RouterLink to="/about">About page</RouterLink>
   </header>
 
   <RouterView />
