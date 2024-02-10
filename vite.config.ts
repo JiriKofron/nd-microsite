@@ -14,7 +14,7 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: './../../../petplusdva'
+    outDir: './../draftspot_theme/assets/microsite'
   },
-  base: '/petplusdva'
+  base: '/microsite'
 })
