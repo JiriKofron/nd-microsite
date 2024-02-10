@@ -1,77 +1,36 @@
 <script setup lang="ts">
-import { RouterView, RouterLink } from 'vue-router'
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <header>
-    <h1 class="border-2 border-solid border-red-400">Nevypusť duši 5 + 2 new</h1>
-    <RouterLink to="/">Home page 3</RouterLink>
-    <RouterLink to="/about">About page</RouterLink>
-  </header>
+  <section class="flex flex-col items-center justify-center w-full">
+    <section class="flex justify-center w-full bg-primary pt-28">
+      <article class="flex flex-col justify-between w-full max-w-[1000px] h-[380px] text-white pt-16">
+        <div class="flex flex-col flex-nowrap">
+          <div class="flex gap-x-7">
+            <img src="@/assets/icons/ico-zazemi.svg" alt="ikona hrnicku s srdcem a oblicejem" width="122" height="137"  />
+            <h1 class="text-heading max-w-80 leading-none pt-2 text-white">
+              Poslouchejme děti, když s námi mluví
+            </h1>
+          </div>
 
-  <RouterView />
+          <div>
+            <div>
+              Místo, kde vám poradíme co dělat,
+              <span>když dítě není v p o h o d ě</span>
+            </div>
+          </div>
+        </div>
+
+        <nav class="flex items-center justify-between">
+          <RouterLink to="/">Představení</RouterLink>
+          <RouterLink to="/varovne-signaly">Varovné signály</RouterLink>
+          <RouterLink to="/jak-vest-rozhovor">Jak s dítětem mluvit</RouterLink>
+          <RouterLink to="/mista-pomoci">Místa pomoci a podpory</RouterLink>
+        </nav>
+      </article>
+    </section>
+
+    <RouterView />
+  </section>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
