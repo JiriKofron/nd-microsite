@@ -5,7 +5,7 @@ import { RouterView, RouterLink } from 'vue-router'
 <template>
   <header>
     <h1 class="border-2 border-solid border-red-400">Nevypusť duši 5 + 2 new</h1>
-    <RouterLink to="/">Home</RouterLink>
+    <RouterLink to="/">Home page</RouterLink>
     <RouterLink to="/about">About page</RouterLink>
   </header>
 
