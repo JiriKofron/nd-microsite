@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script type="module" setup lang="ts">
 import { RouterView } from 'vue-router'
 </script>
 
