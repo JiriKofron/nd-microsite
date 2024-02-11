@@ -5,8 +5,8 @@ import { RouterView } from 'vue-router'
 <template>
   <section class="flex flex-col items-center justify-center w-full">
     <section class="flex justify-center w-full bg-primary pt-28">
-      <article class="flex flex-col justify-between w-full max-w-[1000px] h-[380px] text-white mt-16 px-8 py-5">
-        <div class="flex flex-col flex-nowrap px-3">
+      <article class="flex flex-col justify-between w-full max-w-[900px] h-[380px] text-white mt-16 px-8 py-5">
+        <div class="flex flex-col flex-nowrap">
           <div class="flex gap-x-7">
             <img src="@/assets/icons/ico-zazemi.svg" alt="ikona hrnicku s srdcem a oblicejem" width="122" height="137"  />
             <h1 class="text-heading leading-none pt-2 text-white font-baloo">

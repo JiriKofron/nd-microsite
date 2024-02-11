@@ -8,7 +8,9 @@ export default {
     extend: {
       colors: {
         primary: '#6A498F',
-        orange: '#E67F4F'
+        orange: '#E67F4F',
+        yellow: '#FFF7E8',
+        'light-blue': '#F2F5FE'
       },
       fontSize: {
         heading: '2.5rem'
