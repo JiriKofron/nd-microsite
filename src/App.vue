@@ -31,10 +31,10 @@ import { RouterView } from 'vue-router'
         </div>
 
         <nav class="flex items-center gap-x-2.5 font-montserrat font-semibold">
-          <RouterLink to="/" class="py-2 px-4 rounded-3xl">Představení</RouterLink>
-          <RouterLink to="/varovne-signaly" class="py-2 px-4 rounded-3xl">Varovné signály</RouterLink>
-          <RouterLink to="/jak-vest-rozhovor" class="py-2 px-4 rounded-3xl">Jak s dítětem mluvit</RouterLink>
-          <RouterLink to="/mista-pomoci" class="py-2 px-4 rounded-3xl">Místa pomoci a podpory</RouterLink>
+          <RouterLink to="/poslouchejme-deti" class="py-2 px-4 rounded-3xl">Představení</RouterLink>
+          <RouterLink to="/poslouchejme-deti/varovne-signaly" class="py-2 px-4 rounded-3xl">Varovné signály</RouterLink>
+          <RouterLink to="/poslouchejme-deti/jak-vest-rozhovor" class="py-2 px-4 rounded-3xl">Jak s dítětem mluvit</RouterLink>
+          <RouterLink to="/poslouchejme-deti/mista-pomoci" class="py-2 px-4 rounded-3xl">Místa pomoci a podpory</RouterLink>
         </nav>
       </article>
     </section>

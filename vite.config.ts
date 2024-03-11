@@ -14,7 +14,7 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: './../../../petplusdva',
+    outDir: './../../../poslouchejme-deti',
   },
-  base: '/petplusdva'
+  base: '/poslouchejme-deti'
 })

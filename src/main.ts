@@ -1,5 +1,5 @@
 import './assets/main.css'
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -8,15 +8,15 @@ import IntroductionView from "@/views/IntroductionView.vue";
 
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes: [
         {
-            path: '/',
+            path: '/poslouchejme-deti',
             name: 'introduction',
             component: IntroductionView
         },
         {
-            path: '/varovne-signaly',
+            path: '/poslouchejme-deti/varovne-signaly',
             name: 'warningSignal',
             // route level code-splitting
             // this generates a separate chunk (About.[hash].js) for this route
@@ -24,12 +24,12 @@ const router = createRouter({
             component: () => import('./views/WarningSignalView.vue')
         },
         {
-            path: '/jak-vest-rozhovor',
+            path: '/poslouchejme-deti/jak-vest-rozhovor',
             name: 'howToTalk',
             component: () => import('./views/HowToTalkView.vue')
         },
         {
-            path: '/mista-pomoci',
+            path: '/poslouchejme-deti/mista-pomoci',
             name: 'safeSpaces',
             component: () => import('./views/SafeSpacesView.vue')
         }
