@@ -14,7 +14,7 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: './../../../poslouchejme-deti',
+    outDir: './../../../poslouchejmeDeti',
   },
   base: '/poslouchejme-deti'
 })
