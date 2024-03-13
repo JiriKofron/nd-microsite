@@ -10,13 +10,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#6A498F',
-        orange: '#E67F4F',
-        yellow: '#FFF7E8',
-        'light-blue': '#F2F5FE'
+        primary: 'var(--primary-purple)',
+        orange: 'var(--orange)',
+        yellow: 'var(--yellow)',
+        'light-blue': 'var(--light-blue)',
+        'light-violet': 'var(--light-violet)'
       },
       fontSize: {
-        heading: '2.5rem'
+        heading: '2.5rem',
+        clamp: 'clamp(2rem, 7vw, 3.5rem)'
       },
       borderRadius: {
         '30': '30px'

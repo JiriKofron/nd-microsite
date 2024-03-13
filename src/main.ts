@@ -32,6 +32,11 @@ const router = createRouter({
             path: '/poslouchejme-deti/mista-pomoci',
             name: 'safeSpaces',
             component: () => import('./views/SafeSpacesView.vue')
+        },
+        {
+            path: '/poslouchejme-deti/pro-instituce',
+            name: 'forInstitutions',
+            component: () => import('./views/ForInstitutionsView.vue')
         }
     ]
 })
