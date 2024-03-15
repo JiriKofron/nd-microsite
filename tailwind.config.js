@@ -11,6 +11,7 @@ export default {
     extend: {
       colors: {
         primary: 'var(--primary-purple)',
+        'primary-text': 'var(--primary-text)',
         orange: 'var(--orange)',
         yellow: 'var(--yellow)',
         'light-blue': 'var(--light-blue)',
@@ -18,7 +19,10 @@ export default {
         'dark-violet': 'var(--dark-violet)'
       },
       fontSize: {
-        heading: '2.5rem',
+        base: ['1.5rem', '1.9rem'],
+        17: '1.7rem',
+        'sm-heading': ['2.3rem', '2.6rem'],
+        heading: ['2.6rem', '3rem'],
         clamp: 'clamp(2rem, 6.5vw, 3.5rem)'
       },
       borderRadius: {
@@ -27,8 +31,7 @@ export default {
     },
     fontFamily: {
       baloo: ["Baloo", 'sans-serif'],
-      montserrat: ['Montserrat', 'serif'],
-      roboto: ['Roboto', 'sans-serif']
+      roboto: ['Roboto', 'serif']
     }
   },
   plugins: [],

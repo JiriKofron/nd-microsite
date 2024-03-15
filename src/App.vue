@@ -83,12 +83,13 @@ const activePage = computed(() => {
           </div>
         </div>
 
-        <nav class="flex items-center flex-wrap md:justify-center gap-4 pt-12 pb-6 font-montserrat font-bold">
+        <nav class="flex items-center flex-wrap md:justify-center gap-4 pt-12 pb-6 font-roboto">
           <RouterLink
               v-for="route in routes"
               :key="route.id" :to="route.to"
               :class="[
                   'flex items-center justify-center bg-light-violet text-white',
+                  'font-semibold text-base leading-8 tracking-wider',
                   'py-3.5 px-6 rounded-full no-underline',
                   'hover:no-underline hover:bg-white hover:text-primary',
                   'visited:no-underline visited:text-white route-btn',
@@ -119,7 +120,6 @@ const activePage = computed(() => {
 }
 
 .route-btn {
-  font-size: 14px;
   transition: all .3s ease;
 }
 

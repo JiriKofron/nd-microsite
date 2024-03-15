@@ -8,12 +8,13 @@ const acf = ref<Acf | null>(null)
 const categoryDetails = ref<CategoryDetail[] | undefined | null>(null)
 
 interface CategoryDetail {
-  kategorie_nadpis: string
+  nadpis_detail: string
   ikona: string
-  kategorie_text: string
+  text_detail: string
 }
 interface Acf {
   popis: string
+  kategorie_nadpis: string
   kategorie: {
     kategorie_nadpis: string
     kategorie_detail: CategoryDetail[]
@@ -53,64 +54,85 @@ onMounted( async () => {
 <template>
 <section
     v-if="page && acf"
-    class="flex flex-col align-center justify-center bg-yellow w-full"
+    class="flex flex-col align-center justify-center w-full"
 >
-  <section class="flex flex-col items-center justify-center w-full max-w-[900px]">
-    <article class="flex items-center justify-center">
-      <img src="" alt="balonek" />
-      <p>{{acf.popis}}</p>
+  <section class="flex flex-col items-center justify-center max-w-[900px] p-8">
+    <article class="flex items-center justify-center w-100 p-4 gap-x-8">
+      <img
+          src="@/assets/icons/ico-violet-baloon.svg"
+          alt="balonek"
+          width="38"
+      />
+      <p class="text-17 leading-8 font-normal text-primary-text font-roboto">{{acf.popis}}</p>
     </article>
 
-    <section v-if="categoryDetails">
-      <h2>{{acf.kategorie.nadpis}}</h2>
-      <div>
-        <article v-for="(category, index) in categoryDetails" :key="index">
-          acf s daty
-          {{category.text_detail}}
-          <div class="category-header">
+    <section
+        v-if="categoryDetails"
+        class="flex flex-col items-center justify-center gap-y-6"
+    >
+      <h2
+          class="text-primary-text text-heading text-center font-baloo font-semibold m-0"
+      >
+        {{acf.kategorie.kategorie_nadpis}}
+      </h2>
+
+      <div class="flex flex-col items-center justify-center gap-y-16 p-4">
+        <article
+            v-for="(category, index) in categoryDetails"
+            :key="index"
+            class="bg-yellow p-8 pb-16 rounded-2xl"
+        >
+          <div class="flex items-start gap-8 mb-6">
             <img :src="category.ikona" alt="article icon" />
+            <h3 class="text-sm-heading font-baloo font-semibold text-orange m-0">
+              {{category.nadpis_detail}}
+            </h3>
           </div>
 
-          <div>
-            text kategorie
-          </div>
+          <div
+              v-html="category.text_detail"
+              class="flex flex-col items-center justify-center text-base font-roboto font-normal text-primary-text"
+          />
         </article>
-      </div>
-    </section>
 
-    <section>
-      <div>
-        <img src="@/assets/icons/ico-map.svg" alt="icon with map">
-        <h3>
-          Kde ve svém okolí můžete najít další podporu
-        </h3>
-
-        <p>
-          Říct si o pomoc vyžaduje odvahu. Možná tápete, kdo může pečovat o duše mladých?
-        </p>
-
-        <NdButton>
-          Kdo může pečovat o duše mladých
-        </NdButton>
-
-        <article>
-          <p>
-            Pomoct vám může také
-          </p>
-
-          <div>
-            <img src="" alt="talking bubble" />
-            <NdButton>
-              E-mailová poradna
-            </NdButton>
+        <article class="bg-yellow p-8 pb-16 rounded-2xl">
+          <div class="flex items-start gap-8 mb-6">
+            <img src="@/assets/icons/ico-map.svg" alt="icon with map" />
+            <h3 class="text-sm-heading font-baloo font-semibold text-orange m-0">
+              Kde ve svém okolí můžete najít další podporu
+            </h3>
           </div>
 
-          <div>
-            <img src="" alt="crossroad sign" />
-            <NdButton>
-              Rozcestník sítě pomoci
-            </NdButton>
+          <div class="flex flex-col items-center justify-center text-base font-roboto font-normal text-primary-text">
+            <p>
+              Říct si o pomoc vyžaduje odvahu. Možná tápete, kdo může pečovat o duše mladých?
+            </p>
           </div>
+          <NdButton variant="link" link="/poslouchejme-deti/mista-pomoci" block>
+            Kdo může pečovat o duše mladých?
+          </NdButton>
+
+          <article
+            class="flex flex-col items-center justify-center bg-white p-8 rounded-2xl gap-6 mt-7"
+          >
+            <p class="text-sm-heading text-primary font-semibold font-baloo m-0">
+              Pomoct vám může také
+            </p>
+
+            <div class="flex flex-col items-center justify-center gap-4">
+              <img src="@/assets/icons/ico-talking-bubble.svg" alt="talking bubble" />
+              <NdButton variant="anchor" link="https://nevypustdusi.cz/kde-hledat-pomoc/">
+                E-mailová poradna
+              </NdButton>
+            </div>
+
+            <div class="flex flex-col items-center justify-center gap-4">
+              <img src="@/assets/icons/ico-rozcestník.svg" alt="crossroad sign" />
+              <NdButton variant="anchor" link="https://nevypustdusi.cz/kde-hledat-pomoc/">
+                Rozcestník sítě pomoci
+              </NdButton>
+            </div>
+          </article>
         </article>
       </div>
     </section>
