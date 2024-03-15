@@ -14,11 +14,12 @@ export default {
         orange: 'var(--orange)',
         yellow: 'var(--yellow)',
         'light-blue': 'var(--light-blue)',
-        'light-violet': 'var(--light-violet)'
+        'light-violet': 'var(--light-violet)',
+        'dark-violet': 'var(--dark-violet)'
       },
       fontSize: {
         heading: '2.5rem',
-        clamp: 'clamp(2rem, 7vw, 3.5rem)'
+        clamp: 'clamp(2rem, 6.5vw, 3.5rem)'
       },
       borderRadius: {
         '30': '30px'

@@ -7,7 +7,7 @@ import App from './App.vue'
 import IntroductionView from "@/views/IntroductionView.vue";
 
 
-const router = createRouter({
+export const router = createRouter({
     history: createWebHistory(),
     routes: [
         {

@@ -40,9 +40,9 @@ const activePage = computed(() => {
   <section class="flex flex-col items-center justify-center w-full">
     <section class="flex justify-center w-full bg-primary pt-36">
       <article class="flex flex-col justify-between w-full max-w-[900px] max-h-[380px] text-white mt-0 md-mt-16 px-8 py-5">
-        <div class="flex flex-col flex-nowrap gap-y-4 md:gap-y-18">
+        <div class="flex flex-col flex-nowrap gap-y-3 md:gap-y-18">
           <div class="flex items-center md:justify-center gap-x-2 px-6">
-            <h1 class="text-clamp leading-tight my-0 pt-2 text-white font-baloo font-semibold max-w-[300px] md:max-w-full">
+            <h1 class="text-clamp leading-tight my-0 pt-2 text-white font-baloo font-semibold max-w-[70%] md:max-w-full">
               Poslouchejme děti, když s námi mluví
             </h1>
 
@@ -63,11 +63,12 @@ const activePage = computed(() => {
                 height="100"
                 class="hidden md:flex"
             />
-            <div class="flex flex-col justify-center relative w-11/12 max-w-[420px] px-8 py-2 bg-light-violet rounded-30 text-[15px] md:text-4xl font-bold leading-normal md:leading-relaxed font-baloo">
+
+            <div class="flex flex-col justify-center relative w-10/12 sm:w-11/12 max-w-[420px] pl-8 pr-4 py-2 bg-dark-violet rounded-30 text-[17px] md:text-4xl font-bold leading-normal md:leading-relaxed font-baloo">
               <span class="">Místo, kde vám poradíme co dělat,</span>
-              <span class="uppercase md:text-[26px]">
+              <span class="uppercase md:text-[26px] text-orange">
                 <strong>
-                  když dítě není v p o h o d ě...
+                  když dítě není v pohodě . . .
                 </strong>
               </span>
 
@@ -82,13 +83,13 @@ const activePage = computed(() => {
           </div>
         </div>
 
-        <nav class="flex items-center flex-wrap gap-4 pt-12 pb-6 font-montserrat font-bold">
+        <nav class="flex items-center flex-wrap md:justify-center gap-4 pt-12 pb-6 font-montserrat font-bold">
           <RouterLink
               v-for="route in routes"
               :key="route.id" :to="route.to"
               :class="[
                   'flex items-center justify-center bg-light-violet text-white',
-                  'py-2 px-4 rounded-full no-underline',
+                  'py-3.5 px-6 rounded-full no-underline',
                   'hover:no-underline hover:bg-white hover:text-primary',
                   'visited:no-underline visited:text-white route-btn',
                   {'active': activePage}
@@ -107,18 +108,17 @@ const activePage = computed(() => {
 <style lang="scss" scoped>
 .arrow-down {
   position: absolute;
-  right: -4rem;
-  top: -2rem;
+  right: -2.5rem;
+  top: -2.5rem;
 
   @media screen and (min-width: 790px) {
     left: -17rem;
-    transform: rotateY(180deg) rotateZ(60deg);
+    transform: rotateY(180deg) rotateZ(70deg);
     width: 4rem;
   }
 }
 
 .route-btn {
-  padding: 1.2rem 2rem;
   font-size: 14px;
   transition: all .3s ease;
 }
