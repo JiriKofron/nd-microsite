@@ -3,8 +3,9 @@
 const props = defineProps<{
   variant?: 'button' | 'anchor' | 'link'
   btnType?: 'submit' | 'reset' | 'button'
-  link?: string
+  link?: any
   block?: boolean
+  inverted?: boolean
 }>()
 
 defineEmits(['click', 'submit'])
@@ -14,11 +15,12 @@ defineEmits(['click', 'submit'])
 <template>
   <div
       class="flex items-center justify-center bg-light-violet h-[40px] px4 rounded-full font-semibold text-white text-base no-underline hover:no-underline visited:no-underline visited:text-white leading-relaxed"
-      :class="{'w-fit px-8': !props.block}"
+      :class="{'w-fit px-8': !props.block, 'bg-white !text-primary-text': props.inverted}"
   >
     <template v-if="props.variant === 'button'">
       <button
           class="bg-transparent border-none text-white text-base no-underline hover:no-underline visited:no-underline visited:text-white font-roboto"
+          :class="{'!text-primary-text': props.inverted}"
           :type="props.btnType"
           @click="$emit('click')"
           @submit="$emit('submit')"
@@ -30,12 +32,20 @@ defineEmits(['click', 'submit'])
     <template
         v-else-if="props.variant === 'anchor'"
     >
-      <a :href="props.link"  class="text-white text-base no-underline hover:no-underline visited:no-underline visited:text-white">
+      <a
+          :href="props.link"
+          class="text-white text-base no-underline hover:no-underline visited:no-underline visited:text-white"
+          :class="{'!text-primary-text': props.inverted}"
+      >
         <slot />
       </a>
     </template>
     <template v-else>
-      <RouterLink :to="props.link"  class="text-white text-base no-underline hover:no-underline visited:no-underline visited:text-white">
+      <RouterLink
+          :to="props.link"
+          class="text-white text-base no-underline hover:no-underline visited:no-underline visited:text-white font-roboto"
+          :class="{'!text-primary-text': props.inverted}"
+      >
         <slot />
       </RouterLink>
     </template>

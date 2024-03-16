@@ -2,6 +2,7 @@
 import { RouterView } from 'vue-router'
 import {computed, ref} from "vue";
 import {useRoute} from "vue-router";
+import GlobalFooter from "@/components/GlobalFooter.vue";
 
 const routes = ref([
   {
@@ -31,8 +32,8 @@ const routes = ref([
   }
 ])
 
-const activePage = computed(() => {
-  return routes.value.find(route => route.to === useRoute()?.path )
+const activePageId = computed(() => {
+  return routes.value.find(route => route.to === useRoute()?.path ?? '/poslouchejme-deti' )?.id
 })
 </script>
 
@@ -93,7 +94,7 @@ const activePage = computed(() => {
                   'py-3.5 px-6 rounded-full no-underline',
                   'hover:no-underline hover:bg-white hover:text-primary',
                   'visited:no-underline visited:text-white route-btn',
-                  {'active': activePage}
+                  {'active': activePageId === route.id}
               ]"
           >
             {{route.text}}
@@ -103,6 +104,9 @@ const activePage = computed(() => {
     </section>
 
     <RouterView />
+  </section>
+  <section >
+    <GlobalFooter />
   </section>
 </template>
 

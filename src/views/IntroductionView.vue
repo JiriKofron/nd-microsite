@@ -137,15 +137,6 @@ onMounted( async () => {
       </div>
     </section>
   </section>
-
-  <section class="bg-light-blue">
-    karusel
-  </section>
-
-  <footer class="bg-primary">
-    <button>Kdo za tím stojí</button>
-    <button>Kdo projekt podpořil</button>
-  </footer>
 </section>
 </template>
 
