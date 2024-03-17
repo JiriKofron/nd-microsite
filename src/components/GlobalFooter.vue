@@ -6,6 +6,7 @@ import NdButton from "@/components/NdButton.vue";
 <template>
   <section>
     <article
+        class="flex justify-center"
     >
         <TheCarousel/>
     </article>

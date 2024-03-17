@@ -63,7 +63,7 @@ onMounted( () => {
 </script>
 
 <template>
-  <section class="p-10">
+  <section class="p-10 max-w-[900px]">
     <div
         class="glide"
         ref="glideRef"
@@ -76,12 +76,13 @@ onMounted( () => {
               class="glide__slide"
           >
             <div class="reference-wrapper flex flex-col items-center justify-center text-base text-primary-text font-roboto font-medium">
-              <div class="italic px-8 py-20 mb-8 reference">
-                <div class="reference__text p-8 -mt-8 max-w-[320px]">
+              <div class="md:flex md:items-center md:justify-center italic px-8 py-20 mb-8 reference">
+                <div class="reference__text p-8 -mt-8 max-w-[320px] md:max-w-[520px] md:text-22 md:font-roboto md:font-normal">
                   {{reference.text}}
                 </div>
               </div>
-              <div class="text-orange text-center mb-4">
+
+              <div class="text-orange text-center mb-4 md:text-20">
                 <span>{{reference.jmeno}}, </span>
                 <span>{{reference.pozice}}</span>
               </div>
@@ -139,6 +140,11 @@ onMounted( () => {
   .reference {
     background: url("@/assets/images/reference-text-bubble.svg") no-repeat center center;
     background-size: contain;
+
+    @media  screen and (min-width: 768px) {
+      width: 100%;
+      height: 340px;
+    }
   }
 }
 </style>

@@ -34,7 +34,7 @@ defineEmits(['click', 'submit'])
     >
       <a
           :href="props.link"
-          class="text-white text-base no-underline hover:no-underline visited:no-underline visited:text-white"
+          class="text-white text-base no-underline hover:no-underline visited:no-underline visited:text-white font-roboto font-bold"
           :class="{'!text-primary-text': props.inverted}"
       >
         <slot />

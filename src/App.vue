@@ -43,7 +43,7 @@ const activePageId = computed(() => {
       <article class="flex flex-col justify-between w-full max-w-[900px] max-h-[380px] text-white mt-0 md-mt-16 px-8 py-5">
         <div class="flex flex-col flex-nowrap gap-y-3 md:gap-y-18">
           <div class="flex items-center md:justify-center gap-x-2 px-6">
-            <h1 class="text-clamp leading-tight my-0 pt-2 text-white font-baloo font-semibold max-w-[70%] md:max-w-full">
+            <h1 class="text-clamp leading-tight my-0 pt-2 text-white font-baloo font-semibold w-8/12 md:w-full max-w-[340px] md:max-w-full md:text-center">
               Poslouchejme děti, když s námi mluví
             </h1>
 
@@ -65,8 +65,8 @@ const activePageId = computed(() => {
                 class="hidden md:flex"
             />
 
-            <div class="flex flex-col justify-center relative w-10/12 sm:w-11/12 max-w-[420px] pl-8 pr-4 py-2 bg-dark-violet rounded-30 text-[17px] md:text-4xl font-bold leading-normal md:leading-relaxed font-baloo">
-              <span class="">Místo, kde vám poradíme co dělat,</span>
+            <div class="flex flex-col justify-center relative w-10/12 sm:w-11/12 max-w-[420px] pl-8 pr-4 py-2 bg-dark-violet rounded-30 text-[15px] font-bold leading-normal md:leading-relaxed font-baloo place-wrapper">
+              <span class="md:text-4xl">Místo, kde vám poradíme co dělat,</span>
               <span class="uppercase md:text-[26px] text-orange">
                 <strong>
                   když dítě není v pohodě . . .
@@ -130,5 +130,12 @@ const activePageId = computed(() => {
 .active {
   background-color: white;
   color: var(--primary-purple);
+}
+
+.place-wrapper {
+  @media screen and (min-width: 420px) {
+    font-size: 1.7rem;
+    line-height: 2.4rem;
+  }
 }
 </style>
