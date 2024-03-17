@@ -3,7 +3,7 @@
 </script>
 
 <template>
-<h2>Items view</h2>
+<h2>Jak s dítětem mluvit</h2>
 </template>
 
 <style scoped>

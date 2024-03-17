@@ -14,7 +14,7 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: './../draftspot_theme/assets/microsite'
+    outDir: './../../../poslouchejmeDeti',
   },
-  base: '/petplusdva'
+  base: '/poslouchejmeDeti'
 })

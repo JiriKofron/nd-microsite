@@ -3,7 +3,7 @@
 </script>
 
 <template>
-<h2>Home view</h2>
+<h1>Pro pomáhající instituce</h1>
 </template>
 
 <style scoped>

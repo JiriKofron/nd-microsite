@@ -3,7 +3,7 @@
 </script>
 
 <template>
-<h2>Items view</h2>
+<h2>Varovné signály</h2>
 </template>
 
 <style scoped>

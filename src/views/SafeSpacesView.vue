@@ -3,7 +3,7 @@
 </script>
 
 <template>
-<h2>Items view</h2>
+<h2>Místa pomoci a podpory</h2>
 </template>
 
 <style scoped>
