@@ -33,7 +33,7 @@ const routes = ref([
 ])
 
 const activePageId = computed(() => {
-  return routes.value.find(route => route.to === useRoute()?.path ?? '/poslouchejme-deti' )?.id
+  return routes.value.find(route => route.to === useRoute()?.path)?.id
 })
 </script>
 

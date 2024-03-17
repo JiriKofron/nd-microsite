@@ -30,8 +30,8 @@ onMounted( () => {
         perView: 1
   })
 
-  carousel.mount();
-  carousel.on('run.after', (e: {direction: string, steps: number}) => {
+  // @ts-expect-error
+  carousel.on('run.after', function(e: any) {
     if(e.direction === '=') {
       currentSlide.value = Number(e.steps)
       return
@@ -57,9 +57,8 @@ onMounted( () => {
         currentSlide.value = 0
         break;
     }
-
-
   })
+  carousel.mount();
 })
 </script>
 
@@ -91,35 +90,36 @@ onMounted( () => {
         </ul>
       </div>
 
-      <div class="relative px-20">
+      <div class="relative px-20 py-6">
         <div class="glide__arrows absolute flex items-center justify-between w-full inset-0 z-10"
              data-glide-el="controls"
         >
           <button
-              class="bg-transparent border-none"
+              class="bg-transparent border-none p-0"
               data-glide-dir="<"
           >
             <img src="@/assets/icons/ico-arrow_back_ios.svg" alt="ikona zpět" width="20">
           </button>
+
+          <div
+              class="glide__bullets flex items-center justify-center gap-x-14 z-20 relative"
+              data-glide-el="controls[nav]"
+          >
+            <button
+                v-for="(i, index) in references.length"
+                :key="index"
+                class="glide__bullet bg-light-violet border-none w-12 h-12 rounded-full cursor-pointer p-0 hover:text-primary-text"
+                :class="{'bg-primary-text': currentSlide === index}"
+                :data-glide-dir="`=${index}`"
+            />
+          </div>
+
           <button
-              class="bg-transparent border-none"
+              class="bg-transparent border-none p-0"
               data-glide-dir=">"
           >
             <img src="@/assets/icons/ico-arrow_back_ios.svg" alt="ikona vpřed" width="20" style="transform: rotate(180deg)">
           </button>
-        </div>
-
-        <div
-            class="glide__bullets flex items-center justify-center gap-x-14 z-20 relative"
-            data-glide-el="controls[nav]"
-        >
-          <button
-              v-for="(i, index) in references.length"
-              :key="index"
-              class="glide__bullet bg-light-violet border-none w-12 h-12 rounded-full cursor-pointer"
-              :class="{'bg-primary-text': currentSlide === index}"
-              :data-glide-dir="`=${index}`"
-          />
         </div>
       </div>
     </div>

@@ -4,11 +4,11 @@ import NdButton from "@/components/NdButton.vue";
 </script>
 
 <template>
-  <footer>
-    <section
+  <section>
+    <article
     >
         <TheCarousel/>
-    </section>
+    </article>
 
     <section class="bg-primary flex flex-col items-center justify-center p-8 gap-y-8">
       <NdButton
@@ -27,7 +27,7 @@ import NdButton from "@/components/NdButton.vue";
         Kdo projekt podpořil
       </NdButton>
     </section>
-  </footer>
+  </section>
 </template>
 
 <style scoped>

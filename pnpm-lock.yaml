@@ -8,6 +8,9 @@ dependencies:
   '@glidejs/glide':
     specifier: ^3.6.0
     version: 3.6.0
+  '@types/glidejs__glide':
+    specifier: ^3.6.5
+    version: 3.6.5
   axios:
     specifier: ^1.6.7
     version: 1.6.7
@@ -579,6 +582,10 @@ packages:
   /@tsconfig/node18@18.2.2:
     resolution: {integrity: sha512-d6McJeGsuoRlwWZmVIeE8CUA27lu6jLjvv1JzqmpsytOYYbVi1tHZEnwCNVOXnj4pyLvneZlFlpXUK+X9wBWyw==}
     dev: true
+
+  /@types/glidejs__glide@3.6.5:
+    resolution: {integrity: sha512-OUjzveIu+tiK5VvyPh6jTBJ/vH6+vC+XWzC2KJzpgUW8uancMJBa7R+BlXuvtSPdLw/pQForVasy0fm1D7JWOQ==}
+    dev: false
 
   /@types/json-schema@7.0.15:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
