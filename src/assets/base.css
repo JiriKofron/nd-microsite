@@ -1,9 +1,10 @@
 /* color palette */
 :root {
-  --primary-purple: #6a498f;
-  --primary-text: #6e3f86;
+  --primary: #6A498F;
+  --primary-text: #6E3F86;
   --orange: #E67F4F;
   --yellow: #FFF7E8;
+  --salmon: #FFF6F2;
   --light-blue: #F2F5FE;
   --light-violet: #9564A5;
   --dark-violet: #64378B;
