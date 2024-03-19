@@ -63,7 +63,7 @@ onMounted( () => {
 </script>
 
 <template>
-  <section class="p-10 max-w-[900px]">
+  <section class="p-10 w-[85%] max-w-[900px]">
     <div
         class="glide"
         ref="glideRef"

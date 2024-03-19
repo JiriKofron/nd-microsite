@@ -10,26 +10,34 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: 'var(--primary-purple)',
+        primary: 'var(--primary)',
         'primary-text': 'var(--primary-text)',
         orange: 'var(--orange)',
         yellow: 'var(--yellow)',
         'light-blue': 'var(--light-blue)',
         'light-violet': 'var(--light-violet)',
-        'dark-violet': 'var(--dark-violet)'
+        'dark-violet': 'var(--dark-violet)',
+        salmon: 'var(--salmon)'
       },
       fontSize: {
         base: ['1.5rem', '1.9rem'],
+        16: ['1.6rem', '2.1rem'],
         17: ['1.7rem', '2.4rem'],
         20: ['2rem', '2.6rem'],
         22: ['2.2rem', '3rem'],
+        25: ['2.5rem', '2.7rem'],
         'sm-heading': ['2.3rem', '2.6rem'],
         heading: ['2.6rem', '3rem'],
+        40: ['4rem', '4.5rem'],
         'heading-large': ['4.5rem', '6rem'],
         clamp: 'clamp(2rem, 6.5vw, 3.5rem)'
       },
       borderRadius: {
-        '30': '30px'
+        '30': '3rem',
+        '10': '1rem'
+      },
+      boxShadow: {
+        'warning-sign': '0 2px 6px rgba(107, 73, 142, 0.5)'
       }
     },
     fontFamily: {
