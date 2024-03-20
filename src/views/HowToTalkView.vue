@@ -174,24 +174,24 @@ onMounted(async () => {
 
 <template>
 <section class="w-full">
-  <section v-if="podpurnyRozhovor" class="flex flex-col justify-center gap-8 bg-salmon p-8">
-    <div class="flex items-center gap-8">
-      <img src="@/assets/icons/ico-ask-them.svg" alt="icon zazemi">
-      <h1 class="text-25 font-baloo font-semibold text-primary m-0">{{podpurnyRozhovor.nadpis}}</h1>
+  <section v-if="podpurnyRozhovor" class="flex flex-col justify-center gap-8 md:gap-16 bg-salmon p-8">
+    <div class="flex items-center md:justify-center gap-8 md:gap-12">
+      <img src="@/assets/icons/ico-ask-them.svg" alt="icon zazemi" class="md:w-52">
+      <h1 class="text-25 md:text-heading-large font-baloo font-semibold text-primary m-0 md:w-9/12">{{podpurnyRozhovor.nadpis}}</h1>
     </div>
 
     <h2 class="text-20 font-baloo text-orange font-semibold m-0">
       {{podpurnyRozhovor.podnadpis}}
     </h2>
 
-    <article class="flex flex-col gap-8">
+    <article class="flex flex-col md:flex-row gap-8">
       <div
           v-for="karta in podpurnyRozhovor.nahledy_karet"
           :key="karta.popis"
-          class="flex flex-col items-center gap-8"
+          class="flex flex-col md:flex-col-reverse items-center md:justify-end gap-8"
       >
         <img :src="karta.nahled" :alt="karta.popis" class="w-72" />
-        <p class="text-base font-roboto font-normal text-primary-text tracking-[0.01em] m-0">{{karta.popis}}</p>
+        <p class="text-base md:text-16 font-roboto font-normal text-primary-text tracking-[0.01em] m-0">{{karta.popis}}</p>
       </div>
     </article>
   </section>
