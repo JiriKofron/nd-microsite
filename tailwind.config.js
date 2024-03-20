@@ -20,10 +20,11 @@ export default {
         salmon: 'var(--salmon)'
       },
       fontSize: {
-        base: ['1.5rem', '1.9rem'],
+        base: ['1.5rem', '2rem'],
         16: ['1.6rem', '2.1rem'],
         17: ['1.7rem', '2.4rem'],
         20: ['2rem', '2.6rem'],
+        '20-24': ['2rem', '2.4rem'],
         22: ['2.2rem', '3rem'],
         25: ['2.5rem', '2.7rem'],
         'sm-heading': ['2.3rem', '2.6rem'],
