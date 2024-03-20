@@ -173,7 +173,7 @@ onMounted(async () => {
 </script>
 
 <template>
-<section class="w-full">
+<section class="w-full max-w-[900px]">
   <section v-if="podpurnyRozhovor" class="flex flex-col justify-center gap-8 md:gap-16 bg-salmon p-8">
     <div class="flex items-center md:justify-center gap-8 md:gap-12">
       <img src="@/assets/icons/ico-ask-them.svg" alt="icon zazemi" class="md:w-52">
