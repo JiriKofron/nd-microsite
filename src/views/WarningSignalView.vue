@@ -64,7 +64,7 @@ onMounted(async () => {
 </script>
 
 <template>
-<section v-if="varovneSignalyAcf">
+<section v-if="varovneSignalyAcf" class="max-w-[900px]">
   <article class="flex flex-col items-center justify-center bg-salmon px-8 py-10 gap-y-8">
     <div class="flex items-center justify-start md:justify-center gap-x-8 px-4">
       <img
