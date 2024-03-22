@@ -56,7 +56,7 @@ const activePageId = computed(() => {
             />
           </div>
 
-          <div class="flex md:justify-center h-28 md:h-40 gap-x-7 w-full relative md:ml-28">
+          <div class="flex md:justify-center h-28 md:h-40 gap-x-7 relative md:pl-52">
             <img
                 src="@/assets/icons/ico-cup.svg"
                 alt="ikona hrnicku s srdcem a oblicejem"

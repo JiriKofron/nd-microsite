@@ -19,14 +19,6 @@ import NdButton from "@/components/NdButton.vue";
       >
         Autorský tým a podpora projektu
       </NdButton>
-
-      <NdButton
-          variant="link"
-          link="/"
-          inverted
-      >
-        Kdo projekt podpořil
-      </NdButton>
     </section>
   </section>
 </template>
