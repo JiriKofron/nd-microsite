@@ -29,6 +29,7 @@ export default {
         25: ['2.5rem', '2.7rem'],
         'sm-heading': ['2.3rem', '2.6rem'],
         heading: ['2.6rem', '3rem'],
+        30: ['3rem', '3.5rem'],
         40: ['4rem', '4.5rem'],
         'heading-large': ['4.5rem', '6rem'],
         clamp: 'clamp(2rem, 6.5vw, 3.5rem)'
