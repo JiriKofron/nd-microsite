@@ -18,9 +18,6 @@ export const router = createRouter({
         {
             path: '/poslouchejme-deti/varovne-signaly',
             name: 'warningSignal',
-            // route level code-splitting
-            // this generates a separate chunk (About.[hash].js) for this route
-            // which is lazy-loaded when the route is visited.
             component: () => import('./views/WarningSignalView.vue')
         },
         {
@@ -37,6 +34,11 @@ export const router = createRouter({
             path: '/poslouchejme-deti/pro-instituce',
             name: 'forInstitutions',
             component: () => import('./views/ForInstitutionsView.vue')
+        },
+        {
+            path: '/poslouchejme-deti/o-projektu',
+            name: 'about',
+            component: () => import('./views/AboutView.vue')
         }
     ]
 })

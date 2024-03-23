@@ -15,7 +15,7 @@ defineEmits(['click', 'submit'])
 <template>
   <div
       class="flex items-center justify-center bg-light-violet h-[40px] px4 rounded-full font-semibold text-white text-base no-underline hover:no-underline visited:no-underline visited:text-white leading-relaxed"
-      :class="{'w-fit px-8': !props.block, 'bg-white !text-primary-text': props.inverted}"
+      :class="{'w-fit px-8': !props.block, 'bg-white !text-primary-text hover:bg-light-violet hover:!text-white': props.inverted}"
   >
     <template v-if="props.variant === 'button'">
       <button

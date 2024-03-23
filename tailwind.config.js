@@ -25,6 +25,7 @@ export default {
         17: ['1.7rem', '2.4rem'],
         20: ['2rem', '2.6rem'],
         '20-24': ['2rem', '2.4rem'],
+        '20-26': ['2rem', '2.6rem'],
         22: ['2.2rem', '3rem'],
         25: ['2.5rem', '2.7rem'],
         'sm-heading': ['2.3rem', '2.6rem'],
