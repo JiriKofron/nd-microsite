@@ -64,12 +64,12 @@ onMounted( async () => {
         v-if="page && acf && !loading"
         class="flex flex-col align-center justify-center w-full"
     >
-      <section class="flex flex-col items-center justify-center max-w-[900px] p-8 md:mx-auto">
-        <article class="flex items-center justify-center w-100 p-4 gap-x-8">
+      <section class="flex flex-col items-center justify-center max-w-[900px] p-8 md:p-16 md:mx-auto">
+        <article class="flex items-center justify-center w-100 p-4 gap-x-8 md:gap-x-20">
           <img
               src="@/assets/icons/ico-violet-baloon.svg"
               alt="balonek"
-              width="38"
+              class="w-20 md:w-40"
           />
           <p
               class="text-17-21 font-semibold text-primary-text font-roboto md:text-heading md:font-baloo md:font-semibold"
@@ -83,7 +83,7 @@ onMounted( async () => {
             class="flex flex-col items-center justify-center gap-y-6"
         >
           <h2
-              class="text-primary-text text-heading text-center font-baloo font-semibold m-0 md:text-heading-large"
+              class="text-primary-text text-heading text-center font-baloo font-semibold m-0 md:my-8 md:text-heading-large"
           >
             {{acf.kategorie.kategorie_nadpis}}
           </h2>
@@ -134,7 +134,7 @@ onMounted( async () => {
                 </p>
 
                 <div class="flex flex-col md:flex-row items-center md:items-stretch justify-center gap-12">
-                  <div class="flex flex-col items-center justify-center gap-4">
+                  <div class="flex flex-col items-center justify-center gap-4 md:gap-8">
                     <img
                         src="@/assets/icons/ico-talking-bubble.svg"
                         alt="talking bubble"
@@ -148,8 +148,12 @@ onMounted( async () => {
                     </NdButton>
                   </div>
 
-                  <div class="flex flex-col items-center justify-center md:justify-end gap-4">
-                    <img src="@/assets/icons/ico-rozcestník.svg" alt="crossroad sign" class="md:w-32" />
+                  <div class="flex flex-col items-center justify-center md:justify-end gap-4 md:gap-8">
+                    <img
+                        src="@/assets/icons/ico-rozcestník.svg"
+                        alt="crossroad sign"
+                        class="md:w-32"
+                    />
                     <NdButton
                         variant="anchor"
                         link="https://nevypustdusi.cz/kde-hledat-pomoc/"

@@ -89,7 +89,7 @@ onMounted( () => {
                 </div>
               </div>
 
-              <div class="text-orange text-center mb-4 md:text-20">
+              <div class="text-orange text-center mb-4 md:text-20 max-w-4xl">
                 <span>{{reference.jmeno}}, </span>
                 <span>{{reference.pozice}}</span>
               </div>
@@ -99,11 +99,11 @@ onMounted( () => {
       </div>
 
       <div class="relative px-20 py-6">
-        <div class="glide__arrows absolute flex items-center justify-between w-full inset-0 z-10"
+        <div class="glide__arrows absolute flex items-center justify-center w-full inset-0 z-10 gap-8"
              data-glide-el="controls"
         >
           <button
-              class="bg-transparent border-none p-0"
+              class="flex bg-transparent border-none p-0"
               data-glide-dir="<"
           >
             <img src="@/assets/icons/ico-arrow_back_ios.svg" alt="ikona zpět" width="20">
@@ -123,7 +123,7 @@ onMounted( () => {
           </div>
 
           <button
-              class="bg-transparent border-none p-0"
+              class="flex bg-transparent border-none p-0"
               data-glide-dir=">"
           >
             <img src="@/assets/icons/ico-arrow_back_ios.svg" alt="ikona vpřed" width="20" style="transform: rotate(180deg)">

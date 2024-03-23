@@ -158,7 +158,7 @@ const parseKartyMistaStrachu = async (kartyMistaStrachu: KartyMistaStrachu | und
 }
 
 const fetchData = async () => {
-  const response = await http.get('pages?slug=podpurny-rozhovor')
+  const response = await http.get('pages?slug=jak-vest-rozhovor')
   const [data] = response.data
   podpurnyRozhovorAcf.value = data?.acf
   kartyPetPlusDva.value = await parseKarty(podpurnyRozhovorAcf.value?.karty_pet_plus_dva)
@@ -174,13 +174,13 @@ onMounted(async () => {
 
 <template>
 <section class="w-full max-w-[900px]">
-  <section v-if="podpurnyRozhovor" class="flex flex-col justify-center gap-8 md:gap-16 bg-salmon p-8">
+  <section v-if="podpurnyRozhovor" class="flex flex-col justify-center gap-8 bg-salmon p-8 md:p-16">
     <div class="flex items-center md:justify-center gap-8 md:gap-12">
       <img src="@/assets/icons/ico-ask-them.svg" alt="icon zazemi" class="md:w-52">
       <h1 class="text-25 md:text-heading-large font-baloo font-semibold text-primary m-0 md:w-9/12">{{podpurnyRozhovor.nadpis}}</h1>
     </div>
 
-    <h2 class="text-20 font-baloo text-orange font-semibold m-0">
+    <h2 class="text-20 md:text-30 font-baloo text-orange font-semibold m-0 mt-8">
       {{podpurnyRozhovor.podnadpis}}
     </h2>
 
@@ -196,8 +196,8 @@ onMounted(async () => {
     </article>
   </section>
 
-  <section class="flex flex-col items-center p-8 gap-8 mb-16">
-    <h1 class="text-heading font-baloo font-semibold text-primary m-0 text-center">
+  <section class="flex flex-col items-center p-8 md:p-16 gap-8 md:gap-16 mb-16">
+    <h1 class="text-heading md:text-heading-large font-baloo font-semibold text-primary m-0 text-center">
       Podpora pro podpůrný rozhovor
     </h1>
 
@@ -214,8 +214,8 @@ onMounted(async () => {
     </div>
   </section>
 
-  <section class="flex flex-col p-8 gap-10">
-    <h3 class="text-heading font-baloo font-semibold text-primary m-0 text-center">
+  <section class="flex flex-col p-8 md:p-16 gap-10">
+    <h3 class="text-heading md:text-heading-large font-baloo font-semibold text-primary m-0 text-center">
       5+2 kroků v podpůrném rozhovoru
     </h3>
 
@@ -228,12 +228,12 @@ onMounted(async () => {
 
   <section
       v-if="kartyPetPlusDva"
-      class="flex flex-col items-center p-8 gap-8"
+      class="flex flex-col items-center p-8 md:p-16 gap-8 md:gap-16"
   >
     <article
         v-for="(karta, index) in kartyPetPlusDva"
         :key="karta.nadpis"
-        class="flex flex-col justify-center p-8 gap-8 shadow-warning-sign rounded-10"
+        class="flex flex-col justify-center p-8 md:p-16 gap-8 shadow-warning-sign rounded-10"
     >
       <div v-if="karta.ikony" class="flex items-center justify-center gap-8">
         <img
@@ -269,8 +269,8 @@ onMounted(async () => {
         </div>
       </div>
 
-      <div class="flex flex-col gap-2 mt-6">
-        <img src="@/assets/icons/ico-tipy.svg" alt="ikona tipy rozhovor" class="h-28" />
+      <div class="flex flex-col gap-2 md:gap-8 mt-6">
+        <img src="@/assets/icons/ico-tipy.svg" alt="ikona tipy rozhovor" class="h-28 md:h-36" />
         <ul class="pl-0 list-none">
           <li
               v-for="(tip, index) in karta.tipy"
@@ -287,9 +287,9 @@ onMounted(async () => {
 
   <section
       v-if="kartyMistaStrachu"
-      class="flex flex-col p-8 gap-4"
+      class="flex flex-col p-8 md:p-16 gap-4"
   >
-    <h3 class="text-heading font-baloo font-semibold text-primary m-0 text-center">
+    <h3 class="text-heading md:text-heading-large font-baloo font-semibold text-primary m-0 text-center">
       {{kartyMistaStrachu.nadpis}}
     </h3>
 

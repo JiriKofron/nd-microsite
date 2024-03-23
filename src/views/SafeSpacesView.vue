@@ -62,12 +62,12 @@ onMounted(async () => {
 
 <template>
   <section v-if="mistaPomociAcf" class="max-w-[900px]">
-    <article class="flex flex-col items-center justify-center bg-salmon px-8 py-10 gap-y-8">
+    <article class="flex flex-col items-center justify-center bg-salmon px-8 md:p-16 py-10 gap-y-8 md:gap-16">
       <div class="flex items-center justify-start md:justify-center gap-x-8 px-4">
         <img
             src="@/assets/icons/ico-mista-pomoci.svg"
-            alt="varovne signaly ikona vykricnik v trojuhelniku"
-            class="h-24"
+            alt="místa pomoci ilustrace ruka"
+            class="h-24 md:h-36"
         />
         <h1
             class="font-baloo text-25 md:text-heading-large text-primary font-semibold m-0"
@@ -82,13 +82,13 @@ onMounted(async () => {
 
       <p
           v-for="(popis, index) in mistaPomociAcf.popis" :key="index"
-          v-html="popis.odstavec" class="text-base font-roboto font-normal text-primary-text m-0"
+          v-html="popis.odstavec" class="text-base md:text-16 font-roboto font-normal text-primary-text m-0"
       />
     </article>
 
-  <section class="flex flex-col items-center p-8 gap-8 md:w-full box-border ">
-    <h2 class="text-heading font-baloo font-bold text-primary text-center m-0">
-      Širší podpůrná síť
+  <section class="flex flex-col items-center p-8 md:p-16 gap-8 md:gap-16 md:w-full box-border ">
+    <h2 class="text-heading md:text-heading-large font-baloo font-bold text-primary text-center m-0">
+      Místa pomoci - Širší podpůrná síť
     </h2>
 
     <button
@@ -105,7 +105,8 @@ onMounted(async () => {
       >
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <h3
-              class="text-25 font-baloo text-primary font-semibold m-0"
+              class="text-25 md:text-26 font-baloo text-primary font-semibold m-0"
+              :class="{'md:text-heading-large': sit.showMore}"
           >
             {{sit.nadpis}}
           </h3>
@@ -134,24 +135,24 @@ onMounted(async () => {
 
           <article v-for="sekce in sit.sekce" :key="sekce.nadpis">
 
-            <h4 class="text-20-24 font-baloo font-semibold text-orange">
+            <h4 class="text-20-24 md:text-heading font-baloo font-semibold text-orange">
               {{sekce.nadpis}}
             </h4>
 
             <p
                 v-if="sekce.popis"
                 v-html="sekce.popis"
-                class="text-base font-roboto font-normal tracking-[0.01em] text-primary-text"
+                class="text-base md:text-16 font-roboto font-normal tracking-[0.01em] text-primary-text"
             />
 
             <ul
                 v-if="sekce.body && sekce.body.length > 0"
-                class="pl-0 list-none"
+                class="pl-0 md:pl-6 list-none"
             >
               <li
                   v-for="(bod, index) in sekce.body"
                   :key="index"
-                  class="flex items-start gap-6 text-base text-primary-text font-roboto font-normal py-2"
+                  class="flex items-start gap-6 text-base md:text-16 text-primary-text font-roboto font-normal py-2"
               >
                 <img src="@/assets/icons/ico-dot-orange.svg" alt="ikona seznamu" />
                 <span v-html="bod.bod" />

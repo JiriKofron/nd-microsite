@@ -135,7 +135,7 @@ onMounted(async () => {
 
 <template>
   <section v-if="oProjektuAcf" class="max-w-[900px]">
-    <article class="flex flex-col items-center justify-center bg-salmon px-8 py-10 gap-y-8">
+    <article class="flex flex-col items-center justify-center bg-salmon px-8 py-10 md:p-16 gap-y-8 md:gap-y-16">
       <div class="flex justify-start md:justify-center gap-x-8 px-4">
         <img
             src="@/assets/icons/ico-kdo-stoji.svg"
@@ -172,7 +172,7 @@ onMounted(async () => {
       <p class="text-20-26 lg:text-heading font-baloo font-semibold text-primary text-center md:text-left">Odbornice a odborníci, kteří se podíleli na tvorbě nástrojů</p>
 
       <div>
-        <ul class="flex flex-col gap-12 pl-0 md:pl-6">
+        <ul class="flex flex-col gap-12 md:gap-6 pl-0 md:pl-6">
           <li
               v-for="autor in oProjektuAcf.autorsky_tym"
               :key="autor.jmeno"
@@ -222,7 +222,7 @@ onMounted(async () => {
 
     <section
         v-if="spolupracujiciOrganizace"
-        class="flex flex-col items-center gap-8 p-8"
+        class="flex flex-col items-center gap-8 p-8 md:py-16"
     >
       <h3 class="text-22 md:text-heading font-baloo font-semibold text-primary m-0 py-8">
         Spolupracující organizace
