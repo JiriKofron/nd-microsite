@@ -9,6 +9,9 @@ export default {
   },
   theme: {
     extend: {
+      screens: {
+        'xs': '420px',
+      },
       colors: {
         primary: 'var(--primary)',
         'primary-text': 'var(--primary-text)',
@@ -23,10 +26,12 @@ export default {
         base: ['1.5rem', '2rem'],
         16: ['1.6rem', '2.1rem'],
         17: ['1.7rem', '2.4rem'],
+        '17-21': ['1.7rem', '2.1rem'],
         20: ['2rem', '2.6rem'],
         '20-24': ['2rem', '2.4rem'],
         '20-26': ['2rem', '2.6rem'],
         22: ['2.2rem', '3rem'],
+        '24-34':['2.4rem', '3.4rem'],
         25: ['2.5rem', '2.7rem'],
         'sm-heading': ['2.3rem', '2.6rem'],
         heading: ['2.6rem', '3rem'],

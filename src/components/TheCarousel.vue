@@ -18,7 +18,14 @@ const references = ref<Reference[]>([{
   jmeno: 'Tereza Kvapil Baudišová',
   pozice: 'sociální pracovnice Nízkoprahový klub Pacific',
   text: '"Kdybych měla jako začínající pracovnice takový materiál v ruce, určitě bych šla do náročných rozhovorů s větší jistotou."'
-}])
+}, {
+  id: 3,
+  jmeno: 'Jitka Balcarová',
+  pozice: 'klinická psycholožka, oddělení dětské psychiatrie Fakultní Thomayerovy nemocnice',
+  text:'„Výborná pomůcka a praktický rádce pro všechny, kdo na vlastní kůži pocítí, jak snadno nás v pomoci ohroženým dětem může spoutat strach.“'
+}
+
+])
 
 const glideRef = ref();
 const currentSlide = ref(0);

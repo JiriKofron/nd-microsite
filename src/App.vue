@@ -1,47 +1,48 @@
 <script type="module" setup lang="ts">
 import { RouterView } from 'vue-router'
-import {computed, ref} from "vue";
+import {computed, onMounted, type Ref, ref} from "vue";
 import {useRoute} from "vue-router";
 import GlobalFooter from "@/components/GlobalFooter.vue";
 
 const routes = ref([
   {
-    id: 1,
+    id: 0,
     to: '/poslouchejme-deti',
     text: 'Představení'
   },
   {
-    id: 2,
+    id: 1,
     to: '/poslouchejme-deti/varovne-signaly',
     text: 'Varovné signály'
   },
   {
-    id: 3,
+    id: 2,
     to: '/poslouchejme-deti/jak-vest-rozhovor',
     text: 'Jak vést rozhovor'
   },
   {
-    id: 4,
+    id: 3,
     to: '/poslouchejme-deti/mista-pomoci',
     text: 'Místa pomoci'
   },
   {
-    id: 5,
+    id: 4,
     to: '/poslouchejme-deti/pro-instituce',
     text: 'Pro pomáhající instituce'
   }
 ])
 
+const route = useRoute()
 const activePageId = computed(() => {
-  return routes.value.find(route => route.to === useRoute()?.path)?.id
+  return routes.value.find(r => r.to === route?.path)?.id || 0
 })
 </script>
 
 <template>
   <section class="flex flex-col items-center justify-center w-full">
     <section class="flex justify-center w-full bg-primary pt-36">
-      <article class="flex flex-col justify-between w-full max-w-[900px] max-h-[380px] text-white mt-0 md-mt-16 px-8 py-5">
-        <div class="flex flex-col flex-nowrap gap-y-3 md:gap-y-18">
+      <article class="flex flex-col justify-between w-full max-w-[900px] max-h-[420px] text-white mt-0 md-mt-16 px-8 py-5">
+        <div class="flex flex-col flex-nowrap gap-y-5 md:gap-y-18">
           <div class="flex items-center md:justify-center gap-x-2 px-6">
             <h1 class="text-clamp leading-tight my-0 pt-2 text-white font-baloo font-semibold w-8/12 md:w-full max-w-[340px] md:max-w-full md:text-center">
               Poslouchejme děti, když s námi mluví
@@ -50,9 +51,7 @@ const activePageId = computed(() => {
             <img
                 src="@/assets/icons/ico-cup.svg"
                 alt="ikona hrnicku s srdcem a oblicejem"
-                width="48"
-                height="57"
-                class="md:hidden"
+                class="md:hidden w-20 xs:w-32"
             />
           </div>
 
@@ -65,9 +64,9 @@ const activePageId = computed(() => {
                 class="hidden md:flex"
             />
 
-            <div class="flex flex-col justify-center relative w-10/12 sm:w-11/12 max-w-[420px] pl-8 pr-4 py-2 bg-dark-violet rounded-30 text-[15px] font-bold leading-normal md:leading-relaxed font-baloo place-wrapper">
-              <span class="md:text-4xl">Místo, kde vám poradíme co dělat,</span>
-              <span class="uppercase md:text-[26px] text-orange">
+            <div class="flex flex-col justify-center relative w-10/12 max-w-[320px] xs:w-[90%] xs:max-w-[420px] pl-8 pr-4 py-2 bg-dark-violet rounded-30 font-bold leading-normal md:leading-relaxed font-baloo place-wrapper">
+              <span class="text-[14px] xs:text-17 md:text-4xl">Místo, kde vám poradíme co dělat,</span>
+              <span class=" text-base xs:text-17 md:text-24-34 text-orange uppercase">
                 <strong>
                   když dítě není v pohodě . . .
                 </strong>
@@ -94,7 +93,7 @@ const activePageId = computed(() => {
                   'py-3.5 px-6 rounded-full no-underline',
                   'hover:no-underline hover:bg-white hover:text-primary',
                   'visited:no-underline visited:text-white route-btn',
-                  {'active': activePageId === route.id}
+                  {'active': activePageId == route.id}
               ]"
           >
             {{route.text}}
@@ -105,6 +104,7 @@ const activePageId = computed(() => {
 
     <RouterView />
   </section>
+
   <section >
     <GlobalFooter />
   </section>
@@ -113,7 +113,7 @@ const activePageId = computed(() => {
 <style lang="scss" scoped>
 .arrow-down {
   position: absolute;
-  right: -2.5rem;
+  right: -3rem;
   top: -2.5rem;
 
   @media screen and (min-width: 790px) {
@@ -129,7 +129,7 @@ const activePageId = computed(() => {
 
 .active {
   background-color: white;
-  color: var(--primary-purple);
+  color: var(--primary);
 }
 
 .place-wrapper {
