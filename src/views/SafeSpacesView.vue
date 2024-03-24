@@ -80,10 +80,12 @@ onMounted(async () => {
         {{mistaPomociAcf.podnadpis}}
       </h2>
 
-      <p
-          v-for="(popis, index) in mistaPomociAcf.popis" :key="index"
-          v-html="popis.odstavec" class="text-base md:text-16 font-roboto font-normal text-primary-text m-0"
-      />
+      <div class="flex flex-col gap-8">
+        <p
+            v-for="(popis, index) in mistaPomociAcf.popis" :key="index"
+            v-html="popis.odstavec" class="text-base md:text-16 font-roboto font-normal text-primary-text m-0"
+        />
+      </div>
     </article>
 
   <section class="flex flex-col items-center p-8 md:p-16 gap-8 md:gap-16 md:w-full box-border ">

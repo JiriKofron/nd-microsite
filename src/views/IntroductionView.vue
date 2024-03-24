@@ -89,11 +89,11 @@ onMounted( async () => {
           </h2>
 
           <div class="flex flex-col items-center justify-center gap-y-16">
-            <div class="flex flex-col md:flex-row items-center md:items-stretch justify-center gap-16">
+            <div class="relative flex flex-col md:flex-row items-center md:items-stretch justify-center gap-16">
               <article
                   v-for="(category, index) in categoryDetails"
                   :key="index"
-                  class="bg-yellow p-8 pb-16 md:p-20 rounded-2xl md:basis-6/12"
+                  class="relative bg-salmon p-8 pb-16 md:p-20 rounded-2xl md:basis-6/12"
               >
                 <div class="flex items-start gap-8 mb-6">
                   <img :src="category.ikona" alt="article icon" class="md:w-48" />
@@ -106,10 +106,24 @@ onMounted( async () => {
                     v-html="category.text_detail"
                     class="flex flex-col items-center justify-center text-base font-roboto font-normal text-primary-text m-0 text-detail gap-6"
                 />
+
+                <img
+                    src="@/assets/icons/ico-purple-arrow-sm.svg"
+                    alt="ikona šipka dolu"
+                    class="absolute left-1/2 -bottom-12 md:hidden" />
               </article>
+
+              <img
+                  src="@/assets/icons/ico-purple-arrow-lg.svg"
+                  alt="ikona šipka dolu"
+                  class="absolute left-[42%] top-[60%] hidden md:block" />
+              <img
+                  src="@/assets/icons/ico-purple-arrow-lg.svg"
+                  alt="ikona šipka dolu"
+                  class="absolute right-[10%] -bottom-12 hidden md:block rotated-arrow" />
             </div>
 
-            <article class="flex flex-col gap-6 bg-yellow p-8 pb-16 rounded-2xl md:w-[95%] md:mx-32">
+            <article class="flex flex-col gap-6 bg-salmon p-8 pb-16 rounded-2xl md:w-[95%] md:mx-32">
               <div class="flex items-start gap-8">
                 <img src="@/assets/icons/ico-map.svg" alt="icon with map" class="md:hidden" />
                 <h3 class="text-sm-heading font-baloo font-semibold text-orange m-0 md:font-roboto md:font-bold">
@@ -173,5 +187,9 @@ onMounted( async () => {
 <style lang="scss" scoped>
 ::v-deep(p) {
   margin: 0;
+}
+
+.rotated-arrow {
+  transform: rotate(-130deg) rotateY(180deg);
 }
 </style>
