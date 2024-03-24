@@ -72,7 +72,7 @@ onMounted( async () => {
               class="w-20 md:w-40"
           />
           <p
-              class="text-17-21 font-semibold text-primary-text font-roboto md:text-heading md:font-baloo md:font-semibold"
+              class="text-17-21 font-baloo font-semibold text-primary-text md:text-heading md:font-semibold"
           >
             {{acf.popis}}
           </p>
@@ -83,12 +83,12 @@ onMounted( async () => {
             class="flex flex-col items-center justify-center gap-y-6"
         >
           <h2
-              class="text-primary-text text-heading text-center font-baloo font-semibold m-0 md:my-8 md:text-heading-large"
+              class="text-primary-text text-heading text-center font-baloo font-semibold m-0 py-4 md:my-8 md:text-heading-large"
           >
             {{acf.kategorie.kategorie_nadpis}}
           </h2>
 
-          <div class="flex flex-col items-center justify-center gap-y-16 p-4">
+          <div class="flex flex-col items-center justify-center gap-y-16">
             <div class="flex flex-col md:flex-row items-center md:items-stretch justify-center gap-16">
               <article
                   v-for="(category, index) in categoryDetails"

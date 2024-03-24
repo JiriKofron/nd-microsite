@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+import {ref} from "vue";
+
 const props = defineProps<{
   variant?: 'button' | 'anchor' | 'link'
   btnType?: 'submit' | 'reset' | 'button'
@@ -9,18 +11,23 @@ const props = defineProps<{
 }>()
 
 defineEmits(['click', 'submit'])
+const defaultClasses = ref('flex items-center justify-center h-[40px] px-4 rounded-full font-semibold text-base no-underline hover:no-underline visited:no-underline leading-relaxed cursor-pointer')
 </script>
 
 
 <template>
   <div
-      class="flex items-center justify-center bg-light-violet h-[40px] px4 rounded-full font-semibold text-white text-base no-underline hover:no-underline visited:no-underline visited:text-white leading-relaxed"
-      :class="{'w-fit px-8': !props.block, 'bg-white !text-primary-text hover:bg-light-violet hover:!text-white': props.inverted}"
+      :class="[
+          !props.block ? 'w-fit px-8': '' ,
+          ]"
   >
     <template v-if="props.variant === 'button'">
       <button
-          class="bg-transparent border-none text-white text-base no-underline hover:no-underline visited:no-underline visited:text-white font-roboto"
-          :class="{'!text-primary-text': props.inverted}"
+          class="bg-transparent border-none text-base no-underline hover:no-underline visited:no-underline visited:text-white font-roboto"
+          :class="[
+              defaultClasses,
+              props.inverted ? 'text-primary-text visited:text-primary-text hover:text-white' : 'text-white bg-light-violet visited:text-white'
+              ]"
           :type="props.btnType"
           @click="$emit('click')"
           @submit="$emit('submit')"
@@ -34,8 +41,13 @@ defineEmits(['click', 'submit'])
     >
       <a
           :href="props.link"
-          class="text-white text-base no-underline hover:no-underline visited:no-underline visited:text-white font-roboto font-bold"
-          :class="{'!text-primary-text': props.inverted}"
+          class="text-base no-underline hover:no-underline visited:no-underline font-roboto font-bold"
+          :class="[
+              defaultClasses,
+              props.inverted ?
+                'text-primary-text visited:text-primary-text hover:text-white'
+                : 'text-white bg-light-violet visited:text-white'
+          ]"
       >
         <slot />
       </a>
@@ -43,8 +55,13 @@ defineEmits(['click', 'submit'])
     <template v-else>
       <RouterLink
           :to="props.link"
-          class="text-white text-base no-underline hover:no-underline visited:no-underline visited:text-white font-roboto"
-          :class="{'!text-primary-text': props.inverted}"
+          class="text-base no-underline hover:no-underline visited:no-underline visited:text-white font-roboto"
+          :class="[
+              defaultClasses,
+              props.inverted ?
+                'text-primary-text bg-white hover:bg-light-violet hover:text-white visited:text-primary-text'
+                : 'text-white bg-light-violet visited:text-white'
+          ]"
       >
         <slot />
       </RouterLink>

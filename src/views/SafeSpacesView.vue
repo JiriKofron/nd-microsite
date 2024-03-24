@@ -91,11 +91,12 @@ onMounted(async () => {
       Místa pomoci - Širší podpůrná síť
     </h2>
 
-    <button
-        class="flex items-center justify-center px-10 py-4 border-none bg-orange text-white rounded-full text-base font-roboto font-bold w-fit"
+    <a
+        href="https://nevypustdusi.cz/kde-hledat-pomoc/"
+        class="flex items-center justify-center px-10 py-4 border-none bg-orange text-white rounded-full text-base font-roboto font-bold w-fit no-underline hover:bg-white hover:text-orange"
     >
       Adresář všech kontaktů podle krajů
-    </button>
+    </a>
 
     <article v-if="mistaPomociAcf && mistaPomociAcf.sirsi_podpurna_sit" class="flex flex-col gap-8 md:w-full">
       <div
@@ -133,9 +134,12 @@ onMounted(async () => {
             {{sit.popis}}
           </p>
 
-          <article v-for="sekce in sit.sekce" :key="sekce.nadpis">
+          <article
+              v-for="sekce in sit.sekce" :key="sekce.nadpis"
+              class="py-8"
+          >
 
-            <h4 class="text-20-24 md:text-heading font-baloo font-semibold text-orange">
+            <h4 class="text-20-24 md:text-heading font-baloo font-semibold text-orange my-4">
               {{sekce.nadpis}}
             </h4>
 

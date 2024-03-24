@@ -70,7 +70,7 @@ onMounted( () => {
 </script>
 
 <template>
-  <section class="p-10 w-[85%] max-w-[900px]">
+  <section class="py-10 w-[85%] max-w-[900px]">
     <div
         class="glide"
         ref="glideRef"
@@ -82,8 +82,8 @@ onMounted( () => {
               :key="reference.jmeno"
               class="glide__slide"
           >
-            <div class="reference-wrapper flex flex-col items-center justify-center text-base text-primary-text font-roboto font-medium">
-              <div class="md:flex md:items-center md:justify-center italic px-8 py-20 mb-8 reference">
+            <div class="reference-wrapper flex flex-col items-center justify-center text-[13px] xs:text-base text-primary-text font-roboto font-medium">
+              <div class="md:flex md:items-center md:justify-center italic md:px-8 py-20 mb-8 reference">
                 <div class="reference__text p-8 -mt-8 max-w-[320px] md:max-w-[520px] md:text-22 md:font-roboto md:font-normal">
                   {{reference.text}}
                 </div>
@@ -116,7 +116,7 @@ onMounted( () => {
             <button
                 v-for="(i, index) in references.length"
                 :key="index"
-                class="glide__bullet bg-light-violet border-none w-12 h-12 rounded-full cursor-pointer p-0 hover:text-primary-text"
+                class="glide__bullet bg-light-violet border-none w-12 h-12 rounded-full cursor-pointer p-0 hover:text-primary-text hover:bg-primary-text"
                 :class="{'bg-primary-text': currentSlide === index}"
                 :data-glide-dir="`=${index}`"
             />
