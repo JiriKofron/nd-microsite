@@ -1,5 +1,5 @@
 export interface IntroductionCategory {
-    title: string
-    icon: string
-    text: string
+  title: string
+  icon: string
+  text: string
 }

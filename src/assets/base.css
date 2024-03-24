@@ -1,13 +1,13 @@
 /* color palette */
 :root {
-  --primary: #6A498F;
-  --primary-text: #6E3F86;
-  --orange: #E67F4F;
-  --yellow: #FFF7E8;
-  --salmon: #FFF6F2;
-  --light-blue: #F2F5FE;
-  --light-violet: #9564A5;
-  --dark-violet: #64378B;
+  --primary: #6a498f;
+  --primary-text: #6e3f86;
+  --orange: #e67f4f;
+  --yellow: #fff7e8;
+  --salmon: #fff6f2;
+  --light-blue: #f2f5fe;
+  --light-violet: #9564a5;
+  --dark-violet: #64378b;
 }
 
 html {
@@ -33,75 +33,75 @@ a {
 @tailwind utilities;
 
 @font-face {
-  font-family: "Baloo";
-  src: url('@/assets/fonts/Baloo2-Regular.ttf') format("truetype");
+  font-family: 'Baloo';
+  src: url('@/assets/fonts/Baloo2-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Baloo";
-  src: url('@/assets/fonts/Baloo2-Regular.ttf') format("truetype");
+  font-family: 'Baloo';
+  src: url('@/assets/fonts/Baloo2-Regular.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Baloo";
-  src: url('@/assets/fonts/Baloo2-SemiBold.ttf') format("truetype");
+  font-family: 'Baloo';
+  src: url('@/assets/fonts/Baloo2-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Baloo";
-  src: url('@/assets/fonts/Baloo2-Bold.woff') format("woff");
+  font-family: 'Baloo';
+  src: url('@/assets/fonts/Baloo2-Bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Baloo";
-  src: url('@/assets/fonts/Baloo2-Bold.woff2') format("woff2");
+  font-family: 'Baloo';
+  src: url('@/assets/fonts/Baloo2-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Roboto";
-  src: url('@/assets/fonts/Roboto-Regular.woff') format("woff");
+  font-family: 'Roboto';
+  src: url('@/assets/fonts/Roboto-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Roboto";
-  src: url('@/assets/fonts/Roboto-Regular.woff2') format("woff2");
+  font-family: 'Roboto';
+  src: url('@/assets/fonts/Roboto-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Roboto";
-  src: url("@/assets/fonts/Roboto-Medium.ttf") format("truetype");
+  font-family: 'Roboto';
+  src: url('@/assets/fonts/Roboto-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Roboto";
-  src: url("@/assets/fonts/Roboto-MediumItalic.ttf") format("truetype");
+  font-family: 'Roboto';
+  src: url('@/assets/fonts/Roboto-MediumItalic.ttf') format('truetype');
   font-weight: 500;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
-  font-family: "Roboto";
-  src: url('@/assets/fonts/Roboto-Bold.ttf') format("truetype");
+  font-family: 'Roboto';
+  src: url('@/assets/fonts/Roboto-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
 }
