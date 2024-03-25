@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script type="module" setup lang="ts">
 import Glide from '@glidejs/glide'
 import { onMounted, ref } from 'vue'
 import type { Reference } from '@/types'

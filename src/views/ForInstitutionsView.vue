@@ -1,4 +1,4 @@
-<script setup lang="ts"></script>
+<script type="module" setup lang="ts"></script>
 
 <template>
   <h1>Pro pomáhající instituce</h1>

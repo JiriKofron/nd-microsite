@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script type="module" setup lang="ts">
 import TheCarousel from '@/components/TheCarousel.vue'
 import NdButton from '@/components/NdButton.vue'
 </script>
