@@ -27,7 +27,7 @@ const routes = ref([
   },
   {
     id: 4,
-    to: '/poslouchejme-deti/pro-instituce',
+    to: '/poslouchejme-deti/pro-pomahajici-instituce',
     text: 'Pro pomáhající instituce'
   }
 ])

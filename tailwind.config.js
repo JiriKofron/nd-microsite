@@ -18,6 +18,7 @@ export default {
         orange: 'var(--orange)',
         yellow: 'var(--yellow)',
         'light-blue': 'var(--light-blue)',
+        'pale-violet': 'var(--pale-violet)',
         'light-violet': 'var(--light-violet)',
         'dark-violet': 'var(--dark-violet)',
         salmon: 'var(--salmon)'

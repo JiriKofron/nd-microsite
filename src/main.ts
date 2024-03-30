@@ -30,7 +30,7 @@ export const router = createRouter({
       component: () => import('./views/SafeSpacesView.vue')
     },
     {
-      path: '/poslouchejme-deti/pro-instituce',
+      path: '/poslouchejme-deti/pro-pomahajici-instituce',
       name: 'forInstitutions',
       component: () => import('./views/ForInstitutionsView.vue')
     },
