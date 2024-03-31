@@ -50,8 +50,6 @@ const materialyEbook = ref<Ebook[] | undefined | null>(null)
 
 const parseAsset = async (asset: any) => {
   const response = await http.get(`/media/${asset}`)
-
-  console.log('returned assets url', response.data.source_url)
   return response.data.source_url
 }
 
