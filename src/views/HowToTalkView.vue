@@ -2,6 +2,7 @@
 import http from '@/server/api'
 import { onMounted, ref } from 'vue'
 import DownloadCard from '@/components/DownloadCard.vue'
+import SupportUs from '@/components/SupportUs.vue'
 
 interface NahledKarty {
   nahled: string
@@ -332,6 +333,8 @@ onMounted(async () => {
         {{ kartyMistaStrachu.detail }}
       </p>
     </section>
+
+    <SupportUs />
   </section>
 </template>
 
