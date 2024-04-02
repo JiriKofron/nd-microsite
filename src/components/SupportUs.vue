@@ -3,7 +3,7 @@ import OrderForm from '@/components/OrderForm.vue'
 </script>
 
 <template>
-  <section class="flex flex-col bg-salmon p-8 md:p-16 gap-4 md:gap-8">
+  <section class="flex flex-col bg-salmon p-8 md:p-16 gap-4 md:gap-16">
     <article class="flex flex-col gap-4 md:gap-16">
       <h3
         class="text-heading md:text-heading-large font-baloo font-semibold text-primary m-0 md:self-center"
