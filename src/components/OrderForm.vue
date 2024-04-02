@@ -1,5 +1,6 @@
 <script type="module" setup lang="ts">
 import { ref } from 'vue'
+import axios from "axios";
 
 const formData = ref({
   name: '',
@@ -15,8 +16,12 @@ const formData = ref({
 
 const formElement = ref()
 
-const submitForm = () => {
+const submitForm = async () => {
   console.log('submit', formData.value)
+
+  const forms = await axios.post('https://test.nevypustdusi.cz/wp-json/draftspot_theme/v1/order/', formData.value)
+
+  console.log(forms.data)
   formElement.value.reset()
 }
 </script>
@@ -269,7 +274,7 @@ const submitForm = () => {
           class="flex items-center justify-center h-[40px] px-4 rounded-full leading-relaxed cursor-pointer
           bg-orange border-none text-base md:text-17-21 text-white font-roboto font-semibold w-2/3 md:w-1/3"
           type="submit"
-          @submit="$emit('submit')"
+          @submit="submitForm"
       >
         Odeslat objednávku
       </button>
