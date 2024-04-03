@@ -136,9 +136,9 @@ onMounted(async () => {
             {{ varovneSignalyAcf.varovne_signaly.nadpis }}
           </h2>
 
-          <div class="font-roboto text-base text-primary-text font-normal">
-            {{ varovneSignalyAcf.varovne_signaly.detail }}
-          </div>
+          <div
+              v-html="varovneSignalyAcf.varovne_signaly.detail"
+              class="font-roboto text-base text-primary-text font-normal" />
 
           <div class="flex flex-col items-stretch gap-8 md:gap-12 mt-8">
             <div

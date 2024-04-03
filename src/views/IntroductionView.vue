@@ -133,7 +133,7 @@ onMounted(async () => {
                 Říct si o pomoc vyžaduje odvahu. Možná tápete, kdo může pečovat o duše mladých?
               </p>
             </div>
-            <NdButton variant="link" link="/poslouchejme-deti/mista-pomoci" block class="md:w-5/12">
+            <NdButton variant="link" link="/poslouchejme-deti/mista-pomoci" block class="md:w-5/12 lg:w-4/12">
               Kdo může pečovat o duše mladých?
             </NdButton>
 
@@ -153,7 +153,7 @@ onMounted(async () => {
                     alt="talking bubble"
                     class="md:w-32"
                   />
-                  <NdButton variant="anchor" link="https://nevypustdusi.cz/kde-hledat-pomoc/">
+                  <NdButton variant="anchor" link="https://nevypustdusi.cz/poradna/">
                     E-mailová poradna
                   </NdButton>
                 </div>

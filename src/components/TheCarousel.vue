@@ -84,7 +84,7 @@ onMounted( () => {
                 class="md:flex md:items-center md:justify-center italic md:px-8 py-20 mb-8 reference"
               >
                 <div
-                  class="reference__text p-8 -mt-8 max-w-[320px] md:max-w-[520px] md:text-22 md:font-roboto md:font-normal"
+                  class="reference__text p-8 -mt-8 ml-2 md:ml-0 md:-mt-16 max-w-[320px] md:max-w-[520px] md:text-22 md:font-roboto md:font-normal"
                 >
                   {{ reference.text }}
                 </div>
