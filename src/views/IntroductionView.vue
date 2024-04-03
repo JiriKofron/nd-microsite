@@ -3,7 +3,6 @@ import { onMounted, ref } from 'vue'
 import http from '@/server/api'
 import NdButton from '@/components/NdButton.vue'
 
-const page = ref(null)
 const acf = ref<Acf | null>(null)
 const categoryDetails = ref<CategoryDetail[] | undefined | null>(null)
 
@@ -44,7 +43,6 @@ const fetchData = async () => {
   try {
     const response = await http.get('/pages?slug=poslouchejme-deti-2')
     const [data] = response.data
-    page.value = data
     acf.value = data.acf
     categoryDetails.value = await parseCategoryDetail(acf.value?.kategorie.kategorie_detail)
     loading.value = false
@@ -60,12 +58,12 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section v-if="page && acf && !loading" class="flex flex-col align-center justify-center w-full">
-    <section class="flex flex-col items-center justify-center max-w-[900px] p-8 md:p-16 md:mx-auto">
+  <section class="flex flex-col items-center justify-center w-full">
+    <section v-if="acf && !loading" class="flex flex-col items-center justify-center max-w-[900px] p-8 md:p-16 md:mx-auto">
       <article class="flex items-center justify-center w-100 p-4 gap-x-8 md:gap-x-20">
         <img src="@/assets/icons/ico-violet-baloon.svg" alt="balonek" class="w-20 md:w-40" />
         <p
-          class="text-17-21 font-baloo font-semibold text-primary-text md:text-heading md:font-semibold"
+          class="text-17 font-baloo font-semibold text-primary-text md:text-heading md:font-semibold"
         >
           {{ acf.popis }}
         </p>
@@ -85,11 +83,11 @@ onMounted(async () => {
             <article
               v-for="(category, index) in categoryDetails"
               :key="index"
-              class="relative bg-salmon p-8 pb-16 md:p-20 rounded-2xl md:basis-6/12"
+              class="relative bg-salmon p-8 md:p-16 rounded-2xl md:basis-6/12"
             >
               <div class="flex items-start gap-8 mb-6">
                 <img :src="category.ikona" alt="article icon" class="md:w-48" />
-                <h3 class="text-20-24 font-baloo font-semibold text-orange m-0">
+                <h3 class="text-20 font-baloo font-semibold text-orange m-0">
                   {{ category.nadpis_detail }}
                 </h3>
               </div>
@@ -109,7 +107,7 @@ onMounted(async () => {
             <img
               src="@/assets/icons/ico-purple-arrow-lg.svg"
               alt="ikona šipka dolu"
-              class="absolute left-[42%] top-[60%] hidden md:block"
+              class="absolute left-[40%] top-[60%] hidden md:block"
             />
             <img
               src="@/assets/icons/ico-purple-arrow-lg.svg"
@@ -118,11 +116,11 @@ onMounted(async () => {
             />
           </div>
 
-          <article class="flex flex-col gap-6 bg-salmon p-8 pb-16 rounded-2xl md:w-[95%] md:mx-32">
+          <article class="flex flex-col gap-6 bg-salmon p-8 md:p-16 rounded-2xl md:w-[95%] md:mx-32">
             <div class="flex items-start gap-8">
               <img src="@/assets/icons/ico-map.svg" alt="icon with map" class="md:hidden" />
               <h3
-                class="text-sm-heading font-baloo font-semibold text-orange m-0 md:font-roboto md:font-bold"
+                class="text-heading font-baloo font-semibold text-orange m-0 md:font-roboto md:font-bold"
               >
                 Kde ve svém okolí můžete najít další podporu
               </h3>
@@ -142,7 +140,7 @@ onMounted(async () => {
             <article
               class="flex flex-col items-center justify-center bg-white p-8 rounded-2xl gap-6 mt-7"
             >
-              <p class="text-sm-heading text-primary font-semibold font-baloo m-0">
+              <p class="text-heading text-primary font-semibold font-baloo m-0">
                 Pomoct vám může také
               </p>
 
@@ -177,6 +175,10 @@ onMounted(async () => {
           </article>
         </div>
       </section>
+    </section>
+
+    <section v-if="loading" class="w-full h-dvh flex justify-center mt-24 opacity-20">
+      <img src="@/assets/images/loader.gif" alt="" width="100" height="100" />
     </section>
   </section>
 </template>

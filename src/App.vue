@@ -1,40 +1,47 @@
 <script type="module" setup lang="ts">
 import { RouterView } from 'vue-router'
-import { computed, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import {computed, onMounted, ref, toRaw, watch} from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import GlobalFooter from '@/components/GlobalFooter.vue'
 
 const routes = ref([
   {
     id: 0,
-    to: '/poslouchejme-deti',
+    to: '/poslouchejme-deti/',
     text: 'Představení'
   },
   {
     id: 1,
-    to: '/poslouchejme-deti/varovne-signaly',
+    to: '/poslouchejme-deti/varovne-signaly/',
     text: 'Varovné signály'
   },
   {
     id: 2,
-    to: '/poslouchejme-deti/jak-vest-rozhovor',
+    to: '/poslouchejme-deti/jak-vest-rozhovor/',
     text: 'Jak vést rozhovor'
   },
   {
     id: 3,
-    to: '/poslouchejme-deti/mista-pomoci',
+    to: '/poslouchejme-deti/mista-pomoci-a-podpory/',
     text: 'Místa pomoci'
   },
   {
     id: 4,
-    to: '/poslouchejme-deti/pro-pomahajici-instituce',
+    to: '/poslouchejme-deti/pro-pomahajici-instituce/',
     text: 'Pro pomáhající instituce'
   }
 ])
-
+const activePageId = ref(0)
+const router = useRouter()
 const route = useRoute()
-const activePageId = computed(() => {
-  return routes.value.find((r) => r.to === route?.path)?.id || 0
+
+onMounted(async () =>{
+  await router.isReady()
+  activePageId.value = routes.value.find((r) => r.to === router.currentRoute.value.path)?.id || 0
+})
+
+watch(route, (oldValue, newValue) => {
+  activePageId.value = routes.value.find((r) => r.to === newValue.path)?.id || 0
 })
 </script>
 
@@ -109,7 +116,9 @@ const activePageId = computed(() => {
       </article>
     </section>
 
-    <RouterView />
+    <section class="min-h-dvh">
+      <RouterView />
+    </section>
   </section>
 
   <section>

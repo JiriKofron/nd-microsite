@@ -20,7 +20,7 @@ import OrderForm from '@/components/OrderForm.vue'
 
         <div class="flex flex-col gap-4 py-4 md:py-0">
           <h4
-            class="text-20-24 md:text-heading text-primary md:text-orange font-baloo font-semibold m-0"
+            class="text-20 md:text-heading text-primary md:text-orange font-baloo font-semibold m-0"
           >
             Karty 5+2 kroků
           </h4>
@@ -44,7 +44,7 @@ import OrderForm from '@/components/OrderForm.vue'
         class="flex flex-col md:flex-row self-end md:w-10/12 gap-4 md:gap-16 p-8 bg-white rounded-10"
       >
         <div class="flex flex-col gap-4">
-          <h4 class="text-20-24 md:text-heading text-primary font-baloo font-semibold m-0">
+          <h4 class="text-20 md:text-heading text-primary font-baloo font-semibold m-0">
             Chcete nás podpořit?
           </h4>
 
@@ -66,7 +66,7 @@ import OrderForm from '@/components/OrderForm.vue'
 
       <div class="flex flex-col gap-4 py-4 md:py-0">
         <h4
-          class="text-20-24 md:text-heading text-primary md:text-orange font-baloo font-semibold m-0"
+          class="text-20 md:text-heading text-primary md:text-orange font-baloo font-semibold m-0"
         >
           Karty 5+2 kroků a Místa strachu dohromady
         </h4>

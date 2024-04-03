@@ -139,9 +139,9 @@ onMounted(async () => {
     <article
       class="flex flex-col items-center justify-center bg-salmon px-8 py-10 md:p-16 gap-y-8 md:gap-y-16"
     >
-      <div class="flex justify-start md:justify-center gap-x-8 px-4">
-        <img src="@/assets/icons/ico-kdo-stoji.svg" alt="ikona siluet lidí" class="h-24 lg:h-48" />
-        <h1 class="font-baloo text-25 md:text-30 text-primary font-semibold m-0">
+      <div class="flex justify-start md:justify-center gap-x-8 md:gap-x-20 px-4">
+        <img src="@/assets/icons/ico-kdo-stoji.svg" alt="ikona siluet lidí" class="h-24 md:h-48" />
+        <h1 class="font-baloo text-heading md:text-40 text-primary font-semibold m-0">
           {{ oProjektuAcf.o_projektu.nadpis }}
         </h1>
       </div>
@@ -165,7 +165,7 @@ onMounted(async () => {
       </h2>
 
       <p
-        class="text-20-26 lg:text-heading font-baloo font-semibold text-primary text-center md:text-left"
+        class="text-20 lg:text-heading font-baloo font-semibold text-primary text-center md:text-left"
       >
         Odbornice a odborníci, kteří se podíleli na tvorbě nástrojů
       </p>
@@ -230,7 +230,7 @@ onMounted(async () => {
           <div
             class="flex items-stretch justify-between px-8 py-2 bg-yellow w-full rounded-10 overflow-hidden"
           >
-            <div class="basis-auto text-20-26 font-roboto font-medium text-light-violet py-4 pr-4">
+            <div class="basis-auto text-20 font-roboto font-medium text-light-violet py-4 pr-4">
               {{ organizace.nazev_instituce }}
             </div>
             <div class="flex">

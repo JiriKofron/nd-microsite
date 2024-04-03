@@ -2,79 +2,78 @@
 import Glide from '@glidejs/glide'
 import { onMounted, ref } from 'vue'
 import type { Reference } from '@/types'
+import http from "@/server/api";
 
-const references = ref<Reference[]>([
-  {
-    id: 0,
-    jmeno: 'Lucie Čelikovská',
-    pozice: 'vedoucí Centra Hladina',
-    text: '“... záchytné lano pro každého dospěláka, na kterého se obrátí dítě s tíživou životní situací.”'
-  },
-  {
-    id: 1,
-    jmeno: 'Michal Považan',
-    pozice: 'primář Dětské psychiatrie nemocnice Bohnice',
-    text: '“Karty 5+2 můžou pomoct všem dospělým i dětem. Ukazují vhodnou cestu jak spolu mluvit i ve chvílích, kdy to vypadá, že žádná cesta neexistuje.”'
-  },
-  {
-    id: 2,
-    jmeno: 'Tereza Kvapil Baudišová',
-    pozice: 'sociální pracovnice Nízkoprahový klub Pacific',
-    text: '"Kdybych měla jako začínající pracovnice takový materiál v ruce, určitě bych šla do náročných rozhovorů s větší jistotou."'
-  },
-  {
-    id: 3,
-    jmeno: 'Jitka Balcarová',
-    pozice: 'klinická psycholožka, oddělení dětské psychiatrie Fakultní Thomayerovy nemocnice',
-    text: '„Výborná pomůcka a praktický rádce pro všechny, kdo na vlastní kůži pocítí, jak snadno nás v pomoci ohroženým dětem může spoutat strach.“'
+const loading = ref(false)
+const references = ref<Reference[] | undefined>([])
+
+const fetchData = async () => {
+  try {
+    const response = await http.get('/pages?slug=poslouchejme-deti-2')
+    const [data] = response.data
+    references.value = data.acf?.reference
+    loading.value = false
+  } catch (error) {
+    console.error(error)
   }
-])
+}
 
 const glideRef = ref()
 const currentSlide = ref(0)
 
-onMounted(() => {
-  const carousel = new Glide(glideRef.value, {
-    type: 'carousel',
-    startAt: 0,
-    perView: 1
-  })
+onMounted( () => {
+  loading.value = true
+  fetchData().then(() => {
+    const carousel = new Glide(glideRef.value, {
+      type: 'carousel',
+      startAt: 0,
+      perView: 1
+    })
 
-  // @ts-expect-error
-  carousel.on('run.after', function (e: any) {
-    if (e.direction === '=') {
-      currentSlide.value = Number(e.steps)
-      return
-    }
+    // @ts-expect-error
+    carousel.on('run.after', function (e: any) {
+      if (e.direction === '=') {
+        currentSlide.value = Number(e.steps)
+        return
+      }
 
-    switch (e.direction) {
-      case '>':
-        if (currentSlide.value < references.value.length - 1) {
-          currentSlide.value++
-        } else {
-          currentSlide.value = 0
+      if(references.value?.length) {
+        switch (e.direction) {
+          case '>':
+            if (currentSlide.value < references.value.length - 1) {
+              currentSlide.value++
+            } else {
+              currentSlide.value = 0
+            }
+            break
+          case '<':
+            if (currentSlide.value > 0) {
+              currentSlide.value--
+            } else {
+              currentSlide.value = references.value.length - 1
+            }
+            break
+
+          default:
+            currentSlide.value = 0
+            break
         }
-        break
-      case '<':
-        if (currentSlide.value > 0) {
-          currentSlide.value--
-        } else {
-          currentSlide.value = references.value.length - 1
-        }
-        break
 
-      default:
+      } else {
         currentSlide.value = 0
-        break
-    }
+      }
+    })
+    carousel.mount()
+    loading.value = false
+  }).catch((error) => {
+    console.error(error)
   })
-  carousel.mount()
 })
 </script>
 
 <template>
   <section class="py-10 w-[85%] max-w-[900px]">
-    <div class="glide" ref="glideRef">
+    <div v-if="references" class="glide" ref="glideRef">
       <div class="glide__track" data-glide-el="track">
         <ul class="glide__slides">
           <li v-for="reference in references" :key="reference.jmeno" class="glide__slide">
@@ -110,8 +109,9 @@ onMounted(() => {
           </button>
 
           <div
-            class="glide__bullets flex items-center justify-center gap-x-14 z-20 relative"
-            data-glide-el="controls[nav]"
+              v-if="references"
+              class="glide__bullets flex items-center justify-center gap-x-14 z-20 relative"
+              data-glide-el="controls[nav]"
           >
             <button
               v-for="(i, index) in references.length"

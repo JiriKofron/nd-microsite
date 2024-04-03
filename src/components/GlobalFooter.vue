@@ -10,7 +10,7 @@ import NdButton from '@/components/NdButton.vue'
     </article>
 
     <section class="bg-primary flex flex-col items-center justify-center p-8 gap-y-8">
-      <NdButton variant="link" link="/poslouchejme-deti/o-projektu" inverted>
+      <NdButton variant="link" link="/poslouchejme-deti/o-projektu/" inverted>
         Autorský tým a podpora projektu
       </NdButton>
     </section>

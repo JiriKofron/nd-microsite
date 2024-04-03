@@ -131,13 +131,13 @@ onMounted(async () => {
           alt="varovne signaly ikona vykricnik v trojuhelniku"
           class="h-24 md:h-40"
         />
-        <h1 class="font-baloo text-25 md:text-heading-large text-primary font-semibold m-0">
+        <h1 class="font-baloo text-heading md:text-heading-large text-primary font-semibold m-0">
           {{ proInstituceAcf.nadpis }}
         </h1>
       </div>
 
       <h2
-        class="text-20 md:text-30 font-baloo font-semibold text-orange text-center md:text-left m-0"
+        class="text-20 md:text-30 font-baloo font-semibold text-orange text-center m-0"
       >
         {{ proInstituceAcf.popis }}
       </h2>
@@ -156,13 +156,13 @@ onMounted(async () => {
       />
 
       <div v-if="materialyInfografiky" class="flex flex-col gap-8 py-8 md:gap-16">
-        <h3 class="text-20-26 md:text-30 text-primary font-baloo font-semibold text-center m-0">
+        <h3 class="text-20 md:text-30 text-primary font-baloo font-semibold text-center m-0">
           Infografiky a plakáty
         </h3>
         <div
           v-for="infografika in materialyInfografiky"
           :key="infografika.nadpis"
-          class="flex flex-col gap-4 md:gap-8"
+          class="flex flex-col gap-6 md:gap-8"
         >
           <h4 class="text-17 md:text-heading text-orange font-baloo font-semibold m-0">
             {{ infografika.nadpis }}
@@ -173,7 +173,7 @@ onMounted(async () => {
             class="text-base md:text-16 font-roboto text-primary-text font-normal m-0"
           />
 
-          <div class="flex flex-col md:flex-row md:justify-center items-center md:gap-8">
+          <div class="flex flex-col md:flex-row md:justify-center items-center gap-6 md:gap-8">
             <img
               v-for="nahled in infografika.materialy.nahledy"
               :key="nahled.nahled"
@@ -199,7 +199,7 @@ onMounted(async () => {
           v-if="proInstituceAcf.materialy.ebooky.length > 0"
           class="flex flex-col gap-8 md:gap-16 py-8"
         >
-          <h3 class="text-20-26 md:text-30 text-primary font-baloo font-semibold text-center m-0">
+          <h3 class="text-20 md:text-30 text-primary font-baloo font-semibold text-center m-0">
             Nebuďte na to ve službách sami
           </h3>
           <div
@@ -217,7 +217,7 @@ onMounted(async () => {
             />
 
             <div
-              class="flex flex-col px-8 md:px-16 py-4 md:py-8 gap-4 md:gap-8 rounded-10 bg-pale-violet"
+              class="flex flex-col px-8 md:px-16 py-8 gap-4 md:gap-8 rounded-10 bg-pale-violet"
             >
               <h4
                 class="text-17 md:text-heading text-primary font-baloo font-semibold m-0 uppercase"

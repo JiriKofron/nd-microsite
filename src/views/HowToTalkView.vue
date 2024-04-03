@@ -185,13 +185,13 @@ onMounted(async () => {
       <div class="flex items-center md:justify-center gap-8 md:gap-12">
         <img src="@/assets/icons/ico-ask-them.svg" alt="icon zazemi" class="md:w-52" />
         <h1
-          class="text-25 md:text-heading-large font-baloo font-semibold text-primary m-0 md:w-9/12"
+          class="text-heading md:text-heading-large font-baloo font-semibold text-primary m-0 md:w-9/12"
         >
           {{ podpurnyRozhovor.nadpis }}
         </h1>
       </div>
 
-      <h2 class="text-20 md:text-30 font-baloo text-orange font-semibold m-0 mt-8">
+      <h2 class="text-20 md:text-30 font-baloo text-orange text-center font-semibold m-0 mt-8">
         {{ podpurnyRozhovor.podnadpis }}
       </h2>
 
@@ -211,7 +211,7 @@ onMounted(async () => {
       </article>
     </section>
 
-    <section class="flex flex-col items-center p-8 md:p-16 gap-8 md:gap-16 mb-16">
+    <section class="flex flex-col items-center p-8 md:p-16 gap-8 md:gap-16 mt-4">
       <h1
         class="text-heading md:text-heading-large font-baloo font-semibold text-primary m-0 text-center"
       >
@@ -237,7 +237,7 @@ onMounted(async () => {
 
     <section class="flex flex-col p-8 md:p-16 gap-10">
       <h3
-        class="text-heading md:text-heading-large font-baloo font-semibold text-primary m-0 text-center"
+        class="text-heading md:text-40 font-baloo font-semibold text-primary m-0 text-center"
       >
         5+2 kroků v podpůrném rozhovoru
       </h3>
@@ -245,7 +245,7 @@ onMounted(async () => {
       <img
         src="@/assets/images/podpurny_rozhovor_graphic.svg"
         alt="grafika s radami při podpůrném rozhovoru"
-        class="bg-primary rounded-10 overflow-hidden"
+        class="bg-primary rounded-10 overflow-hidden md:w-2/3 self-center"
       />
     </section>
 
@@ -265,7 +265,7 @@ onMounted(async () => {
           />
         </div>
 
-        <div class="text-25 font-baloo text-primary font-semibold">
+        <div class="text-heading font-baloo text-primary font-semibold">
           {{ `${index + 1}. ${karta.nadpis}` }}
         </div>
 

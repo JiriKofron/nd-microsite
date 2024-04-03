@@ -8,7 +8,7 @@ const props = defineProps<{
   <div
     class="flex flex-col justify-center max-w-[476px] rounded-10 overflow-hidden shadow-warning-sign"
   >
-    <div class="bg-salmon py-8 px-10 text-20-24 font-baloo font-semibold text-primary">
+    <div class="bg-salmon py-8 px-10 text-20 font-baloo font-semibold text-primary">
       <slot />
     </div>
 

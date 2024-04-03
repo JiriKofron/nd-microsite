@@ -10,32 +10,32 @@ export const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
-      path: '/poslouchejme-deti',
+      path: '/poslouchejme-deti/',
       name: 'introduction',
       component: IntroductionView
     },
     {
-      path: '/poslouchejme-deti/varovne-signaly',
+      path: '/poslouchejme-deti/varovne-signaly/',
       name: 'warningSignal',
       component: () => import('./views/WarningSignalView.vue')
     },
     {
-      path: '/poslouchejme-deti/jak-vest-rozhovor',
+      path: '/poslouchejme-deti/jak-vest-rozhovor/',
       name: 'howToTalk',
       component: () => import('./views/HowToTalkView.vue')
     },
     {
-      path: '/poslouchejme-deti/mista-pomoci',
+      path: '/poslouchejme-deti/mista-pomoci-a-podpory/',
       name: 'safeSpaces',
       component: () => import('./views/SafeSpacesView.vue')
     },
     {
-      path: '/poslouchejme-deti/pro-pomahajici-instituce',
+      path: '/poslouchejme-deti/pro-pomahajici-instituce/',
       name: 'forInstitutions',
       component: () => import('./views/ForInstitutionsView.vue')
     },
     {
-      path: '/poslouchejme-deti/o-projektu',
+      path: '/poslouchejme-deti/o-projektu/',
       name: 'about',
       component: () => import('./views/AboutView.vue')
     }

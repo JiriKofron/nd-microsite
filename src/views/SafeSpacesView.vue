@@ -71,7 +71,7 @@ onMounted(async () => {
           alt="místa pomoci ilustrace ruka"
           class="h-24 md:h-36"
         />
-        <h1 class="font-baloo text-25 md:text-heading-large text-primary font-semibold m-0">
+        <h1 class="font-baloo text-heading md:text-heading-large text-primary font-semibold m-0">
           {{ mistaPomociAcf.nadpis }}
         </h1>
       </div>
@@ -90,7 +90,7 @@ onMounted(async () => {
       </div>
     </article>
 
-    <section class="flex flex-col items-center p-8 md:p-16 gap-8 md:gap-16 md:w-full box-border">
+    <section class="flex flex-col items-center p-8 md:p-16 gap-8 md:gap-16 mt-4 md:w-full box-border">
       <h2
         class="text-heading md:text-heading-large font-baloo font-bold text-primary text-center m-0"
       >
@@ -106,7 +106,7 @@ onMounted(async () => {
 
       <article
         v-if="mistaPomociAcf && mistaPomociAcf.sirsi_podpurna_sit"
-        class="flex flex-col gap-8 md:w-full"
+        class="flex flex-col gap-6 md:gap-16 md:w-full"
       >
         <div
           v-for="(sit, index) in sirsiPodpurnaSit"
@@ -115,7 +115,7 @@ onMounted(async () => {
         >
           <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <h3
-              class="text-25 md:text-26 font-baloo text-primary font-semibold m-0"
+              class="text-heading md:text-26 font-baloo text-primary font-semibold m-0"
               :class="{ 'md:text-heading-large': sit.showMore }"
             >
               {{ sit.nadpis }}
@@ -124,7 +124,7 @@ onMounted(async () => {
             <button
               v-if="!sit.showMore"
               @click="sit.showMore = true"
-              class="flex items-center justify-center px-6 py-2 border-none bg-orange text-white rounded-full text-base font-roboto font-bold w-fit gap-2 self-end"
+              class="flex items-center justify-center px-6 py-2 border-none bg-orange text-white rounded-full text-base tracking-[0.05em] font-roboto font-bold w-fit gap-2 self-end"
               type="button"
             >
               <span>Zobrazit detail</span>
@@ -142,7 +142,7 @@ onMounted(async () => {
             </p>
 
             <article v-for="sekce in sit.sekce" :key="sekce.nadpis" class="py-8">
-              <h4 class="text-20-24 md:text-heading font-baloo font-semibold text-orange my-4">
+              <h4 class="text-20 md:text-heading font-baloo font-semibold text-orange my-4">
                 {{ sekce.nadpis }}
               </h4>
 
@@ -168,7 +168,7 @@ onMounted(async () => {
           <button
             v-if="sit.showMore"
             @click="sit.showMore = false"
-            class="flex items-center justify-center px-6 py-2 border-none bg-orange text-white rounded-full text-base font-roboto font-bold w-fit gap-2 self-end"
+            class="flex items-center justify-center px-6 py-2 border-none bg-orange text-white rounded-full text-base md:text-17 font-roboto font-bold tracking-[0.05em] md:tracking-[0.03em] w-fit gap-2 self-end"
             type="button"
           >
             <span>Skrýt</span>

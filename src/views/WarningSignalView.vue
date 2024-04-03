@@ -32,6 +32,7 @@ interface VarovneSignalyAcf {
 
 const varovneSignalyAcf = ref<VarovneSignalyAcf | null>(null)
 const varovneSignaly = ref<VarovnySignal[] | undefined>([])
+const loading = ref(false)
 
 const parseWarningSignalContent = async (warningSignals: VarovnySignal[] | undefined) => {
   if (!warningSignals) {
@@ -51,12 +52,19 @@ const parseWarningSignalContent = async (warningSignals: VarovnySignal[] | undef
 }
 
 const fetchData = async () => {
-  const response = await http.get('pages?slug=varovne-signaly')
-  const [data] = response.data
-  varovneSignalyAcf.value = data?.acf
-  varovneSignaly.value = await parseWarningSignalContent(
-    varovneSignalyAcf.value?.varovne_signaly.signal
-  )
+  loading.value = true
+  try {
+    const response = await http.get('pages?slug=varovne-signaly')
+    const [data] = response.data
+    varovneSignalyAcf.value = data?.acf
+    varovneSignaly.value = await parseWarningSignalContent(
+        varovneSignalyAcf.value?.varovne_signaly.signal
+    )
+
+    loading.value = false
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 onMounted(async () => {
@@ -65,7 +73,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section v-if="varovneSignalyAcf" class="max-w-[900px]">
+  <section v-if="varovneSignalyAcf && !loading" class="max-w-[900px]">
     <article class="flex flex-col items-center justify-center bg-salmon px-8 py-10 md:p-16 gap-y-8">
       <div class="flex items-center justify-start md:justify-center gap-x-8 px-4">
         <img
@@ -73,13 +81,13 @@ onMounted(async () => {
           alt="varovne signaly ikona vykricnik v trojuhelniku"
           class="h-24 md:h-40"
         />
-        <h1 class="font-baloo text-25 md:text-heading-large text-primary font-semibold m-0">
+        <h1 class="font-baloo text-heading md:text-heading-large text-primary font-semibold m-0">
           {{ varovneSignalyAcf.nadpis }}
         </h1>
       </div>
 
       <h2
-        class="text-20 md:text-30 font-baloo font-semibold text-orange text-center md:text-left m-0"
+        class="text-20 md:text-30 font-baloo font-semibold text-orange text-center m-0"
       >
         {{ varovneSignalyAcf.podnadpis }}
       </h2>
@@ -91,7 +99,7 @@ onMounted(async () => {
 
     <section class="flex flex-col items-center justify-center gap-y-8 p-8 pt-10 md:p-16">
       <article class="flex flex-col items-center justify-center gap-y-8">
-        <h2 class="text-25 md:text-heading-large font-baloo text-primary font-semibold m-0">
+        <h2 class="text-heading md:text-heading-large font-baloo text-primary font-semibold m-0">
           {{ varovneSignalyAcf.zavazne_signaly.nadpis }}
         </h2>
 
@@ -123,7 +131,7 @@ onMounted(async () => {
       <section class="py-8">
         <article class="flex flex-col items-center justify-center gap-y-8 py-8">
           <h2
-            class="text-25 md:text-heading-large font-baloo text-primary font-semibold m-0 text-center"
+            class="text-heading md:text-heading-large font-baloo text-primary font-semibold m-0 text-center"
           >
             {{ varovneSignalyAcf.varovne_signaly.nadpis }}
           </h2>
@@ -143,9 +151,9 @@ onMounted(async () => {
               </div>
 
               <div class="flex flex-col md:flex-row gap-6 md:gap-12">
-                <div class="flex md:flex-col items-center md:items-start gap-4 md:basis-2/12">
+                <div class="flex md:flex-col items-center md:items-start gap-8 md:basis-2/12">
                   <span
-                    class="inline-block uppercase underline text-16 text-primary-text font-roboto font-bold"
+                    class="inline-block uppercase text-17 md:text-16 md:tracking-tracking-[0.01em] text-primary font-roboto font-medium md:font-bold"
                     >co se děje:
                   </span>
                   <img :src="signal.ikona" alt="ikona karta závažné signály" class="w-20" />
