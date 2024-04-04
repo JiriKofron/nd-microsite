@@ -30,10 +30,10 @@ export default {
         20: ['2rem', '2.6rem'],
         22: ['2.2rem', '3rem'],
         '24-34':['2.4rem', '3.4rem'],
-        heading: ['2.6rem', '3rem'],
+        heading: ['2.5rem', '2.7rem'],
         30: ['3rem', '3.5rem'],
         40: ['4rem', '4.5rem'],
-        'heading-large': ['4.5rem', '6rem'],
+        'heading-large': ['4rem', '5rem'],
         clamp: 'clamp(2rem, 6.5vw, 3.5rem)'
       },
       borderRadius: {

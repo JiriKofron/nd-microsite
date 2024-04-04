@@ -28,7 +28,7 @@ import OrderForm from '@/components/OrderForm.vue'
           <p
             class="text-base md:text-16 text-primary-text font-roboto font-normal tracking-[0.01em] m-0"
           >
-            Karty 5+2 kroků v podpůrném rozhovoru dostanete na workshopech Nevypusť duši nebo si je
+            Karty 5+2 kroků v podpůrném rozhovoru dostanete na <a href="https://nevypustdusi.cz/programy/" target="_blank"> workshopech Nevypusť duši</a> nebo si je
             můžete vyzvednout zdarma každý pátek od 9:30 do 11:30 na adrese Václavské náměstí 11.
           </p>
 
@@ -52,7 +52,7 @@ import OrderForm from '@/components/OrderForm.vue'
             class="text-base md:text-16 text-primary-text font-roboto font-normal tracking-[0.01em] m-0"
           >
             Karty dáváme zdarma a vše tiskneme, balíme a zasíláme na naše náklady. Pokud nás v naší
-            činnosti chcete podpořit, můžete to udělat na webu darujeme.cz
+            činnosti chcete podpořit, můžete to <a href="https://www.darujme.cz/organizace/1200070" target="_blank">udělat na webu darujeme.cz</a>
             <span class="hidden md:inline"> nebo skrz QR kód zde přímo z mobilu. </span>
           </p>
         </div>

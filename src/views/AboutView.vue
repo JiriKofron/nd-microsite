@@ -125,6 +125,11 @@ const parseSpolupracujiciOrganizace = async (
 }
 
 onMounted(async () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
+
   await fetchData()
   oProjektu.value = await parseOProjektu(oProjektuAcf.value?.o_projektu)
   podporovatele.value = await parsePodporovatele(oProjektuAcf.value?.podporovatele)
@@ -252,5 +257,3 @@ onMounted(async () => {
     </section>
   </section>
 </template>
-
-<style scoped></style>

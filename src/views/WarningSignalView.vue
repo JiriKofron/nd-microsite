@@ -75,13 +75,13 @@ onMounted(async () => {
 <template>
   <section v-if="varovneSignalyAcf && !loading" class="max-w-[900px]">
     <article class="flex flex-col items-center justify-center bg-salmon px-8 py-10 md:p-16 gap-y-8">
-      <div class="flex items-center justify-start md:justify-center gap-x-8 px-4">
+      <div class="flex md:items-center justify-start md:justify-center gap-x-8 px-4">
         <img
           src="@/assets/icons/ico-varovne-signaly.svg"
           alt="varovne signaly ikona vykricnik v trojuhelniku"
-          class="h-24 md:h-40"
+          class="h-24 md:h-40 grow basis-1/5"
         />
-        <h1 class="font-baloo text-heading md:text-heading-large text-primary font-semibold m-0">
+        <h1 class="font-baloo text-heading md:text-heading-large text-primary font-semibold m-0 grow basis-2/3">
           {{ varovneSignalyAcf.nadpis }}
         </h1>
       </div>

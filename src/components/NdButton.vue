@@ -11,7 +11,7 @@ const props = defineProps<{
 
 defineEmits(['click', 'submit'])
 const defaultClasses = ref(
-  'flex items-center justify-center xs:h-[40px] px-8 py-3 xs:py-0 rounded-full font-semibold text-[14px] xs:text-base font-roboto no-underline hover:no-underline visited:no-underline leading-relaxed cursor-pointer'
+  'flex items-center justify-center xs:h-[40px] px-8 py-3 xs:py-0 rounded-full font-semibold text-[14px] xs:text-base font-roboto no-underline hover:no-underline visited:no-underline leading-relaxed text-center cursor-pointer'
 )
 </script>
 

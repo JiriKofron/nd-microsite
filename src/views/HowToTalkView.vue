@@ -182,16 +182,16 @@ onMounted(async () => {
       v-if="podpurnyRozhovor"
       class="flex flex-col justify-center gap-8 bg-salmon p-8 md:p-16"
     >
-      <div class="flex items-center md:justify-center gap-8 md:gap-12">
+      <div class="flex md:items-center md:justify-center gap-8 md:gap-12">
         <img src="@/assets/icons/ico-ask-them.svg" alt="icon zazemi" class="md:w-52" />
         <h1
-          class="text-heading md:text-heading-large font-baloo font-semibold text-primary m-0 md:w-9/12"
+          class="text-heading md:text-heading-large font-baloo font-semibold text-primary m-0"
         >
           {{ podpurnyRozhovor.nadpis }}
         </h1>
       </div>
 
-      <h2 class="text-20 md:text-30 font-baloo text-orange text-center font-semibold m-0 mt-8">
+      <h2 class="text-20 md:text-30 font-baloo text-orange text-center font-semibold m-0 md:mt-8">
         {{ podpurnyRozhovor.podnadpis }}
       </h2>
 
@@ -245,7 +245,7 @@ onMounted(async () => {
       <img
         src="@/assets/images/podpurny_rozhovor_graphic.svg"
         alt="grafika s radami při podpůrném rozhovoru"
-        class="bg-primary rounded-10 overflow-hidden md:w-2/3 self-center"
+        class="bg-primary rounded-10 overflow-hidden w-full md:w-2/3 self-center"
       />
     </section>
 

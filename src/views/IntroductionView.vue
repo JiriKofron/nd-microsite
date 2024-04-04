@@ -85,16 +85,16 @@ onMounted(async () => {
               :key="index"
               class="relative bg-salmon p-8 md:p-16 rounded-2xl md:basis-6/12"
             >
-              <div class="flex items-start gap-8 mb-6">
+              <div class="flex items-start gap-8 mb-6 md:mb-8">
                 <img :src="category.ikona" alt="article icon" class="md:w-48" />
-                <h3 class="text-20 font-baloo font-semibold text-orange m-0">
+                <h3 class="text-20 md:text-heading font-baloo font-semibold text-orange m-0">
                   {{ category.nadpis_detail }}
                 </h3>
               </div>
 
               <div
                 v-html="category.text_detail"
-                class="flex flex-col items-center justify-center text-base font-roboto font-normal text-primary-text m-0 text-detail gap-6"
+                class="flex flex-col items-center justify-center text-base font-roboto font-normal text-primary-text m-0 text-detail gap-6 md:gap-8"
               />
 
               <img
@@ -107,7 +107,7 @@ onMounted(async () => {
             <img
               src="@/assets/icons/ico-purple-arrow-lg.svg"
               alt="ikona šipka dolu"
-              class="absolute left-[40%] top-[60%] hidden md:block"
+              class="absolute left-[40%] md:left-[41%] top-[60%] hidden md:block"
             />
             <img
               src="@/assets/icons/ico-purple-arrow-lg.svg"
@@ -116,24 +116,24 @@ onMounted(async () => {
             />
           </div>
 
-          <article class="flex flex-col gap-6 bg-salmon p-8 md:p-16 rounded-2xl md:w-[95%] md:mx-32">
+          <article class="flex flex-col gap-6 bg-salmon p-8 md:p-16 rounded-2xl md:w-[91%] md:mx-32">
             <div class="flex items-start gap-8">
               <img src="@/assets/icons/ico-map.svg" alt="icon with map" class="md:hidden" />
               <h3
-                class="text-heading font-baloo font-semibold text-orange m-0 md:font-roboto md:font-bold"
+                class="text-heading font-baloo font-semibold text-orange m-0"
               >
-                Kde ve svém okolí můžete najít další podporu
+                Kde ve svém okolí můžete najít další podporu a pomoc
               </h3>
             </div>
 
             <div
-              class="flex flex-col items-center md:items-start justify-center text-base font-roboto font-normal md:font-bold text-primary-text md:text-20"
+              class="flex flex-col items-center md:items-start justify-center"
             >
-              <p class="md:m-0 md:mb-6">
+              <p class="text-base font-roboto font-medium text-primary-text tracking-[0.01em] md:text-20 md:m-0 md:mb-6">
                 Říct si o pomoc vyžaduje odvahu. Možná tápete, kdo může pečovat o duše mladých?
               </p>
             </div>
-            <NdButton variant="link" link="/poslouchejme-deti/mista-pomoci" block class="md:w-5/12 lg:w-4/12">
+            <NdButton variant="link" link="/poslouchejme-deti/mista-pomoci" block class="md:w-2/5">
               Kdo může pečovat o duše mladých?
             </NdButton>
 
