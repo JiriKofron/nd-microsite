@@ -17,19 +17,21 @@ const formData = ref({
 const formElement = ref()
 
 const submitForm = async () => {
-  console.log('submit', formData.value)
-
-  const forms = await axios.post('https://test.nevypustdusi.cz/wp-json/draftspot_theme/v1/order/', formData.value)
-
-  console.log(forms.data)
-  formElement.value.reset()
+  // const values = Object.values(formData.value)
+  try {
+    // await axios.post('https://test.nevypustdusi.cz/wp-json/draftspot_theme/v1/order/', formData.value)
+  } catch (error) {
+    console.error(error)
+  } finally {
+    formElement.value.reset()
+  }
 }
 </script>
 
 <template>
   <section class="flex flex-col p-8 md:p-16 gap-8 md:gap-16 bg-white rounded-10">
     <div class="flex flex-col gap-8 md:gap-16">
-      <h4 class="text-orange text-25 md:text-30 font-baloo font-semibold m-0">Objednat karty</h4>
+      <h4 class="text-orange text-heading md:text-30 font-baloo font-semibold m-0">Objednat karty</h4>
 
       <p class="text-primary-text text-base md:text-16 font-roboto font-normal tracking-[0.01em] m-0">
         Objednávky jsou odesílány 1x za 14 dní. Po objednání vám přijde potvrzovací e-mail s dalšími
@@ -43,7 +45,7 @@ const submitForm = async () => {
         @submit.prevent="submitForm"
     >
       <div class="flex flex-col md:flex-row gap-8 md:gap-16">
-        <h4 class="text-primary text-20-24 md:text-heading font-baloo font-semibold m-0 md:basis-2/6">Kontakt na vás</h4>
+        <h4 class="text-primary text-20 md:text-heading font-baloo font-semibold m-0 md:basis-2/6">Kontakt na vás</h4>
 
         <div class="flex flex-col gap-12 input__group md:basis-3/6">
           <div class="input">
@@ -120,7 +122,7 @@ const submitForm = async () => {
       </div>
 
       <div class="flex flex-col md:flex-row gap-8 md:gap-16">
-        <h4 class="text-primary text-20-24 md:text-heading font-baloo font-semibold m-0 md:basis-2/6">Fakturační údaje</h4>
+        <h4 class="text-primary text-20 md:text-heading font-baloo font-semibold m-0 md:basis-2/6">Fakturační údaje</h4>
 
         <div class="flex flex-col gap-12 input__group md:basis-3/6">
           <div class="input">
@@ -164,7 +166,7 @@ const submitForm = async () => {
         </p>
 
         <div class="flex flex-col md:flex-row gap-8 md:gap-16">
-          <p class="text-primary text-20-24 font-baloo font-semibold m-0 md:basis-4/12">
+          <p class="text-primary text-20 font-baloo font-semibold m-0 md:basis-4/12">
             5+2 kroků k podpůrnému rozhovoru
           </p>
 
@@ -190,7 +192,7 @@ const submitForm = async () => {
             >
               <p class="text-base font-roboto font-normal m-0">Cena:</p>
               <p
-                  class="font-bold font-baloo text-20-24 m-0"
+                  class="font-bold font-baloo text-20 m-0"
               >
                 Zdarma
               </p>
@@ -205,7 +207,7 @@ const submitForm = async () => {
           této dvojice karet.
         </p>
         <div class="flex flex-col md:flex-row gap-8 md:gap-16">
-          <p class="text-primary text-20-24 font-baloo font-semibold m-0 md:basis-4/12">
+          <p class="text-primary text-20 font-baloo font-semibold m-0 md:basis-4/12">
             5+2 kroků k podpůrnému rozhovoru a Místa strachu
           </p>
 
@@ -237,7 +239,7 @@ const submitForm = async () => {
                 </p>
 
                 <p
-                    class="font-bold font-baloo text-20-24 m-0"
+                    class="font-bold font-baloo text-20 m-0"
                 >
                   {{formData.mistastrachu * 600 }} Kč
                 </p>
@@ -249,7 +251,7 @@ const submitForm = async () => {
       </div>
 
       <div class="flex flex-col md:flex-row gap-8 md:gap-16 h-[240px]">
-        <h4 class="text-primary text-20-24 font-baloo font-semibold m-0 md:basis-4/12">
+        <h4 class="text-primary text-20 font-baloo font-semibold m-0 md:basis-4/12">
           Zde můžete upřesnit svou objednávku
         </h4>
 
@@ -272,7 +274,7 @@ const submitForm = async () => {
 
       <button
           class="flex items-center justify-center h-[40px] px-4 rounded-full leading-relaxed cursor-pointer
-          bg-orange border-none text-base md:text-17-21 text-white font-roboto font-semibold w-2/3 md:w-1/3"
+          bg-orange border-none text-base md:text-17 text-white font-roboto font-semibold w-2/3 md:w-1/3"
           type="submit"
           @submit="submitForm"
       >

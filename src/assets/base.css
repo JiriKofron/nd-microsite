@@ -27,6 +27,7 @@ body {
 
 a {
   color: var(--orange);
+  font-weight: 600;
 }
 
 /* tailwind */

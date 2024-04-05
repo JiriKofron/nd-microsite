@@ -11,7 +11,7 @@ const props = defineProps<{
 
 defineEmits(['click', 'submit'])
 const defaultClasses = ref(
-  'flex items-center justify-center h-[40px] px-4 rounded-full font-semibold text-base no-underline hover:no-underline visited:no-underline leading-relaxed cursor-pointer'
+  'flex items-center justify-center xs:h-[40px] px-8 py-3 xs:py-0 rounded-full font-semibold text-[14px] xs:text-base font-roboto no-underline hover:no-underline visited:no-underline leading-relaxed text-center cursor-pointer'
 )
 </script>
 
@@ -19,7 +19,7 @@ const defaultClasses = ref(
   <div :class="[!props.block ? 'w-fit px-8' : '']">
     <template v-if="props.variant === 'button'">
       <button
-        class="bg-transparent border-none text-base no-underline hover:no-underline visited:no-underline visited:text-white font-roboto"
+        class="bg-transparent border-none text-base no-underline hover:no-underline visited:no-underline visited:text-white"
         :class="[
           defaultClasses,
           props.inverted
@@ -37,7 +37,7 @@ const defaultClasses = ref(
     <template v-else-if="props.variant === 'anchor'">
       <a
         :href="props.link"
-        class="text-base no-underline hover:no-underline visited:no-underline font-roboto font-bold"
+        class="no-underline hover:no-underline visited:no-underline font-bold"
         :class="[
           defaultClasses,
           props.inverted
@@ -51,7 +51,7 @@ const defaultClasses = ref(
     <template v-else>
       <RouterLink
         :to="props.link"
-        class="text-base no-underline hover:no-underline visited:no-underline visited:text-white font-roboto"
+        class="no-underline hover:no-underline visited:no-underline"
         :class="[
           defaultClasses,
           props.inverted
