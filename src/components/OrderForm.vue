@@ -1,8 +1,22 @@
 <script type="module" setup lang="ts">
-import { ref } from 'vue'
+import {ref} from 'vue'
+import {Form, Field, useForm, ErrorMessage, validate} from "vee-validate";
+import {object, string, number} from "yup";
 import axios from "axios";
 
-const formData = ref({
+interface FormData {
+  name: string
+  address: string
+  mail: string
+  phone: string
+  ico?: string
+  invoice?: string
+  petplusdva?: number
+  mistastrachu?: number
+  note?: string
+}
+
+const formData = ref<FormData>({
   name: '',
   address: '',
   mail: '',
@@ -15,15 +29,43 @@ const formData = ref({
 })
 
 const formElement = ref()
+const schema = object({
+    name: string().required('Vyplňte prosím svoje jméno').min(4, 'Minimální počet znaků jsou 4'),
+    address: string().required('Vyplňte prosím dodací adresu'),
+    email: string().required('Vyplňte prosím emailovou adresu').email('Email není validní'),
+    phone: string().required('Vyplňte prosím svoje telefonní číslo'),
+    ico: string(),
+    invoice: string(),
+    petplusdva: number(),
+    mistastrachu: number(),
+    note: string().max(250, 'Maximální délka poznámky je 250 znaků')
+  })
+
+const {
+  isSubmitting,
+} = useForm();
 
 const submitForm = async () => {
-  // const values = Object.values(formData.value)
   try {
-    // await axios.post('https://test.nevypustdusi.cz/wp-json/draftspot_theme/v1/order/', formData.value)
+    await axios.post('https://test.nevypustdusi.cz/wp-json/draftspot_theme/v1/order/', formData.value)
   } catch (error) {
     console.error(error)
   } finally {
-    formElement.value.reset()
+    formElement.value.resetForm()
+  }
+}
+
+const handleErrors = ({errors}) => {
+
+  if(errors) {
+    const firstError = Object.keys(errors)[0];
+    const el = document.querySelector(`#${firstError}`);
+
+    el?.scrollIntoView({
+      behavior: 'smooth',
+    });
+
+    (el as HTMLElement)?.focus();
   }
 }
 </script>
@@ -39,27 +81,39 @@ const submitForm = async () => {
       </p>
     </div>
 
-    <form
+    <Form
+        v-slot="{errors}"
         ref="formElement"
         class="flex flex-col gap-16"
-        @submit.prevent="submitForm"
+        :validation-schema="schema"
+        @invalid-submit="handleErrors"
+        @submit="submitForm"
     >
-      <div class="flex flex-col md:flex-row gap-8 md:gap-16">
+      <div class="flex flex-col md:flex-row gap-10 md:gap-16">
         <h4 class="text-primary text-20 md:text-heading font-baloo font-semibold m-0 md:basis-2/6">Kontakt na vás</h4>
 
-        <div class="flex flex-col gap-12 input__group md:basis-3/6">
+        <div class="flex flex-col gap-14 input__group md:basis-3/6">
           <div class="input">
-            <label for="name" class="input__label">
+            <label
+                for="name"
+                class="input__label"
+                :class="{'input__label--errors': errors.name}"
+            >
               Jméno a příjmení *
             </label>
-            <input
+
+            <Field
                 v-model="formData.name"
-                type="text"
                 id="name"
                 name="name"
-                required
-                minlength="4"
+                type="text"
                 class="input__field"
+                :class="{'input__field--errors focus-visible:outline-danger outline-2': errors.name}"
+            />
+
+            <ErrorMessage
+                name="name"
+                class="text-sm font-roboto text-danger pl-8 pt-1"
             />
           </div>
 
@@ -67,35 +121,46 @@ const submitForm = async () => {
             <label
                 for="address"
                 class="input__label"
+                :class="{'input__label--errors': errors.address}"
             >
               Adresa, kam karty zašleme *
             </label>
-            <input
+
+            <Field
                 v-model="formData.address"
-                type="text"
                 id="address"
                 name="address"
-                required
-                minlength="4"
+                type="text"
                 class="input__field"
+                :class="{'input__field--errors focus-visible:outline-danger outline-2': errors.address}"
+            />
+
+            <ErrorMessage
+                name="address"
+                class="text-sm font-roboto text-danger pl-8 pt-1"
             />
           </div>
 
           <div class="input">
             <label
-                for="mail"
+                for="email"
                 class="input__label"
+                :class="{'input__label--errors': errors.email}"
             >
               Email, na který vám odpovíme *
             </label>
-            <input
+            <Field
                 v-model="formData.mail"
-                type="email"
-                id="mail"
-                name="mail"
-                required
-                minlength="4"
+                id="email"
+                name="email"
+                type="text"
                 class="input__field"
+                :class="{'input__field--errors focus-visible:outline-danger outline-2': errors.email}"
+            />
+
+            <ErrorMessage
+                name="email"
+                class="text-sm font-roboto text-danger pl-8 pt-1"
             />
           </div>
 
@@ -103,19 +168,23 @@ const submitForm = async () => {
             <label
                 for="phone"
                 class="input__label"
+                :class="{'input__label--errors': errors.phone}"
             >
               Telefon *
             </label>
 
-            <input
+            <Field
                 v-model="formData.phone"
-                type="text"
                 id="phone"
                 name="phone"
-                required
-                minlength="9"
-                maxlength="15"
+                type="text"
                 class="input__field"
+                :class="{'input__field--errors focus-visible:outline-danger outline-2': errors.phone}"
+            />
+
+            <ErrorMessage
+                name="phone"
+                class="text-sm font-roboto text-danger pl-8 pt-1"
             />
           </div>
         </div>
@@ -124,20 +193,28 @@ const submitForm = async () => {
       <div class="flex flex-col md:flex-row gap-8 md:gap-16">
         <h4 class="text-primary text-20 md:text-heading font-baloo font-semibold m-0 md:basis-2/6">Fakturační údaje</h4>
 
-        <div class="flex flex-col gap-12 input__group md:basis-3/6">
+        <div class="flex flex-col gap-14 input__group md:basis-3/6">
           <div class="input">
             <label
                 for="ico"
                 class="input__label"
+                :class="{'input__label--errors': errors.ico}"
             >
               IČO
             </label>
-            <input
+            <Field
                 v-model="formData.ico"
-                type="number"
                 id="ico"
                 name="ico"
+                type="text"
                 class="input__field"
+                :class="{'input__field--errors focus-visible:outline-danger outline-2': errors.ico}"
+                @change="errors.ico = ''"
+            />
+
+            <ErrorMessage
+                name="ico"
+                class="text-sm font-roboto text-danger pl-8 pt-1"
             />
           </div>
 
@@ -145,15 +222,23 @@ const submitForm = async () => {
             <label
                 for="invoice"
                 class="input__label"
+                :class="{'input__label--errors': errors.invoice}"
             >
               Fakturační adresa
             </label>
-            <input
+            <Field
                 v-model="formData.invoice"
-                type="text"
                 id="invoice"
                 name="invoice"
+                type="text"
                 class="input__field"
+                :class="{'input__field--errors focus-visible:outline-danger outline-2': errors.invoice}"
+                @change="errors.invoice = ''"
+            />
+
+            <ErrorMessage
+                name="invoice"
+                class="text-sm font-roboto text-danger pl-8 pt-1"
             />
           </div>
         </div>
@@ -175,15 +260,24 @@ const submitForm = async () => {
               <label
                   for="petplusdva"
                   class="input__label input__label--numbers"
+                  :class="{'input__label--errors': errors.petplusdva}"
               >
                 Počet
               </label>
-              <input
-                v-model="formData.petplusdva"
-                type="number"
-                id="petplusdva"
-                name="petplusdva"
-                class="w-1/3 max-w-40 input__field"
+
+              <Field
+                  v-model="formData.petplusdva"
+                  id="petplusdva"
+                  name="petplusdva"
+                  type="number"
+                  class="w-1/3 max-w-40 input__field"
+                  :class="{'input__field--errors focus-visible:outline-danger outline-2': errors.petplusdva}"
+                  @change="errors.petplusdva = ''"
+              />
+
+              <ErrorMessage
+                  name="petplusdva"
+                  class="text-sm font-roboto text-danger pl-2 pt-1"
               />
             </div>
 
@@ -216,15 +310,24 @@ const submitForm = async () => {
               <label
                   for="mistastrachu"
                   class="input__label"
+                  :class="{'input__label--errors': errors.mistastrachu}"
               >
                 Počet
               </label>
-              <input
-                v-model="formData.mistastrachu"
-                type="number"
-                id="mistastrachu"
-                name="mistastrachu"
-                class="w-1/3 input__field md:w-40"
+
+              <Field
+                  v-model="formData.mistastrachu"
+                  id="mistastrachu"
+                  name="mistastrachu"
+                  type="number"
+                  class="w-1/3 max-w-40 input__field"
+                  :class="{'input__field--errors focus-visible:outline-danger outline-2': errors.mistastrachu}"
+                  @change="errors.mistastrachu = ''"
+              />
+
+              <ErrorMessage
+                  name="mistastrachu"
+                  class="text-sm font-roboto text-danger pl-8 pt-1"
               />
             </div>
 
@@ -259,15 +362,24 @@ const submitForm = async () => {
           <label
               for="note"
               class="input__label"
+              :class="{'input__label--errors focus-visible:outline-danger outline-2': errors.note}"
           >
             Poznámka
           </label>
-          <textarea
+
+          <Field
               v-model="formData.note"
               id="note"
               name="note"
+              type="textarea"
               class="input__field !h-72"
-              rows="10"
+              :class="{'input__field--errors': errors.note}"
+              @change="errors.note= ''"
+          />
+
+          <ErrorMessage
+              name="note"
+              class="text-sm font-roboto text-danger pl-8 pt-1"
           />
         </div>
       </div>
@@ -276,11 +388,11 @@ const submitForm = async () => {
           class="flex items-center justify-center h-[40px] px-4 rounded-full leading-relaxed cursor-pointer
           bg-orange border-none text-base md:text-17 text-white font-roboto font-semibold w-2/3 md:w-1/3"
           type="submit"
-          @submit="submitForm"
+          :disabled="isSubmitting"
       >
         Odeslat objednávku
       </button>
-    </form>
+    </Form>
   </section>
 </template>
 
@@ -303,6 +415,11 @@ const submitForm = async () => {
       line-height: 2rem;
       font-family: 'Roboto', sans-serif;
       color: var(--primary-text);
+
+
+      &--errors {
+        color: var(--danger);
+      }
     }
 
     &__field {
@@ -315,10 +432,15 @@ const submitForm = async () => {
       font-size: 1.7rem;
       line-height: 2.1rem;
       font-family: 'Roboto', sans-serif;
-      color: var(--gray);
+      color: var(--primary-text);
 
       &:focus {
         color: var(--primary-text);
+      }
+
+
+      &--errors {
+        border: 1px solid var(--danger);
       }
     }
   }
