@@ -99,7 +99,7 @@ onMounted(async () => {
 
       <a
         href="https://nevypustdusi.cz/kde-hledat-pomoc/"
-        class="flex items-center justify-center px-10 py-4 border-none bg-orange text-white rounded-full text-base font-roboto font-bold w-fit no-underline hover:bg-white hover:text-orange"
+        class="flex items-center justify-center px-10 py-4 border-none bg-orange text-white rounded-full text-base font-roboto font-bold w-fit no-underline box-border hover:bg-white hover:text-orange hover:outline hover:outline-[3px] hover:outline-orange"
       >
         Adresář všech kontaktů podle krajů
       </a>
@@ -137,9 +137,9 @@ onMounted(async () => {
           </div>
 
           <div v-if="sit.showMore">
-            <p class="text-base font-roboto font-normal tracking-[0.01em] text-primary-text">
-              {{ sit.popis }}
-            </p>
+            <p
+                v-html="sit.popis"
+                class="text-base font-roboto font-normal tracking-[0.01em] text-primary-text" />
 
             <article v-for="sekce in sit.sekce" :key="sekce.nadpis" class="py-8">
               <h4 class="text-20 md:text-heading font-baloo font-semibold text-orange my-4">

@@ -27,8 +27,8 @@ const routes = ref([
   },
   {
     id: 4,
-    to: '/poslouchejme-deti/pro-pomahajici-instituce/',
-    text: 'Pro pomáhající instituce'
+    to: '/poslouchejme-deti/pro-instituce/',
+    text: 'Pro instituce'
   }
 ])
 const activePageId = ref(0)
@@ -79,7 +79,7 @@ watch(route, (oldValue, newValue) => {
               class="flex flex-col justify-center relative w-10/12 max-w-[320px] xs:w-[90%] xs:max-w-[420px] pl-8 pr-4 py-2 bg-dark-violet rounded-30 font-bold leading-normal md:leading-relaxed font-baloo place-wrapper"
             >
               <span class="text-[14px] xs:text-17 md:text-4xl"
-                >Místo, kde vám poradíme co dělat,</span
+                >Místo, kde vám poradíme, co dělat,</span
               >
               <span class="text-base xs:text-17 md:text-24-34 text-orange uppercase">
                 <strong> když dítě není v pohodě . . . </strong>

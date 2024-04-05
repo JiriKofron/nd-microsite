@@ -183,9 +183,9 @@ onMounted(async () => {
       class="flex flex-col justify-center gap-8 bg-salmon p-8 md:p-16"
     >
       <div class="flex md:items-center md:justify-center gap-8 md:gap-12">
-        <img src="@/assets/icons/ico-ask-them.svg" alt="icon zazemi" class="md:w-52" />
+        <img src="@/assets/icons/ico-ask-them.svg" alt="icon zazemi" class="md:h-44 grow basis-1/5" />
         <h1
-          class="text-heading md:text-heading-large font-baloo font-semibold text-primary m-0"
+          class="text-heading md:text-heading-large font-baloo font-semibold text-primary m-0 grow basis-2/3"
         >
           {{ podpurnyRozhovor.nadpis }}
         </h1>
@@ -199,7 +199,7 @@ onMounted(async () => {
         <div
           v-for="karta in podpurnyRozhovor.nahledy_karet"
           :key="karta.popis"
-          class="flex flex-col md:flex-col-reverse items-center md:justify-end gap-8"
+          class="flex flex-col md:flex-col-reverse items-center md:justify-end gap-8 basis-6/12"
         >
           <img :src="karta.nahled" :alt="karta.popis" class="w-72" />
           <p
@@ -215,7 +215,7 @@ onMounted(async () => {
       <h1
         class="text-heading md:text-heading-large font-baloo font-semibold text-primary m-0 text-center"
       >
-        Podpora pro podpůrný rozhovor
+        Jak vést podpůrný rozhovor
       </h1>
 
       <button

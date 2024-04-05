@@ -27,7 +27,6 @@ interface Infografika {
 interface Ebook {
   nazev: string
   popis: string
-  disclaimer: string
   soubory_ke_stazeni: Soubor[]
 }
 
@@ -42,6 +41,7 @@ interface ProInstituceAcf {
   nadpis: string
   popis: string
   materialy: Materialy
+  disclaimer: string
 }
 
 const proInstituceAcf = ref<ProInstituceAcf | null>(null)
@@ -108,7 +108,7 @@ const parsetMaterialyEbook = async (ebooky: Ebook[] | undefined) => {
 }
 
 const fetchData = async () => {
-  const response = await http.get('pages?slug=pro-pomahajici-instituce')
+  const response = await http.get('pages?slug=pro-instituce')
   const [data] = response.data
   proInstituceAcf.value = data?.acf
   materialyInfografiky.value = await parseMaterialyInfografiky(
@@ -124,14 +124,14 @@ onMounted(async () => {
 
 <template>
   <section v-if="proInstituceAcf" class="max-w-[900px]">
-    <article class="flex flex-col items-center justify-center bg-salmon px-8 py-12 md:p-16 gap-y-8">
-      <div class="flex items-center justify-start md:justify-center gap-x-8 px-4">
+    <article class="flex flex-col items-center md:items-start justify-center bg-salmon px-8 py-12 md:p-16 gap-y-8">
+      <div class="flex items-center justify-start gap-x-8 md:gap-20 px-4 md:pl-40">
         <img
           src="@/assets/icons/ico-institutions.svg"
           alt="varovne signaly ikona vykricnik v trojuhelniku"
           class="h-24 md:h-40"
         />
-        <h1 class="font-baloo text-heading md:text-heading-large text-primary font-semibold m-0">
+        <h1 class="md:self-center font-baloo text-heading md:text-heading-large text-primary font-semibold m-0">
           {{ proInstituceAcf.nadpis }}
         </h1>
       </div>
@@ -196,6 +196,20 @@ onMounted(async () => {
         </div>
 
         <div
+            class="flex flex-col px-8 md:px-16 py-8 gap-4 md:gap-8 rounded-10 bg-pale-violet"
+        >
+          <h4
+              class="text-17 md:text-heading text-primary font-baloo font-semibold m-0 uppercase"
+          >
+            Upozornění
+          </h4>
+          <div
+              v-html="proInstituceAcf.disclaimer"
+              class="flex flex-col text-primary-text text-base md:text-16 font-roboto font-normal tracking-[0.01em] gap-4"
+          />
+        </div>
+
+        <div
           v-if="proInstituceAcf.materialy.ebooky.length > 0"
           class="flex flex-col gap-8 md:gap-16 py-8"
         >
@@ -215,20 +229,6 @@ onMounted(async () => {
               v-html="ebook.popis"
               class="text-base md:text-16 font-roboto text-primary-text font-normal m-0"
             />
-
-            <div
-              class="flex flex-col px-8 md:px-16 py-8 gap-4 md:gap-8 rounded-10 bg-pale-violet"
-            >
-              <h4
-                class="text-17 md:text-heading text-primary font-baloo font-semibold m-0 uppercase"
-              >
-                Upozornění
-              </h4>
-              <div
-                v-html="ebook.disclaimer"
-                class="flex flex-col text-primary-text text-base md:text-16 font-roboto font-normal tracking-[0.01em] gap-4"
-              />
-            </div>
             <DownloadCard
               v-for="soubor in ebook.soubory_ke_stazeni"
               :key="soubor.nazev"

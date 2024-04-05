@@ -8,7 +8,7 @@ import OrderForm from '@/components/OrderForm.vue'
       <h3
         class="text-heading md:text-heading-large font-baloo font-semibold text-primary m-0 md:self-center"
       >
-        Chcete si karty koupit v krabičce?
+        Chci karty do ruky
       </h3>
 
       <div class="flex flex-col gap-4 md:flex-row md:gap-20">
@@ -60,7 +60,7 @@ import OrderForm from '@/components/OrderForm.vue'
         <img
           src="@/assets/images/qr-darujme.png"
           alt="QR kód pro dárce"
-          class="hidden md:block w-2/12 px-12 aspect-square"
+          class="hidden md:block w-2/12 pr-12 aspect-square"
         />
       </div>
 
