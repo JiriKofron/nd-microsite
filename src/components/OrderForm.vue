@@ -17,12 +17,14 @@ const formData = ref({
 const formElement = ref()
 
 const submitForm = async () => {
-  console.log('submit', formData.value)
-
-  const forms = await axios.post('https://test.nevypustdusi.cz/wp-json/draftspot_theme/v1/order/', formData.value)
-
-  console.log(forms.data)
-  formElement.value.reset()
+  // const values = Object.values(formData.value)
+  try {
+    // await axios.post('https://test.nevypustdusi.cz/wp-json/draftspot_theme/v1/order/', formData.value)
+  } catch (error) {
+    console.error(error)
+  } finally {
+    formElement.value.reset()
+  }
 }
 </script>
 
