@@ -1,5 +1,9 @@
 <script type="module" setup lang="ts">
+import {ref} from "vue";
 import OrderForm from '@/components/OrderForm.vue'
+import OrderModal from "@/components/OrderModal.vue";
+
+const showModal = ref(false)
 </script>
 
 <template>
@@ -83,6 +87,10 @@ import OrderForm from '@/components/OrderForm.vue'
     </article>
 
     <OrderForm />
+
+    <section class="relative">
+      <OrderModal v-model="showModal" />
+    </section>
   </section>
 </template>
 

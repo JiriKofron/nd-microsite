@@ -11,6 +11,9 @@
   --dark-violet: #64378b;
   --gray: #D8D6DA;
   --danger: #DC2626;
+  --light-gray: rgba(0 0 0 / 30%);
+  --green: #53B44A;
+  --text-gray: #615F5B;
 }
 
 html {

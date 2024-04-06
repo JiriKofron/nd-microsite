@@ -21,8 +21,11 @@ export default {
         'pale-violet': 'var(--pale-violet)',
         'light-violet': 'var(--light-violet)',
         'dark-violet': 'var(--dark-violet)',
+        green: 'var(--green)',
         salmon: 'var(--salmon)',
-        danger: 'var(--danger)'
+        danger: 'var(--danger)',
+        'light-gray': 'var(--light-gray)',
+        'text-gray':'var(--text-gray)'
       },
       fontSize: {
         sm: ['1.4rem', '1.7rem'],

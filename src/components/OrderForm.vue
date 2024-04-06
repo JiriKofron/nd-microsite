@@ -12,7 +12,7 @@ interface FormData {
   ico?: string
   invoice?: string
   petplusdva?: number
-  mistastrachu?: number
+  mistastrachu: number
   note?: string
 }
 
@@ -55,7 +55,7 @@ const submitForm = async () => {
   }
 }
 
-const handleErrors = ({errors}) => {
+const handleErrors = ({errors}: any ) => {
 
   if(errors) {
     const firstError = Object.keys(errors)[0];
@@ -371,8 +371,9 @@ const handleErrors = ({errors}) => {
               v-model="formData.note"
               id="note"
               name="note"
-              type="textarea"
-              class="input__field !h-72"
+              as="textarea"
+              rows="7"
+              class="input__field !h-72 !p-6"
               :class="{'input__field--errors': errors.note}"
               @change="errors.note= ''"
           />
