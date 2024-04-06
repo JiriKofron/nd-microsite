@@ -70,15 +70,13 @@ const handleErrors = ({ errors }: any) => {
     el?.scrollIntoView({
       behavior: 'smooth'
     })
-
     ;(el as HTMLElement)?.focus()
   }
 }
 </script>
 
 <template>
-  <section
-      class="flex flex-col p-8 md:p-16 gap-8 md:gap-16 bg-white rounded-10">
+  <section class="flex flex-col p-8 md:p-16 gap-8 md:gap-16 bg-white rounded-10">
     <div class="flex flex-col gap-8 md:gap-16">
       <h4 class="text-orange text-heading md:text-30 font-baloo font-semibold m-0">
         Objednat karty

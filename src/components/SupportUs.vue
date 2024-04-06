@@ -85,13 +85,15 @@ const showModal = ref(false)
         <p
           class="text-base md:text-16 text-primary-text font-roboto font-normal tracking-[0.01em] m-0"
         >
-          Balení karet 5+2 kroků v podpůrném rozhovoru a Místa strachu teprve připravujeme. Bude je
-          možné objednávat později za přibližnou částku 600,- Kč.
+          Kompletní sadu karet zahrnující 5+2 kroků v podpůrném rozhovoru a Místa strachu právě
+          dotahujeme do konce. Už teď vám můžeme říct, že budou k zakoupení za přibližnou částku
+          600,- Kč a dostanou se k vám během letních měsíců. Prozatím můžete vyplnit předobjednávku
+          přes formulář níže. Jakmile bude sada hotová, dáme vám vědět.
         </p>
       </div>
     </article>
 
-    <OrderForm @submit="value => showModal = value" />
+    <OrderForm @submit="(value) => (showModal = value)" />
 
     <section class="relative">
       <OrderModal v-model="showModal" />
