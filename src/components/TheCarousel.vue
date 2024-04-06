@@ -11,7 +11,7 @@ const fetchData = async () => {
   try {
     const response = await http.get('/pages?slug=poslouchejme-deti-2')
     const [data] = response.data
-    references.value = data.acf?.reference
+    references.value = data?.acf?.reference
     loading.value = false
   } catch (error) {
     console.error(error)

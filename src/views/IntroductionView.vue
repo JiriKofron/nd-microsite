@@ -41,9 +41,9 @@ const parseCategoryDetail = async (categoryDetail: CategoryDetail[] | undefined)
 
 const fetchData = async () => {
   try {
-    const response = await http.get('/pages?slug=poslouchejme-deti-2')
+    const response = await http.get('/pages?slug=poslouchejme-deti')
     const [data] = response.data
-    acf.value = data.acf
+    acf.value = data?.acf
     categoryDetails.value = await parseCategoryDetail(acf.value?.kategorie.kategorie_detail)
     loading.value = false
   } catch (error) {

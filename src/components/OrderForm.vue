@@ -50,7 +50,7 @@ const { isSubmitting } = useForm()
 const submitForm = async () => {
   try {
     await axios.post(
-      'https://test.nevypustdusi.cz/wp-json/draftspot_theme/v1/order/',
+      'https://nevypustdusi.cz/wp-json/draftspot_theme/v1/order/',
       formData.value
     )
 
