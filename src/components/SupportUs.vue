@@ -1,9 +1,13 @@
 <script type="module" setup lang="ts">
+import { ref } from 'vue'
 import OrderForm from '@/components/OrderForm.vue'
+import OrderModal from '@/components/OrderModal.vue'
+
+const showModal = ref(false)
 </script>
 
 <template>
-  <section class="flex flex-col bg-salmon p-8 md:p-16 gap-4 md:gap-16">
+  <section id="objednavka" class="flex flex-col bg-salmon p-8 md:p-16 gap-4 md:gap-16">
     <article class="flex flex-col gap-4 md:gap-16">
       <h3
         class="text-heading md:text-heading-large font-baloo font-semibold text-primary m-0 md:self-center"
@@ -28,8 +32,12 @@ import OrderForm from '@/components/OrderForm.vue'
           <p
             class="text-base md:text-16 text-primary-text font-roboto font-normal tracking-[0.01em] m-0"
           >
-            Karty 5+2 kroků v podpůrném rozhovoru dostanete na <a href="https://nevypustdusi.cz/programy/" target="_blank"> workshopech Nevypusť duši</a> nebo si je
-            můžete vyzvednout zdarma každý pátek od 9:30 do 11:30 na adrese Václavské náměstí 11.
+            Karty 5+2 kroků v podpůrném rozhovoru dostanete na
+            <a href="https://nevypustdusi.cz/programy/" target="_blank">
+              workshopech Nevypusť duši</a
+            >
+            nebo si je můžete vyzvednout zdarma každý pátek od 9:30 do 11:30 na adrese Václavské
+            náměstí 11.
           </p>
 
           <p
@@ -52,7 +60,10 @@ import OrderForm from '@/components/OrderForm.vue'
             class="text-base md:text-16 text-primary-text font-roboto font-normal tracking-[0.01em] m-0"
           >
             Karty dáváme zdarma a vše tiskneme, balíme a zasíláme na naše náklady. Pokud nás v naší
-            činnosti chcete podpořit, můžete to <a href="https://www.darujme.cz/organizace/1200070" target="_blank">udělat na webu darujeme.cz</a>
+            činnosti chcete podpořit, můžete to
+            <a href="https://www.darujme.cz/organizace/1200070" target="_blank"
+              >udělat na webu darujeme.cz</a
+            >
             <span class="hidden md:inline"> nebo skrz QR kód zde přímo z mobilu. </span>
           </p>
         </div>
@@ -60,7 +71,7 @@ import OrderForm from '@/components/OrderForm.vue'
         <img
           src="@/assets/images/qr-darujme.png"
           alt="QR kód pro dárce"
-          class="hidden md:block w-2/12 pr-12 aspect-square"
+          class="hidden md:block w-40 h-40 pr-12 aspect-square"
         />
       </div>
 
@@ -80,7 +91,11 @@ import OrderForm from '@/components/OrderForm.vue'
       </div>
     </article>
 
-    <OrderForm />
+    <OrderForm @submit="value => showModal = value" />
+
+    <section class="relative">
+      <OrderModal v-model="showModal" />
+    </section>
   </section>
 </template>
 

@@ -9,7 +9,11 @@
   --pale-violet: #f9edf9;
   --light-violet: #9564a5;
   --dark-violet: #64378b;
-  --gray: #D8D6DA;
+  --gray: #d8d6da;
+  --danger: #dc2626;
+  --light-gray: rgba(0 0 0 / 30%);
+  --green: #53b44a;
+  --text-gray: #615f5b;
 }
 
 html {
