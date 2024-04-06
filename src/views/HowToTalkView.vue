@@ -183,7 +183,11 @@ onMounted(async () => {
       class="flex flex-col justify-center gap-8 bg-salmon p-8 md:p-16"
     >
       <div class="flex md:items-center md:justify-center gap-8 md:gap-12">
-        <img src="@/assets/icons/ico-ask-them.svg" alt="icon zazemi" class="md:h-44 grow basis-1/5" />
+        <img
+          src="@/assets/icons/ico-ask-them.svg"
+          alt="icon zazemi"
+          class="md:h-44 grow basis-1/5"
+        />
         <h1
           class="text-heading md:text-heading-large font-baloo font-semibold text-primary m-0 grow basis-2/3"
         >
@@ -236,9 +240,7 @@ onMounted(async () => {
     </section>
 
     <section class="flex flex-col p-8 md:p-16 gap-10">
-      <h3
-        class="text-heading md:text-40 font-baloo font-semibold text-primary m-0 text-center"
-      >
+      <h3 class="text-heading md:text-40 font-baloo font-semibold text-primary m-0 text-center">
         5+2 kroků v podpůrném rozhovoru
       </h3>
 

@@ -124,21 +124,23 @@ onMounted(async () => {
 
 <template>
   <section v-if="proInstituceAcf" class="max-w-[900px]">
-    <article class="flex flex-col items-center md:items-start justify-center bg-salmon px-8 py-12 md:p-16 gap-y-8">
+    <article
+      class="flex flex-col items-center md:items-start justify-center bg-salmon px-8 py-12 md:p-16 gap-y-8"
+    >
       <div class="flex items-center justify-start gap-x-8 md:gap-20 px-4 md:pl-40">
         <img
           src="@/assets/icons/ico-institutions.svg"
           alt="varovne signaly ikona vykricnik v trojuhelniku"
           class="h-24 md:h-40"
         />
-        <h1 class="md:self-center font-baloo text-heading md:text-heading-large text-primary font-semibold m-0">
+        <h1
+          class="md:self-center font-baloo text-heading md:text-heading-large text-primary font-semibold m-0"
+        >
           {{ proInstituceAcf.nadpis }}
         </h1>
       </div>
 
-      <h2
-        class="text-20 md:text-30 font-baloo font-semibold text-orange text-center m-0"
-      >
+      <h2 class="text-20 md:text-30 font-baloo font-semibold text-orange text-center m-0">
         {{ proInstituceAcf.popis }}
       </h2>
     </article>
@@ -195,17 +197,13 @@ onMounted(async () => {
           </div>
         </div>
 
-        <div
-            class="flex flex-col px-8 md:px-16 py-8 gap-4 md:gap-8 rounded-10 bg-pale-violet"
-        >
-          <h4
-              class="text-17 md:text-heading text-primary font-baloo font-semibold m-0 uppercase"
-          >
+        <div class="flex flex-col px-8 md:px-16 py-8 gap-4 md:gap-8 rounded-10 bg-pale-violet">
+          <h4 class="text-17 md:text-heading text-primary font-baloo font-semibold m-0 uppercase">
             Upozornění
           </h4>
           <div
-              v-html="proInstituceAcf.disclaimer"
-              class="flex flex-col text-primary-text text-base md:text-16 font-roboto font-normal tracking-[0.01em] gap-4"
+            v-html="proInstituceAcf.disclaimer"
+            class="flex flex-col text-primary-text text-base md:text-16 font-roboto font-normal tracking-[0.01em] gap-4"
           />
         </div>
 

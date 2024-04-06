@@ -1,6 +1,6 @@
 <script type="module" setup lang="ts">
 import { RouterView } from 'vue-router'
-import {computed, onMounted, ref, toRaw, watch} from 'vue'
+import { computed, onMounted, ref, toRaw, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import GlobalFooter from '@/components/GlobalFooter.vue'
 
@@ -35,7 +35,7 @@ const activePageId = ref(0)
 const router = useRouter()
 const route = useRoute()
 
-onMounted(async () =>{
+onMounted(async () => {
   await router.isReady()
   activePageId.value = routes.value.find((r) => r.to === router.currentRoute.value.path)?.id || 0
 })

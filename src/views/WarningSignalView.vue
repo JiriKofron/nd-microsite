@@ -58,7 +58,7 @@ const fetchData = async () => {
     const [data] = response.data
     varovneSignalyAcf.value = data?.acf
     varovneSignaly.value = await parseWarningSignalContent(
-        varovneSignalyAcf.value?.varovne_signaly.signal
+      varovneSignalyAcf.value?.varovne_signaly.signal
     )
 
     loading.value = false
@@ -81,14 +81,14 @@ onMounted(async () => {
           alt="varovne signaly ikona vykricnik v trojuhelniku"
           class="h-24 md:h-40 grow basis-1/5"
         />
-        <h1 class="font-baloo text-heading md:text-heading-large text-primary font-semibold m-0 grow basis-2/3">
+        <h1
+          class="font-baloo text-heading md:text-heading-large text-primary font-semibold m-0 grow basis-2/3"
+        >
           {{ varovneSignalyAcf.nadpis }}
         </h1>
       </div>
 
-      <h2
-        class="text-20 md:text-30 font-baloo font-semibold text-orange text-center m-0"
-      >
+      <h2 class="text-20 md:text-30 font-baloo font-semibold text-orange text-center m-0">
         {{ varovneSignalyAcf.podnadpis }}
       </h2>
       <p
@@ -137,8 +137,9 @@ onMounted(async () => {
           </h2>
 
           <div
-              v-html="varovneSignalyAcf.varovne_signaly.detail"
-              class="font-roboto text-base text-primary-text font-normal" />
+            v-html="varovneSignalyAcf.varovne_signaly.detail"
+            class="font-roboto text-base text-primary-text font-normal"
+          />
 
           <div class="flex flex-col items-stretch gap-8 md:gap-12 mt-8">
             <div

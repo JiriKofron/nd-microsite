@@ -90,7 +90,9 @@ onMounted(async () => {
       </div>
     </article>
 
-    <section class="flex flex-col items-center p-8 md:p-16 gap-8 md:gap-16 mt-4 md:w-full box-border">
+    <section
+      class="flex flex-col items-center p-8 md:p-16 gap-8 md:gap-16 mt-4 md:w-full box-border"
+    >
       <h2
         class="text-heading md:text-heading-large font-baloo font-bold text-primary text-center m-0"
       >
@@ -138,8 +140,9 @@ onMounted(async () => {
 
           <div v-if="sit.showMore">
             <p
-                v-html="sit.popis"
-                class="text-base font-roboto font-normal tracking-[0.01em] text-primary-text" />
+              v-html="sit.popis"
+              class="text-base font-roboto font-normal tracking-[0.01em] text-primary-text"
+            />
 
             <article v-for="sekce in sit.sekce" :key="sekce.nadpis" class="py-8">
               <h4 class="text-20 md:text-heading font-baloo font-semibold text-orange my-4">

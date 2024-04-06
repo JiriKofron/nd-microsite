@@ -59,7 +59,10 @@ onMounted(async () => {
 
 <template>
   <section class="flex flex-col items-center justify-center w-full">
-    <section v-if="acf && !loading" class="flex flex-col items-center justify-center max-w-[900px] p-8 md:p-16 md:mx-auto">
+    <section
+      v-if="acf && !loading"
+      class="flex flex-col items-center justify-center max-w-[900px] p-8 md:p-16 md:mx-auto"
+    >
       <article class="flex items-center justify-center w-100 p-4 gap-x-8 md:gap-x-20">
         <img src="@/assets/icons/ico-violet-baloon.svg" alt="balonek" class="w-20 md:w-40" />
         <p
@@ -116,20 +119,20 @@ onMounted(async () => {
             />
           </div>
 
-          <article class="flex flex-col gap-6 bg-salmon p-8 md:p-16 rounded-2xl md:w-[91%] md:mx-32">
+          <article
+            class="flex flex-col gap-6 bg-salmon p-8 md:p-16 rounded-2xl md:w-[91%] md:mx-32"
+          >
             <div class="flex items-start gap-8">
               <img src="@/assets/icons/ico-map.svg" alt="icon with map" class="md:hidden" />
-              <h3
-                class="text-heading font-baloo font-semibold text-orange m-0"
-              >
+              <h3 class="text-heading font-baloo font-semibold text-orange m-0">
                 Kde ve svém okolí můžete najít další podporu a pomoc
               </h3>
             </div>
 
-            <div
-              class="flex flex-col items-center md:items-start justify-center"
-            >
-              <p class="text-base font-roboto font-medium text-primary-text tracking-[0.01em] md:text-20 md:m-0 md:mb-6">
+            <div class="flex flex-col items-center md:items-start justify-center">
+              <p
+                class="text-base font-roboto font-medium text-primary-text tracking-[0.01em] md:text-20 md:m-0 md:mb-6"
+              >
                 Říct si o pomoc vyžaduje odvahu. Možná tápete, kdo může pečovat o duše mladých?
               </p>
             </div>

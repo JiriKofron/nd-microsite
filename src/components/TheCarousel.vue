@@ -2,7 +2,7 @@
 import Glide from '@glidejs/glide'
 import { onMounted, ref } from 'vue'
 import type { Reference } from '@/types'
-import http from "@/server/api";
+import http from '@/server/api'
 
 const loading = ref(false)
 const references = ref<Reference[] | undefined>([])
@@ -21,53 +21,54 @@ const fetchData = async () => {
 const glideRef = ref()
 const currentSlide = ref(0)
 
-onMounted( () => {
+onMounted(() => {
   loading.value = true
-  fetchData().then(() => {
-    const carousel = new Glide(glideRef.value, {
-      type: 'carousel',
-      startAt: 0,
-      perView: 1
-    })
+  fetchData()
+    .then(() => {
+      const carousel = new Glide(glideRef.value, {
+        type: 'carousel',
+        startAt: 0,
+        perView: 1
+      })
 
-    // @ts-expect-error
-    carousel.on('run.after', function (e: any) {
-      if (e.direction === '=') {
-        currentSlide.value = Number(e.steps)
-        return
-      }
-
-      if(references.value?.length) {
-        switch (e.direction) {
-          case '>':
-            if (currentSlide.value < references.value.length - 1) {
-              currentSlide.value++
-            } else {
-              currentSlide.value = 0
-            }
-            break
-          case '<':
-            if (currentSlide.value > 0) {
-              currentSlide.value--
-            } else {
-              currentSlide.value = references.value.length - 1
-            }
-            break
-
-          default:
-            currentSlide.value = 0
-            break
+      // @ts-expect-error
+      carousel.on('run.after', function (e: any) {
+        if (e.direction === '=') {
+          currentSlide.value = Number(e.steps)
+          return
         }
 
-      } else {
-        currentSlide.value = 0
-      }
+        if (references.value?.length) {
+          switch (e.direction) {
+            case '>':
+              if (currentSlide.value < references.value.length - 1) {
+                currentSlide.value++
+              } else {
+                currentSlide.value = 0
+              }
+              break
+            case '<':
+              if (currentSlide.value > 0) {
+                currentSlide.value--
+              } else {
+                currentSlide.value = references.value.length - 1
+              }
+              break
+
+            default:
+              currentSlide.value = 0
+              break
+          }
+        } else {
+          currentSlide.value = 0
+        }
+      })
+      carousel.mount()
+      loading.value = false
     })
-    carousel.mount()
-    loading.value = false
-  }).catch((error) => {
-    console.error(error)
-  })
+    .catch((error) => {
+      console.error(error)
+    })
 })
 </script>
 
@@ -109,9 +110,9 @@ onMounted( () => {
           </button>
 
           <div
-              v-if="references"
-              class="glide__bullets flex items-center justify-center gap-x-14 z-20 relative"
-              data-glide-el="controls[nav]"
+            v-if="references"
+            class="glide__bullets flex items-center justify-center gap-x-14 z-20 relative"
+            data-glide-el="controls[nav]"
           >
             <button
               v-for="(i, index) in references.length"
