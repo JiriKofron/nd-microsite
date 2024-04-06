@@ -4,6 +4,10 @@ import { Form, Field, useForm, ErrorMessage } from 'vee-validate'
 import { object, string, number } from 'yup'
 import axios from 'axios'
 
+const emit = defineEmits<{
+  (e: 'submit', value: boolean): void
+}>()
+
 interface FormData {
   name: string
   address: string
@@ -49,6 +53,8 @@ const submitForm = async () => {
       'https://test.nevypustdusi.cz/wp-json/draftspot_theme/v1/order/',
       formData.value
     )
+
+    emit('submit', true)
   } catch (error) {
     console.error(error)
   } finally {
@@ -71,7 +77,8 @@ const handleErrors = ({ errors }: any) => {
 </script>
 
 <template>
-  <section class="flex flex-col p-8 md:p-16 gap-8 md:gap-16 bg-white rounded-10">
+  <section
+      class="flex flex-col p-8 md:p-16 gap-8 md:gap-16 bg-white rounded-10">
     <div class="flex flex-col gap-8 md:gap-16">
       <h4 class="text-orange text-heading md:text-30 font-baloo font-semibold m-0">
         Objednat karty

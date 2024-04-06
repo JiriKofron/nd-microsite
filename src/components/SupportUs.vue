@@ -91,7 +91,7 @@ const showModal = ref(false)
       </div>
     </article>
 
-    <OrderForm />
+    <OrderForm @submit="value => showModal = value" />
 
     <section class="relative">
       <OrderModal v-model="showModal" />

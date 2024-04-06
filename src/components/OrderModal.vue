@@ -1,8 +1,12 @@
-<script setup lang="ts"></script>
+<script type="module" setup lang="ts">
+
+const model = defineModel()
+</script>
 
 <template>
   <section
-    class="flex items-center justify-center fixed w-full h-full inset-0 overflow-hidden z-50 bg-light-gray overscroll-none"
+      v-if="model"
+      class="flex items-center justify-center fixed w-full h-full inset-0 overflow-hidden z-50 bg-light-gray overscroll-none"
   >
     <div
       class="flex flex-col w-full md:w-2/3 max-w-[900px] bg-white p-8 md:py-12 md:px-20 gap-12 rounded-10 mx-8"
@@ -18,6 +22,7 @@
       <button
         class="flex items-center justify-center h-[40px] px-12 rounded-full leading-relaxed cursor-pointer bg-orange border-none text-base md:text-17 text-white font-roboto font-semibold w-fit"
         type="button"
+        @click="model = false"
       >
         Chci poslat další objednávku
       </button>
