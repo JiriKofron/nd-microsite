@@ -230,23 +230,24 @@ onMounted(async () => {
 
         <a
           href="#objednavka"
-          class="flex items-center justify-center px-10 h-[40px] border-none bg-orange text-white rounded-full text-base font-roboto font-bold no-underline visited:no-underline"
+          class="flex items-center justify-center px-10 h-[40px] border-none bg-orange text-white rounded-full text-base font-roboto font-bold hover:no-underline hover:bg-white hover:outline hover:outline-[3px] hover:outline-orange hover:text-orange no-underline visited:no-underline transition-all duration-300"
         >
           Chci karty v krabičce
         </a>
 
-        <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-8 download-cards md:w-full">
           <DownloadCard
-            v-for="soubor in kartyKeStazeni"
+            v-for="(soubor, index) in kartyKeStazeni"
             :key="soubor.nazev_souboru"
             :download-link="soubor.soubor"
+            :class="`download-card-${index}`"
           >
             {{ soubor.nazev_souboru }}
           </DownloadCard>
         </div>
       </section>
 
-      <section class="flex flex-col p-8 md:p-16 gap-10">
+      <section class="flex flex-col p-8 md:px-16 gap-10">
         <h3 class="text-heading md:text-40 font-baloo font-semibold text-primary m-0 text-center">
           5+2 kroků v podpůrném rozhovoru
         </h3>
@@ -261,7 +262,7 @@ onMounted(async () => {
 
       <section
         v-if="kartyPetPlusDva"
-        class="flex flex-col items-center p-8 md:p-16 gap-8 md:gap-16"
+        class="flex flex-col items-center p-8 md:px-16 gap-8 md:gap-16"
       >
         <article
           v-for="(karta, index) in kartyPetPlusDva"
@@ -325,7 +326,9 @@ onMounted(async () => {
           {{ kartyMistaStrachu.nadpis }}
         </h3>
 
-        <p class="text-base font-roboto font-normal text-primary-text tracking-[0.01em] m-0">
+        <p
+          class="text-base md:text-16 font-roboto font-normal text-primary-text tracking-[0.01em] m-0"
+        >
           {{ kartyMistaStrachu.popis }}
         </p>
 
@@ -338,13 +341,15 @@ onMounted(async () => {
             class="py-2 flex items-center list-none gap-3"
           >
             <img src="@/assets/icons/ico-dot-orange.svg" alt="ikona list orange" class="w-6 h-6" />
-            <span class="text-base font-roboto font-normal text-primary-text">{{
+            <span class="text-base md:text-16 font-roboto font-normal text-primary-text">{{
               obava.obava
             }}</span>
           </li>
         </ul>
 
-        <p class="text-base font-roboto font-normal text-primary-text tracking-[0.01em] m-0">
+        <p
+          class="text-base md:text-16 font-roboto font-normal text-primary-text tracking-[0.01em] m-0"
+        >
           {{ kartyMistaStrachu.detail }}
         </p>
       </section>
@@ -358,4 +363,42 @@ onMounted(async () => {
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.download-cards {
+  @media screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+}
+
+.download-card-0 {
+  grid-column-start: 4;
+  grid-column-end: 10;
+}
+
+.download-card-1,
+.download-card-2 {
+  grid-row-start: 2;
+}
+
+.download-card-1 {
+  grid-column-start: 1;
+  justify-self: end;
+  grid-column-end: 7;
+}
+
+.download-card-2 {
+  grid-column-start: 7;
+  grid-column-end: 12;
+}
+
+.download-card-3 {
+  grid-row-start: 3;
+  grid-column-start: 4;
+  grid-column-end: 10;
+}
+</style>

@@ -27,7 +27,7 @@ interface SirsiPodpurnaSit {
   showMore: boolean
   sekce: Sekce[]
   odkazy: Odkaz[]
-  soubory_ke_stazeni: SouborKeStazeni[]
+  soubory_ke_stazeni: SouborKeStazeni[] | undefined
 }
 
 interface MistaPomociAcf {
@@ -61,7 +61,11 @@ const kartySitKeStazeni = async (kartyKeStazeni: SouborKeStazeni[] | undefined) 
 }
 
 const parseSirsiPodpurnaSit = async (sirsiPodpurnaSit: SirsiPodpurnaSit[] | undefined) => {
-  const promises = sirsiPodpurnaSit?.map(async (sit) => {
+  if (!sirsiPodpurnaSit) {
+    return
+  }
+
+  const promises = sirsiPodpurnaSit?.map(async (sit: SirsiPodpurnaSit) => {
     const parsedSoubory = await kartySitKeStazeni(sit.soubory_ke_stazeni)
 
     return {
@@ -74,7 +78,10 @@ const parseSirsiPodpurnaSit = async (sirsiPodpurnaSit: SirsiPodpurnaSit[] | unde
   return Promise.all(promises)
 }
 
-const parseKartaCeleSite = async (karta) => {
+const parseKartaCeleSite = async (karta: string | undefined) => {
+  if (!karta) {
+    return
+  }
   const response = await http.get(`/media/${karta}`)
 
   return response.data.source_url
@@ -86,7 +93,7 @@ const fetchData = async () => {
     const [data] = response.data
     mistaPomociAcf.value = data.acf
     sirsiPodpurnaSit.value = await parseSirsiPodpurnaSit(mistaPomociAcf.value?.sirsi_podpurna_sit)
-    celeSite.value = await parseKartaCeleSite(mistaPomociAcf.value.soubory_ke_stazeni)
+    celeSite.value = await parseKartaCeleSite(mistaPomociAcf.value?.soubory_ke_stazeni)
     loading.value = false
   } catch (error) {
     console.error(error)
@@ -141,7 +148,7 @@ onMounted(async () => {
 
         <a
           href="https://nevypustdusi.cz/kde-hledat-pomoc/"
-          class="flex items-center justify-center px-10 py-4 border-none bg-orange text-white rounded-full text-base font-roboto font-bold w-fit no-underline box-border hover:bg-white hover:text-orange hover:outline hover:outline-[3px] hover:outline-orange"
+          class="flex items-center justify-center px-10 py-4 border-none bg-orange text-white rounded-full text-base font-roboto font-bold w-fit no-underline box-border hover:bg-white hover:text-orange hover:outline hover:outline-[3px] hover:outline-orange hover:no-underline transition-all duration-300"
         >
           Adresář všech kontaktů podle krajů
         </a>
@@ -167,14 +174,15 @@ onMounted(async () => {
               <button
                 v-if="!sit.showMore"
                 @click="sit.showMore = true"
-                class="flex items-center justify-center px-6 py-2 border-none bg-orange text-white rounded-full text-base tracking-[0.05em] font-roboto font-bold w-fit gap-2 self-end"
+                class="flex items-center justify-center px-6 py-2 border-none bg-orange text-white rounded-full text-base tracking-[0.05em] font-roboto font-bold w-fit gap-2 self-end cursor-pointer hover:bg-white hover:text-orange hover:outline hover:outline-[3px] hover:outline-orange hover:no-underline transition-all duration-300"
                 type="button"
               >
                 <span>Zobrazit detail</span>
+
                 <img
                   src="@/assets/icons/ico-keyboard-arrow-up.svg"
                   alt="ikona šipka nahoru"
-                  class="rotate-180"
+                  class="rotate-180 hover:fill-orange orange-arrow"
                 />
               </button>
             </div>

@@ -16,7 +16,7 @@ const props = defineProps<{
       <a
         :href="props.downloadLink"
         target="_blank"
-        class="flex items-center gap-4 text-base text-orange font-bold font-roboto tracking-[0.05em] no-underline visited:no-underline"
+        class="flex items-center gap-4 text-base text-orange font-bold font-roboto tracking-[0.05em] no-underline hover:no-underline visited:no-underline"
       >
         <span>Stáhnout</span>
         <img src="@/assets/icons/ico-download.svg" alt="download icon" />

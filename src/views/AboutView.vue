@@ -123,7 +123,7 @@ const fetchData = async () => {
   try {
     const response = await http.get('pages?slug=o-projektu')
     const [data] = response.data
-    oProjektuAcf.value = data.acf
+    oProjektuAcf.value = data?.acf
     oProjektu.value = await parseOProjektu(oProjektuAcf.value?.o_projektu)
     podporovatele.value = await parsePodporovatele(oProjektuAcf.value?.podporovatele)
     spolupracujiciOrganizace.value = await parseSpolupracujiciOrganizace(
@@ -150,20 +150,20 @@ onMounted(async () => {
   <section class="flex flex-col items-center justify-center w-full">
     <section v-if="oProjektuAcf && !loading" class="max-w-[900px]">
       <article
-        class="flex flex-col items-center justify-center bg-salmon px-8 py-10 md:p-16 gap-y-8 md:gap-y-16"
+        class="flex flex-col items-center justify-center bg-salmon px-8 py-10 md:p-16 gap-y-8"
       >
-        <div class="flex justify-start md:justify-center gap-x-8 md:gap-x-20 px-4">
+        <div class="flex justify-start md:justify-center gap-x-8 md:gap-x-16 px-4">
           <img
             src="@/assets/icons/ico-kdo-stoji.svg"
             alt="ikona siluet lidí"
-            class="h-24 md:h-48"
+            class="h-24 md:h-44"
           />
           <h1 class="font-baloo text-heading md:text-40 text-primary font-semibold m-0">
             {{ oProjektuAcf.o_projektu.nadpis }}
           </h1>
         </div>
 
-        <h2 class="text-20 md:text-30 font-baloo font-semibold text-orange text-center m-0">
+        <h2 class="text-20 md:text-30 font-baloo font-semibold text-orange text-center m-0 md:mt-8">
           {{ oProjektuAcf.o_projektu.podnadpis }}
         </h2>
 
@@ -241,22 +241,22 @@ onMounted(async () => {
 
         <div
           v-if="spolupracujiciOrganizace.length > 0"
-          class="flex flex-wrap justify-center gap-20 md:gap-y-32"
+          class="flex flex-wrap justify-center gap-20 md:gap-8"
         >
           <div
             v-for="organizace in spolupracujiciOrganizace"
             :key="organizace.nazev_instituce"
-            class="flex flex-col items-center w-[250px] gap-4"
+            class="flex flex-col items-center w-[250px] gap-4 box-border"
           >
             <a
               :href="organizace.odkaz"
               target="_blank"
-              class="flex flex-col items-center gap-4 no-underline visited:no-underline"
+              class="flex flex-col items-center gap-4 no-underline hover:no-underline visited:no-underline w-full"
             >
               <img :src="organizace.logo" :alt="organizace.nazev_instituce" />
 
               <div
-                class="flex items-stretch justify-between px-8 py-2 bg-yellow w-full rounded-10 overflow-hidden"
+                class="flex items-stretch justify-between px-8 py-2 bg-yellow w-full rounded-10 overflow-hidden box-border"
               >
                 <div class="basis-auto text-20 font-roboto font-medium text-light-violet py-4 pr-4">
                   {{ organizace.nazev_instituce }}

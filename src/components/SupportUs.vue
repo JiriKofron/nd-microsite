@@ -49,15 +49,15 @@ const showModal = ref(false)
       </div>
 
       <div
-        class="flex flex-col md:flex-row self-end md:w-10/12 gap-4 md:gap-16 p-8 bg-white rounded-10"
+        class="flex flex-col md:flex-row md:justify-between self-end md:w-10/12 gap-4 md:gap-16 p-8 bg-white rounded-10"
       >
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-4 basis-8/12">
           <h4 class="text-20 md:text-heading text-primary font-baloo font-semibold m-0">
             Chcete nás podpořit?
           </h4>
 
           <p
-            class="text-base md:text-16 text-primary-text font-roboto font-normal tracking-[0.01em] m-0"
+            class="text-base md:text-16 text-primary-text font-roboto font-normal tracking-[0.01em] m-0 max-w-[480px]"
           >
             Karty dáváme zdarma a vše tiskneme, balíme a zasíláme na naše náklady. Pokud nás v naší
             činnosti chcete podpořit, můžete to
@@ -68,11 +68,14 @@ const showModal = ref(false)
           </p>
         </div>
 
-        <img
-          src="@/assets/images/qr-darujme.png"
-          alt="QR kód pro dárce"
-          class="hidden md:block w-40 h-40 pr-12 aspect-square"
-        />
+        <div class="hidden md:flex md:justify-center w-40 h-40 aspect-square md:basis-4/12">
+          <img
+            src="@/assets/images/qr-darujme.png"
+            alt="QR kód pro dárce"
+            width="120"
+            height="120"
+          />
+        </div>
       </div>
 
       <div class="flex flex-col gap-4 py-4 md:py-0">

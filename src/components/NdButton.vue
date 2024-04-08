@@ -11,7 +11,7 @@ const props = defineProps<{
 
 defineEmits(['click', 'submit'])
 const defaultClasses = ref(
-  'flex items-center justify-center xs:h-[40px] px-8 py-3 xs:py-0 rounded-full font-semibold text-[14px] xs:text-base font-roboto no-underline hover:no-underline visited:no-underline leading-relaxed text-center cursor-pointer'
+  'flex items-center justify-center xs:h-[40px] px-8 py-3 xs:py-0 rounded-full font-semibold text-[14px] xs:text-base font-roboto no-underline hover:no-underline visited:no-underline leading-relaxed text-center cursor-pointer transition-all duration-300'
 )
 </script>
 
@@ -24,7 +24,7 @@ const defaultClasses = ref(
           defaultClasses,
           props.inverted
             ? 'text-primary-text visited:text-primary-text hover:text-white'
-            : 'text-white bg-light-violet visited:text-white'
+            : 'text-white bg-light-violet visited:text-white hover:bg-dark-violet'
         ]"
         :type="props.btnType"
         @click="$emit('click')"
@@ -42,7 +42,7 @@ const defaultClasses = ref(
           defaultClasses,
           props.inverted
             ? 'text-primary-text visited:text-primary-text hover:text-white'
-            : 'text-white bg-light-violet visited:text-white'
+            : 'text-white bg-light-violet visited:text-white hover:bg-dark-violet'
         ]"
       >
         <slot />
@@ -56,7 +56,7 @@ const defaultClasses = ref(
           defaultClasses,
           props.inverted
             ? 'text-primary-text bg-white hover:bg-light-violet hover:text-white visited:text-primary-text'
-            : 'text-white bg-light-violet visited:text-white'
+            : 'text-white bg-light-violet visited:text-white hover:bg-dark-violet'
         ]"
       >
         <slot />
