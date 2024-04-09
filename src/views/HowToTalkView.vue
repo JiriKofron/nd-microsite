@@ -3,6 +3,7 @@ import http from '@/server/api'
 import { onMounted, ref } from 'vue'
 import DownloadCard from '@/components/DownloadCard.vue'
 import SupportUs from '@/components/SupportUs.vue'
+import { useRouter } from 'vue-router'
 
 interface NahledKarty {
   nahled: string
@@ -59,6 +60,7 @@ const kartyKeStazeni = ref<KartyKeStazeni[] | undefined | null>(null)
 const kartyMistaStrachu = ref<KartyMistaStrachu | undefined | null>(null)
 const kartyPetPlusDva = ref<KartaPetPlusDva[] | undefined | null>(null)
 const loading = ref(false)
+const router = useRouter()
 
 const parsePodpurnyRozhovorData = async (podpurnyRozhovor: PodpurnyRozhovor | undefined) => {
   if (!podpurnyRozhovor) {
@@ -173,6 +175,10 @@ const fetchData = async () => {
     )
 
     loading.value = false
+
+    if (router.currentRoute.value.hash) {
+      window.location.href = router.currentRoute.value.hash
+    }
   } catch (error) {
     console.error(error)
   }
@@ -319,7 +325,7 @@ onMounted(async () => {
         </article>
       </section>
 
-      <section v-if="kartyMistaStrachu" class="flex flex-col p-8 md:p-16 gap-4">
+      <section v-if="kartyMistaStrachu" id="mista-strachu" class="flex flex-col p-8 md:p-16 gap-4">
         <h3
           class="text-heading md:text-heading-large font-baloo font-semibold text-primary m-0 text-center"
         >

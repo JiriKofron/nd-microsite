@@ -167,12 +167,12 @@ onMounted(async () => {
           {{ oProjektuAcf.o_projektu.podnadpis }}
         </h2>
 
-        <p class="text-base font-roboto font-normal text-primary-text m-0">
+        <p class="text-base md:text-16 font-roboto font-normal text-primary-text m-0">
           {{ oProjektuAcf.o_projektu.popis }}
         </p>
 
         <div v-if="oProjektu && oProjektu.loga.length > 0">
-          <img :src="logo.logo" v-for="logo in oProjektu.loga" :key="logo.logo" alt="" />
+          <img :src="logo.logo" v-for="logo in oProjektu.loga" :key="logo.logo" alt="" width="250" />
         </div>
       </article>
 
@@ -190,7 +190,7 @@ onMounted(async () => {
         </p>
 
         <div>
-          <ul class="flex flex-col gap-12 md:gap-6 pl-0 md:pl-6">
+          <ul class="flex flex-col gap-6 pl-0 md:pl-6">
             <li
               v-for="autor in oProjektuAcf.autorsky_tym"
               :key="autor.jmeno"
@@ -199,11 +199,11 @@ onMounted(async () => {
               <img src="@/assets/icons/ico-dot-orange.svg" alt="ikona seznamu" class="self-start" />
 
               <span>
-                <span class="text-base font-roboto font-bold text-primary">
+                <span class="text-base md:text-16 font-roboto font-bold text-primary">
                   {{ `${autor.jmeno} - ` }}
                 </span>
                 <span
-                  class="text-base font-roboto font-normal tracking-[0.01em] text-primary-text"
+                  class="text-base md:text-16 font-roboto font-normal tracking-[0.01em] text-primary-text"
                   >{{ autor.pozice }}</span
                 >
               </span>
@@ -220,7 +220,7 @@ onMounted(async () => {
 
           <p
             v-html="podporovatele.popis"
-            class="text-base font-roboto font-normal text-primary-text"
+            class="text-base md:text-16 font-roboto font-normal text-primary-text"
           />
         </div>
 
@@ -246,14 +246,22 @@ onMounted(async () => {
           <div
             v-for="organizace in spolupracujiciOrganizace"
             :key="organizace.nazev_instituce"
-            class="flex flex-col items-center w-[250px] gap-4 box-border"
+            class="flex flex-col items-stretch w-[250px] gap-4 box-border"
           >
             <a
               :href="organizace.odkaz"
               target="_blank"
               class="flex flex-col items-center gap-4 no-underline hover:no-underline visited:no-underline w-full"
             >
-              <img :src="organizace.logo" :alt="organizace.nazev_instituce" />
+              <div
+                  class="flex items-center justify-center h-[120px]"
+              >
+                <img
+                    :src="organizace.logo"
+                    :alt="organizace.nazev_instituce"
+                    class="max-w-[200px] max-h-[120px]"
+                />
+              </div>
 
               <div
                 class="flex items-stretch justify-between px-8 py-2 bg-yellow w-full rounded-10 overflow-hidden box-border"

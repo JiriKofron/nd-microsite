@@ -320,8 +320,8 @@ const handleErrors = ({ errors }: any) => {
         class="flex flex-col gap-4 p-8 md:p-0 md:gap-16 shadow-warning-sign md:shadow-none rounded-10"
       >
         <p class="text-primary-text text-base md:text-16 font-roboto font-normal m-0">
-          Sadu karet 5+2 kroků a Místa strachu si může zakoupit kdokoliv za cenu 600 Kč za balení
-          této dvojice karet.
+          Sadu 5+2 a Místa strachu si můžete předobjednat za přibližnou částku 600 Kč za balení. O
+          finální ceně a termínu doručení vás budeme informovat.
         </p>
         <div class="flex flex-col md:flex-row gap-8 md:gap-16">
           <p class="text-primary text-20 font-baloo font-semibold m-0 md:basis-4/12">

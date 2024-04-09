@@ -27,6 +27,7 @@ onMounted(() => {
     .then(() => {
       const carousel = new Glide(glideRef.value, {
         type: 'carousel',
+        autoplay: 15000,
         startAt: 0,
         perView: 1
       })

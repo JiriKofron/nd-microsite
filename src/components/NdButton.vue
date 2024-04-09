@@ -16,7 +16,7 @@ const defaultClasses = ref(
 </script>
 
 <template>
-  <div :class="[!props.block ? 'w-fit px-8' : '']">
+  <div :class="[!props.block ? 'w-fit' : '']">
     <template v-if="props.variant === 'button'">
       <button
         class="bg-transparent border-none text-base no-underline hover:no-underline visited:no-underline visited:text-white"
