@@ -9,9 +9,9 @@ const references = ref<Reference[] | undefined>([])
 
 const fetchData = async () => {
   try {
-    const response = await http.get('/pages?slug=poslouchejme-deti-2')
+    const response = await http.get('/pages?slug=poslouchejme-deti')
     const [data] = response.data
-    references.value = data.acf?.reference
+    references.value = data?.acf?.reference
     loading.value = false
   } catch (error) {
     console.error(error)
@@ -27,6 +27,7 @@ onMounted(() => {
     .then(() => {
       const carousel = new Glide(glideRef.value, {
         type: 'carousel',
+        autoplay: 15000,
         startAt: 0,
         perView: 1
       })
@@ -105,7 +106,7 @@ onMounted(() => {
           class="glide__arrows absolute flex items-center justify-center w-full inset-0 z-10 gap-8"
           data-glide-el="controls"
         >
-          <button class="flex bg-transparent border-none p-0" data-glide-dir="<">
+          <button class="flex bg-transparent border-none p-0 cursor-pointer" data-glide-dir="<">
             <img src="@/assets/icons/ico-arrow_back_ios.svg" alt="ikona zpět" width="20" />
           </button>
 
@@ -123,7 +124,7 @@ onMounted(() => {
             />
           </div>
 
-          <button class="flex bg-transparent border-none p-0" data-glide-dir=">">
+          <button class="flex bg-transparent border-none p-0 cursor-pointer" data-glide-dir=">">
             <img
               src="@/assets/icons/ico-arrow_back_ios.svg"
               alt="ikona vpřed"

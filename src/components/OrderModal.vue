@@ -19,7 +19,7 @@ const model = defineModel()
       </div>
 
       <button
-        class="flex items-center justify-center h-[40px] px-12 rounded-full leading-relaxed cursor-pointer bg-orange border-none text-base md:text-17 text-white font-roboto font-semibold w-fit"
+        class="flex items-center justify-center h-[40px] px-12 rounded-full leading-relaxed cursor-pointer bg-orange border-none text-base md:text-17 text-white font-roboto font-semibold w-fit hover:bg-white hover:text-orange hover:outline hover:outline-[3px] hover:outline-orange transition-all duration-300"
         type="button"
         @click="model = false"
       >
@@ -27,9 +27,9 @@ const model = defineModel()
       </button>
 
       <div
-        class="flex flex-col md:flex-row self-end gap-4 md:gap-16 p-8 shadow-warning-sign rounded-10"
+        class="flex flex-col md:flex-row md:justify-between gap-4 md:gap-16 p-8 shadow-warning-sign rounded-10"
       >
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-4 basis-8/12">
           <h4 class="text-20 md:text-heading text-primary font-baloo font-semibold m-0">
             Chcete nás podpořit?
           </h4>
@@ -46,11 +46,14 @@ const model = defineModel()
           </p>
         </div>
 
-        <img
-          src="@/assets/images/qr-darujme.png"
-          alt="QR kód pro dárce"
-          class="hidden md:block w-40 h-40 pr-12 aspect-square"
-        />
+        <div class="hidden md:flex md:justify-center w-40 h-40 aspect-square md:basis-4/12">
+          <img
+            src="@/assets/images/qr-darujme.png"
+            alt="QR kód pro dárce"
+            width="120"
+            height="120"
+          />
+        </div>
       </div>
     </div>
   </section>

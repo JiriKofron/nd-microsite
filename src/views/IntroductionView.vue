@@ -41,9 +41,9 @@ const parseCategoryDetail = async (categoryDetail: CategoryDetail[] | undefined)
 
 const fetchData = async () => {
   try {
-    const response = await http.get('/pages?slug=poslouchejme-deti-2')
+    const response = await http.get('/pages?slug=poslouchejme-deti')
     const [data] = response.data
-    acf.value = data.acf
+    acf.value = data?.acf
     categoryDetails.value = await parseCategoryDetail(acf.value?.kategorie.kategorie_detail)
     loading.value = false
   } catch (error) {
@@ -74,7 +74,7 @@ onMounted(async () => {
 
       <section v-if="categoryDetails" class="flex flex-col items-center justify-center gap-y-6">
         <h2
-          class="text-primary-text text-heading text-center font-baloo font-semibold m-0 py-4 md:my-8 md:text-heading-large"
+          class="text-primary-text text-heading text-center font-baloo font-semibold m-0 py-4 md:text-heading-large"
         >
           {{ acf.kategorie.kategorie_nadpis }}
         </h2>
@@ -136,7 +136,10 @@ onMounted(async () => {
                 Říct si o pomoc vyžaduje odvahu. Možná tápete, kdo může pečovat o duše mladých?
               </p>
             </div>
-            <NdButton variant="link" link="/poslouchejme-deti/mista-pomoci" block class="md:w-2/5">
+            <NdButton
+              variant="link"
+              link="/poslouchejme-deti/mista-pomoci-a-podpory"
+            >
               Kdo může pečovat o duše mladých?
             </NdButton>
 

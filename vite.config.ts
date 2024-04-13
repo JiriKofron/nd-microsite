@@ -14,7 +14,7 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: './../../../poslouchejmeDeti',
+    outDir: './../poslouchejmeDeti',
   },
-  base: '/poslouchejmeDeti'
+  base: '/wp-content/themes/poslouchejmeDeti'
 })

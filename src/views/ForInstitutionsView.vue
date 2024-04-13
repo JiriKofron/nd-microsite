@@ -201,7 +201,7 @@ onMounted(async () => {
                 v-for="soubor in infografika.materialy.soubory"
                 :key="soubor.nazev"
                 :download-link="soubor.soubor_ke_stazeni"
-                class="text-primary hover:underline"
+                class="text-primary hover:no-underline"
               >
                 {{ soubor.nazev }}
               </DownloadCard>
@@ -238,7 +238,7 @@ onMounted(async () => {
                 v-for="soubor in ebook.soubory_ke_stazeni"
                 :key="soubor.nazev"
                 :download-link="soubor.soubor_ke_stazeni"
-                class="text-primary hover:underline md:self-center"
+                class="text-primary hover:no-underline md:self-center"
               >
                 {{ ebook.nazev }}
               </DownloadCard>

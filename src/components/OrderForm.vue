@@ -14,6 +14,7 @@ interface FormData {
   mail: string
   phone: string
   ico?: string
+  company?: string
   invoice?: string
   petplusdva?: number
   mistastrachu: number
@@ -26,6 +27,7 @@ const formData = ref<FormData>({
   mail: '',
   phone: '',
   ico: '',
+  company: '',
   invoice: '',
   petplusdva: 0,
   mistastrachu: 0,
@@ -39,6 +41,7 @@ const schema = object({
   email: string().required('Vyplňte prosím emailovou adresu').email('Email není validní'),
   phone: string().required('Vyplňte prosím svoje telefonní číslo'),
   ico: string(),
+  company: string(),
   invoice: string(),
   petplusdva: number(),
   mistastrachu: number(),
@@ -49,10 +52,9 @@ const { isSubmitting } = useForm()
 
 const submitForm = async () => {
   try {
-    await axios.post(
-      'https://test.nevypustdusi.cz/wp-json/draftspot_theme/v1/order/',
-      formData.value
-    )
+    await axios.post(`${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/order/`, formData.value)
+
+    await axios.post(`${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/insert/`, formData.value)
 
     emit('submit', true)
   } catch (error) {
@@ -200,6 +202,29 @@ const handleErrors = ({ errors }: any) => {
 
         <div class="flex flex-col gap-14 input__group md:basis-3/6">
           <div class="input">
+            <label
+              for="company"
+              class="input__label"
+              :class="{ 'input__label--errors': errors.company }"
+            >
+              Název firmy
+            </label>
+            <Field
+              v-model="formData.company"
+              id="company"
+              name="company"
+              type="text"
+              class="input__field"
+              :class="{
+                'input__field--errors focus-visible:outline-danger outline-2': errors.company
+              }"
+              @change="errors.company = ''"
+            />
+
+            <ErrorMessage name="company" class="text-sm font-roboto text-danger pl-8 pt-1" />
+          </div>
+
+          <div class="input">
             <label for="ico" class="input__label" :class="{ 'input__label--errors': errors.ico }">
               IČO
             </label>
@@ -297,8 +322,8 @@ const handleErrors = ({ errors }: any) => {
         class="flex flex-col gap-4 p-8 md:p-0 md:gap-16 shadow-warning-sign md:shadow-none rounded-10"
       >
         <p class="text-primary-text text-base md:text-16 font-roboto font-normal m-0">
-          Sadu karet 5+2 kroků a Místa strachu si může zakoupit kdokoliv za cenu 600 Kč za balení
-          této dvojice karet.
+          Sadu 5+2 a Místa strachu si můžete předobjednat za přibližnou částku 600 Kč za balení. O
+          finální ceně a termínu doručení vás budeme informovat.
         </p>
         <div class="flex flex-col md:flex-row gap-8 md:gap-16">
           <p class="text-primary text-20 font-baloo font-semibold m-0 md:basis-4/12">
@@ -374,7 +399,7 @@ const handleErrors = ({ errors }: any) => {
       </div>
 
       <button
-        class="flex items-center justify-center h-[40px] px-4 rounded-full leading-relaxed cursor-pointer bg-orange border-none text-base md:text-17 text-white font-roboto font-semibold w-2/3 md:w-1/3"
+        class="flex items-center justify-center h-[40px] px-4 rounded-full leading-relaxed cursor-pointer bg-orange border-none text-base md:text-17 text-white font-roboto font-semibold w-2/3 md:w-1/3 hover:bg-white hover:text-orange hover:outline hover:outline-[3px] hover:outline-orange transition-all duration-300"
         type="submit"
         :disabled="isSubmitting"
       >

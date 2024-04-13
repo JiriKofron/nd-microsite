@@ -166,7 +166,8 @@ onMounted(async () => {
                     <img
                       :src="signal.ikona"
                       alt="ikona karta závažné signály"
-                      class="w-20 md:pl-8"
+                      width="80"
+                      class="w-20 md:w-24 md:pl-4"
                     />
                   </div>
 
