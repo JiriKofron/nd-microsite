@@ -52,7 +52,9 @@ const { isSubmitting } = useForm()
 
 const submitForm = async () => {
   try {
-    await axios.post('https://nevypustdusi.cz/wp-json/draftspot_theme/v1/order/', formData.value)
+    await axios.post(`${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/order/`, formData.value)
+
+    await axios.post(`${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/insert/`, formData.value)
 
     emit('submit', true)
   } catch (error) {
