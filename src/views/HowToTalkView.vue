@@ -42,11 +42,32 @@ interface KartyMistaStrachu {
   soubory_ke_stazeni: Record<string, string>[]
 }
 
-interface PodpurnyRozhovorAcf {
+export interface ChceteNasPodporit {
+  nadpis: string
+  popis: string
+  qr_kod: string | undefined
+}
+
+export interface ObjednavkyKartyPetPlusDva {
+  nadpis: string
+  popis: string
+  ikona: string | undefined
+}
+
+export interface KartyBalicek {
+  nadpis: string
+  popis: string
+}
+
+export interface PodpurnyRozhovorAcf {
   jak_vest_rozhovor: PodpurnyRozhovor
   karty_pet_plus_dva: KartaPetPlusDva[]
   karty_ke_stazeni: KartyKeStazeni[]
   karty_mista_strachu: KartyMistaStrachu
+  chcete_nas_podporit?: ChceteNasPodporit
+  karty_5_plus_2?: ObjednavkyKartyPetPlusDva
+  karty_balicek?: KartyBalicek
+  nadpis: string
 }
 
 interface KartyKeStazeni {
@@ -360,7 +381,9 @@ onMounted(async () => {
         </p>
       </section>
 
-      <SupportUs />
+      <SupportUs
+        :data="podpurnyRozhovorAcf"
+      />
     </section>
 
     <section v-if="loading" class="w-full h-dvh flex justify-center mt-24 opacity-20">

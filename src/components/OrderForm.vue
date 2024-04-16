@@ -16,6 +16,7 @@ interface FormData {
   ico?: string
   company?: string
   invoice?: string
+  delivery: 'osobne' | 'postou'
   petplusdva?: number
   mistastrachu: number
   note?: string
@@ -29,6 +30,7 @@ const formData = ref<FormData>({
   ico: '',
   company: '',
   invoice: '',
+  delivery: 'osobne',
   petplusdva: 0,
   mistastrachu: 0,
   note: ''
@@ -43,7 +45,11 @@ const schema = object({
   ico: string(),
   company: string(),
   invoice: string(),
-  petplusdva: number(),
+  delivery: string(),
+  petplusdva: number().when('delivery', {
+    is: 'postou',
+    then: (schema) => schema.min(10, 'Pro odeslání poštou je minimální počet kusů 10')
+  }),
   mistastrachu: number(),
   note: string().max(250, 'Maximální délka poznámky je 250 znaků')
 })
@@ -266,6 +272,42 @@ const handleErrors = ({ errors }: any) => {
         </div>
       </div>
 
+      <div class="flex flex-col md:flex-row gap-8 md:gap-16">
+        <h4 class="text-primary text-20 md:text-heading font-baloo font-semibold m-0 md:basis-2/6">
+          Způsob doručení
+        </h4>
+
+        <div class="flex flex-col gap-14 input__group md:basis-3/6">
+          <div class="input">
+            <label
+                for="delivery"
+                class="input__label"
+                :class="{ 'input__label--errors': errors.delivery }"
+            >
+              Doručení
+            </label>
+
+            <Field
+                v-model="formData.delivery"
+                as="select"
+                id="delivery"
+                name="delivery"
+                type="text"
+                class="input__field"
+                :class="{
+                'input__field--errors focus-visible:outline-danger outline-2': errors.invoice
+              }"
+                @change="errors.delivery = ''"
+            >
+              <option value="osobne">Osobně</option>
+              <option value="postou">Poštou</option>
+            </Field>
+
+            <ErrorMessage name="delivery" class="text-sm font-roboto text-danger pl-8 pt-1" />
+          </div>
+        </div>
+      </div>
+
       <div
         class="flex flex-col gap-8 md:gap-16 p-8 md:p-0 shadow-warning-sign md:shadow-none rounded-10"
       >
@@ -279,41 +321,44 @@ const handleErrors = ({ errors }: any) => {
             5+2 kroků k podpůrnému rozhovoru
           </p>
 
-          <div
-            class="flex items-center justify-evenly md:justify-start gap-4 md:gap-8 md:basis-6/12"
-          >
+          <div class="flex flex-col md:basis-6/12">
             <div
-              class="input max-w-48 md:max-w-none md:flex md:items-center md:justify-start md:!w-40"
+                class="flex items-center justify-evenly md:justify-start gap-4 md:gap-8"
             >
-              <label
-                for="petplusdva"
-                class="input__label input__label--numbers"
-                :class="{ 'input__label--errors': errors.petplusdva }"
+              <div
+                  class="input max-w-48 md:max-w-none md:flex md:flex-col md:items-center md:justify-start md:!w-40"
               >
-                Počet
-              </label>
+                <label
+                    for="petplusdva"
+                    class="input__label input__label--numbers"
+                    :class="{ 'input__label--errors': errors.petplusdva }"
+                >
+                  Počet
+                </label>
 
-              <Field
-                v-model="formData.petplusdva"
-                id="petplusdva"
-                name="petplusdva"
-                type="number"
-                class="w-1/3 max-w-40 input__field"
-                :class="{
+                <Field
+                    v-model="formData.petplusdva"
+                    id="petplusdva"
+                    name="petplusdva"
+                    type="number"
+                    class="w-1/3 max-w-40 input__field"
+                    :class="{
                   'input__field--errors focus-visible:outline-danger outline-2': errors.petplusdva
                 }"
-                @change="errors.petplusdva = ''"
-              />
+                    @change="errors.petplusdva = ''"
+                />
 
-              <ErrorMessage name="petplusdva" class="text-sm font-roboto text-danger pl-2 pt-1" />
+              </div>
+
+              <div
+                  class="flex items-center justify-between md:justify-start gap-4 md:gap-8 w-2/3 text-primary-text"
+              >
+                <p class="text-base font-roboto font-normal m-0">Cena:</p>
+                <p class="font-bold font-baloo text-20 m-0">Zdarma</p>
+              </div>
             </div>
 
-            <div
-              class="flex items-center justify-between md:justify-start gap-4 md:gap-8 w-2/3 text-primary-text"
-            >
-              <p class="text-base font-roboto font-normal m-0">Cena:</p>
-              <p class="font-bold font-baloo text-20 m-0">Zdarma</p>
-            </div>
+            <ErrorMessage name="petplusdva" class="text-sm font-roboto text-danger pl-2 pt-1" />
           </div>
         </div>
       </div>
