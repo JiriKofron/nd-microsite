@@ -5,12 +5,19 @@ import NdButton from '@/components/NdButton.vue'
 
 const acf = ref<Acf | null>(null)
 const categoryDetails = ref<CategoryDetail[] | undefined | null>(null)
+const loga = ref<Logo[] | undefined | null>(null)
 
 interface CategoryDetail {
   nadpis_detail: string
   ikona: string
   text_detail: string
 }
+
+interface Logo {
+  nazev: string
+  logo: string
+}
+
 interface Acf {
   popis: string
   kategorie_nadpis: string
@@ -18,6 +25,7 @@ interface Acf {
     kategorie_nadpis: string
     kategorie_detail: CategoryDetail[]
   }
+  loga: Logo[]
 }
 
 const loading = ref(false)
@@ -39,12 +47,30 @@ const parseCategoryDetail = async (categoryDetail: CategoryDetail[] | undefined)
   return await Promise.all(promises)
 }
 
+const parseLoga = async (loga: Logo[] | undefined) => {
+  if(!loga) {
+    return
+  }
+
+  const promises = loga.map(async (obj) => {
+    const response = await http.get(`/media/${obj.logo}`)
+
+    return {
+      ...obj,
+      logo: response.data.source_url
+    }
+  })
+
+  return await Promise.all(promises)
+}
+
 const fetchData = async () => {
   try {
     const response = await http.get('/pages?slug=poslouchejme-deti')
     const [data] = response.data
     acf.value = data?.acf
     categoryDetails.value = await parseCategoryDetail(acf.value?.kategorie.kategorie_detail)
+    loga.value = await parseLoga(acf.value?.loga)
     loading.value = false
   } catch (error) {
     console.error(error)
@@ -180,6 +206,10 @@ onMounted(async () => {
             </article>
           </article>
         </div>
+      </section>
+
+      <section v-if="loga" class="flex items-center justify-center gap-6 md:gap-8 p-8 md:p-16 w-full">
+        <img v-for="logo in loga" :key="logo.nazev" :src="logo.logo" alt="" height="100" />
       </section>
     </section>
 
