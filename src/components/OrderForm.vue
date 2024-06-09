@@ -269,9 +269,8 @@ const handleErrors = ({ errors }: any) => {
       <div
         class="flex flex-col gap-8 md:gap-16 p-8 md:p-0 shadow-warning-sign md:shadow-none rounded-10"
       >
-        <p class="text-primary-text text-base md:text-16 font-roboto font-normal m-0">
-          5+2 kroků v podpůrném rozhovoru si můžete objednat zdarma pouze ve variantě 10 kusů a více
-          na adresu instituce, pro kterou budou využity.
+        <p class="text-danger text-base md:text-16 font-roboto font-normal m-0">
+          Karty 5+2 kroků v podpůrném rozhovoru aktuálně nejsou na skladě, ale můžete si je stáhnout výše na stránce ve formátu PDF.
         </p>
 
         <div class="flex flex-col md:flex-row gap-8 md:gap-16">
@@ -302,6 +301,7 @@ const handleErrors = ({ errors }: any) => {
                 :class="{
                   'input__field--errors focus-visible:outline-danger outline-2': errors.petplusdva
                 }"
+                :disabled="true"
                 @change="errors.petplusdva = ''"
               />
 
