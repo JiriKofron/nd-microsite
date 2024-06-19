@@ -42,11 +42,31 @@ interface KartyMistaStrachu {
   soubory_ke_stazeni: Record<string, string>[]
 }
 
+export interface KartyPetPlusDvaPopis {
+  ikona: string
+  nadpis: string
+  popis: string
+}
+
+export interface KartyBalicek {
+  nadpis: string
+  popis: string
+}
+
+export interface ChceteNasPodporit {
+  nadpis: string
+  popis: string
+  qr_kod: string
+}
+
 interface PodpurnyRozhovorAcf {
   jak_vest_rozhovor: PodpurnyRozhovor
   karty_pet_plus_dva: KartaPetPlusDva[]
   karty_ke_stazeni: KartyKeStazeni[]
   karty_mista_strachu: KartyMistaStrachu
+  karty_5_plus_2: KartyPetPlusDvaPopis
+  karty_balicek: KartyBalicek
+  chcete_nas_podporit: ChceteNasPodporit
 }
 
 interface KartyKeStazeni {
@@ -165,6 +185,8 @@ const fetchData = async () => {
     const response = await http.get('pages?slug=jak-vest-rozhovor')
     const [data] = response.data
     podpurnyRozhovorAcf.value = data?.acf
+    console.log(podpurnyRozhovorAcf.value);
+
     kartyPetPlusDva.value = await parseKarty(podpurnyRozhovorAcf.value?.karty_pet_plus_dva)
     kartyMistaStrachu.value = await parseKartyMistaStrachu(
       podpurnyRozhovorAcf.value?.karty_mista_strachu
@@ -360,7 +382,12 @@ onMounted(async () => {
         </p>
       </section>
 
-      <SupportUs />
+      <SupportUs
+          v-if="podpurnyRozhovorAcf"
+          :karty="podpurnyRozhovorAcf.karty_5_plus_2"
+          :balicek="podpurnyRozhovorAcf.karty_balicek"
+          :support="podpurnyRozhovorAcf.chcete_nas_podporit"
+      />
     </section>
 
     <section v-if="loading" class="w-full h-dvh flex justify-center mt-24 opacity-20">
