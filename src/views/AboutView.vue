@@ -167,9 +167,10 @@ onMounted(async () => {
           {{ oProjektuAcf.o_projektu.podnadpis }}
         </h2>
 
-        <p class="text-base md:text-16 font-roboto font-normal text-primary-text m-0">
-          {{ oProjektuAcf.o_projektu.popis }}
-        </p>
+        <p
+            class="text-base md:text-16 font-roboto font-normal text-primary-text m-0"
+            v-html="oProjektuAcf.o_projektu.popis"
+         />
 
         <div v-if="oProjektu && oProjektu.loga.length > 0">
           <img :src="logo.logo" v-for="logo in oProjektu.loga" :key="logo.logo" alt="" width="250" />
