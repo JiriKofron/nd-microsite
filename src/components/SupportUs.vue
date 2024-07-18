@@ -2,8 +2,15 @@
 import { ref } from 'vue'
 import OrderForm from '@/components/OrderForm.vue'
 import OrderModal from '@/components/OrderModal.vue'
+import type {ChceteNasPodporit, KartyPetPlusDvaPopis, KartyBalicek} from "@/views/HowToTalkView.vue";
 
 const showModal = ref(false)
+
+const props = defineProps<{
+  karty: KartyPetPlusDvaPopis
+  balicek: KartyBalicek
+  support: ChceteNasPodporit
+}>()
 </script>
 
 <template>
@@ -26,25 +33,13 @@ const showModal = ref(false)
           <h4
             class="text-20 md:text-heading text-primary md:text-orange font-baloo font-semibold m-0"
           >
-            Karty 5+2 kroků
+            {{props.karty.nadpis}}
           </h4>
 
-          <p
-            class="text-base md:text-16 text-primary-text font-roboto font-normal tracking-[0.01em] m-0"
-          >
-            Karty 5+2 kroků v podpůrném rozhovoru dostanete na
-            <a href="https://nevypustdusi.cz/programy/" target="_blank">
-              workshopech Nevypusť duši</a
-            >
-            nebo si je můžete vyzvednout zdarma každý pátek od 9:30 do 11:30 na adrese Václavské
-            náměstí 11.
-          </p>
-
-          <p
-            class="text-base md:text-16 text-primary-text font-roboto font-normal tracking-[0.01em] m-0"
-          >
-            Pokud jste instituce, můžete si je objednat v minimálním počtu kusů 10.
-          </p>
+          <div
+            class="flex flex-col text-base md:text-16 text-primary-text font-roboto font-normal tracking-[0.01em] m-0"
+            v-html="props.karty.popis"
+           />
         </div>
       </div>
 
@@ -53,17 +48,13 @@ const showModal = ref(false)
       >
         <div class="flex flex-col gap-4 basis-8/12">
           <h4 class="text-20 md:text-heading text-primary font-baloo font-semibold m-0">
-            Chcete nás podpořit?
+            {{props.support.nadpis}}
           </h4>
 
           <p
             class="text-base md:text-16 text-primary-text font-roboto font-normal tracking-[0.01em] m-0 max-w-[480px]"
           >
-            Karty dáváme zdarma a vše tiskneme, balíme a zasíláme na naše náklady. Pokud nás v naší
-            činnosti chcete podpořit, můžete to
-            <a href="https://www.darujme.cz/organizace/1200070" target="_blank"
-              >udělat na webu darujeme.cz</a
-            >
+            <span v-html="props.support.popis" />
             <span class="hidden md:inline"> nebo skrz QR kód zde přímo z mobilu. </span>
           </p>
         </div>
@@ -82,16 +73,15 @@ const showModal = ref(false)
         <h4
           class="text-20 md:text-heading text-primary md:text-orange font-baloo font-semibold m-0"
         >
-          Karty 5+2 kroků a Místa strachu dohromady
+          {{ props.balicek.nadpis }}
         </h4>
 
         <p
           class="text-base md:text-16 text-primary-text font-roboto font-normal tracking-[0.01em] m-0"
         >
-          Kompletní sadu karet zahrnující 5+2 kroků v podpůrném rozhovoru a Místa strachu právě
-          dotahujeme do konce. Už teď vám můžeme říct, že budou k zakoupení za přibližnou částku
-          600,- Kč a dostanou se k vám během letních měsíců. Prozatím můžete vyplnit předobjednávku
-          přes formulář níže. Jakmile bude sada hotová, dáme vám vědět.
+          {{
+            props.balicek.popis
+          }}
         </p>
       </div>
     </article>
