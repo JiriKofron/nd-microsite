@@ -14,7 +14,12 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: './../poslouchejmeDeti',
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name].[hash][extname]'
+      }
+    },
+    outDir: 'dist',
   },
-  base: '/wp-content/themes/poslouchejmeDeti'
+  base: 'dist'
 })
