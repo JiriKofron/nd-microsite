@@ -48,6 +48,11 @@ export const router = createRouter({
       path: '/poslouchejme-deti/o-projektu/',
       name: 'about',
       component: () => import('./views/AboutView.vue')
+    },
+    {
+      path: '/objednat-karty',
+      name: 'cardsOrder',
+      component: () => import('./views/CardsOrder.vue')
     }
   ]
 })

@@ -2,14 +2,14 @@
 import { ref } from 'vue'
 import OrderForm from '@/components/OrderForm.vue'
 import OrderModal from '@/components/OrderModal.vue'
-import type {ChceteNasPodporit, KartyPetPlusDvaPopis, KartyBalicek} from "@/views/HowToTalkView.vue";
+import type {ChceteNasPodporit, KartyPetPlusDvaPopis, KartyBalicek} from "@/views/CardsOrder.vue";
 
 const showModal = ref(false)
 
 const props = defineProps<{
-  karty: KartyPetPlusDvaPopis
-  balicek: KartyBalicek
-  support: ChceteNasPodporit
+  karty: KartyPetPlusDvaPopis | undefined
+  balicek: KartyBalicek | undefined
+  support: ChceteNasPodporit | undefined
 }>()
 </script>
 
@@ -33,28 +33,30 @@ const props = defineProps<{
           <h4
             class="text-20 md:text-heading text-primary md:text-orange font-baloo font-semibold m-0"
           >
-            {{props.karty.nadpis}}
+            {{props.karty?.nadpis}}
           </h4>
 
           <div
             class="flex flex-col text-base md:text-16 text-primary-text font-roboto font-normal tracking-[0.01em] m-0"
-            v-html="props.karty.popis"
+            v-html="props.karty?.popis"
            />
         </div>
       </div>
 
-      <div
+<!--
+TODO: Makes no sense to have support qr code in money order page, but I suppose it will go somewhere else, so I just keep the code for myself
+<div
         class="flex flex-col md:flex-row md:justify-between self-end md:w-10/12 gap-4 md:gap-16 p-8 bg-white rounded-10"
       >
         <div class="flex flex-col gap-4 basis-8/12">
           <h4 class="text-20 md:text-heading text-primary font-baloo font-semibold m-0">
-            {{props.support.nadpis}}
+            {{props.support?.nadpis}}
           </h4>
 
           <p
             class="text-base md:text-16 text-primary-text font-roboto font-normal tracking-[0.01em] m-0 max-w-[480px]"
           >
-            <span v-html="props.support.popis" />
+            <span v-html="props.support?.popis" />
             <span class="hidden md:inline"> nebo skrz QR kód zde přímo z mobilu. </span>
           </p>
         </div>
@@ -67,20 +69,20 @@ const props = defineProps<{
             height="120"
           />
         </div>
-      </div>
+      </div>-->
 
       <div class="flex flex-col gap-4 py-4 md:py-0">
         <h4
           class="text-20 md:text-heading text-primary md:text-orange font-baloo font-semibold m-0"
         >
-          {{ props.balicek.nadpis }}
+          {{ props.balicek?.nadpis }}
         </h4>
 
         <p
           class="text-base md:text-16 text-primary-text font-roboto font-normal tracking-[0.01em] m-0"
         >
           {{
-            props.balicek.popis
+            props.balicek?.popis
           }}
         </p>
       </div>

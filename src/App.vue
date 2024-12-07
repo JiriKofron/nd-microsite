@@ -29,6 +29,11 @@ const routes = ref([
     id: 4,
     to: '/poslouchejme-deti/pro-instituce/',
     text: 'Pro instituce'
+  },
+  {
+    id: 5,
+    to: '/objednat-karty',
+    text: 'Objednat karty'
   }
 ])
 const activePageId = ref(0)
@@ -49,7 +54,7 @@ watch(route, (oldValue, newValue) => {
   <section class="flex flex-col items-center justify-center w-full">
     <section class="flex justify-center w-full bg-primary pt-36">
       <article
-        class="flex flex-col justify-between w-full max-w-[900px] max-h-[420px] text-white mt-0 md-mt-16 px-8 py-5"
+        class="flex flex-col justify-between w-full max-w-[1000px] max-h-[420px] text-white mt-0 md-mt-16 px-8 py-5"
       >
         <div class="flex flex-col flex-nowrap gap-y-5 md:gap-y-18">
           <div class="flex items-center md:justify-center gap-x-2 px-6">

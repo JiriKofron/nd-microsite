@@ -139,8 +139,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-@import 'node_modules/@glidejs/glide/src/assets/sass/glide.core';
-
 .reference-wrapper {
   display: flex;
   flex-flow: column nowrap;

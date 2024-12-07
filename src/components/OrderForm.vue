@@ -18,6 +18,7 @@ interface FormData {
   invoice?: string
   petplusdva?: number
   mistastrachu: number
+  payment: string
   note?: string
 }
 
@@ -31,6 +32,7 @@ const formData = ref<FormData>({
   invoice: '',
   petplusdva: 0,
   mistastrachu: 0,
+  payment: 'GoPay',
   note: ''
 })
 
@@ -44,7 +46,8 @@ const schema = object({
   company: string(),
   invoice: string(),
   petplusdva: number(),
-  mistastrachu: number(),
+  mistastrachu: number().required('Vyplňte prosím počet kusů'),
+  payment: string().nullable(),
   note: string().max(250, 'Maximální délka poznámky je 250 znaků')
 })
 
@@ -267,64 +270,8 @@ const handleErrors = ({ errors }: any) => {
       </div>
 
       <div
-        class="flex flex-col gap-8 md:gap-16 p-8 md:p-0 shadow-warning-sign md:shadow-none rounded-10"
-      >
-        <p class="text-danger text-base md:text-16 font-roboto font-normal m-0">
-          Karty 5+2 kroků v podpůrném rozhovoru aktuálně nejsou na skladě, ale můžete si je stáhnout výše na stránce ve formátu PDF.
-        </p>
-
-        <div class="flex flex-col md:flex-row gap-8 md:gap-16">
-          <p class="text-primary text-20 font-baloo font-semibold m-0 md:basis-4/12">
-            5+2 kroků k podpůrnému rozhovoru
-          </p>
-
-          <div
-            class="flex items-center justify-evenly md:justify-start gap-4 md:gap-8 md:basis-6/12"
-          >
-            <div
-              class="input max-w-48 md:max-w-none md:flex md:items-center md:justify-start md:!w-40"
-            >
-              <label
-                for="petplusdva"
-                class="input__label input__label--numbers"
-                :class="{ 'input__label--errors': errors.petplusdva }"
-              >
-                Počet
-              </label>
-
-              <Field
-                v-model="formData.petplusdva"
-                id="petplusdva"
-                name="petplusdva"
-                type="number"
-                class="w-1/3 max-w-40 input__field"
-                :class="{
-                  'input__field--errors focus-visible:outline-danger outline-2': errors.petplusdva
-                }"
-                :disabled="true"
-                @change="errors.petplusdva = ''"
-              />
-
-              <ErrorMessage name="petplusdva" class="text-sm font-roboto text-danger pl-2 pt-1" />
-            </div>
-
-            <div
-              class="flex items-center justify-between md:justify-start gap-4 md:gap-8 w-2/3 text-primary-text"
-            >
-              <p class="text-base font-roboto font-normal m-0">Cena:</p>
-              <p class="font-bold font-baloo text-20 m-0">Zdarma</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
         class="flex flex-col gap-4 p-8 md:p-0 md:gap-16 shadow-warning-sign md:shadow-none rounded-10"
       >
-        <p class="text-primary-text text-base md:text-16 font-roboto font-normal m-0">
-          Sadu 5+2 a Místa strachu si můžete předobjednat za přibližnou částku 600 Kč za balení. O
-          finální ceně a termínu doručení vás budeme informovat.
-        </p>
         <div class="flex flex-col md:flex-row gap-8 md:gap-16">
           <p class="text-primary text-20 font-baloo font-semibold m-0 md:basis-4/12">
             5+2 kroků k podpůrnému rozhovoru a Místa strachu
@@ -398,13 +345,39 @@ const handleErrors = ({ errors }: any) => {
         </div>
       </div>
 
-      <button
-        class="flex items-center justify-center h-[40px] px-4 rounded-full leading-relaxed cursor-pointer bg-orange border-none text-base md:text-17 text-white font-roboto font-semibold w-2/3 md:w-1/3 hover:bg-white hover:text-orange hover:outline hover:outline-[3px] hover:outline-orange transition-all duration-300"
-        type="submit"
-        :disabled="isSubmitting"
-      >
-        Odeslat objednávku
-      </button>
+      <div class="flex flex-col">
+        <h4 class="text-primary text-20 font-baloo font-semibold m-0 md:basis-4/12">
+          Způsob platby
+        </h4>
+
+        <div class="flex items-center gap-4">
+          <Field
+              v-model="formData.payment"
+              id="payment"
+              name="payment"
+              type="radio"
+              value="GoPay"
+              class="m-0"
+          />
+
+          <p class="text-primary text-base font-baloo font-semibold">GoPay - online platba</p>
+        </div>
+
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <button
+            class="flex items-center justify-center h-[40px] px-4 rounded-full leading-relaxed cursor-pointer bg-orange border-none text-base md:text-17 text-white font-roboto font-semibold w-2/3 md:w-1/3 hover:bg-white hover:text-orange hover:outline hover:outline-[3px] hover:outline-orange transition-all duration-300"
+            type="submit"
+            :disabled="isSubmitting"
+        >
+          Závazně objednat
+        </button>
+
+        <span class="text-base font-roboto text-light-gray">
+          Po kliknutí budete přesměrováni na platební bránu GoPay
+        </span>
+      </div>
     </Form>
   </section>
 </template>
