@@ -37,7 +37,6 @@ const cardsOrder = ref<CardsOrder>()
 const fetchData = async () => {
   try {
     const response = await http.get('pages?slug=objednat-karty')
-    console.log('response karty', response.data)
     const [data] = response.data
     cardsOrder.value = data?.acf
   } catch (error) {

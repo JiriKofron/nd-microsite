@@ -60,13 +60,11 @@ const { isSubmitting } = useForm()
 
 
 /*TODO: Submit process
- - send request to create paymyent with form data
- - get the response with paymentId and payment gateway - save the order to the wordpress table with paymentId and rest data and redirect user to the gateway
+ - redirect user to the gateway
  - rest is on the redirect url
 */
 
 const submitForm = async () => {
-  console.log('submit', formData.value)
   try {
     const {data} = await axios.post(`${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/place_order/`, {
       ...formData.value,
@@ -82,14 +80,14 @@ const submitForm = async () => {
       total: data.amount / 100,
     }
 
-    //await axios.post(`${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/order/`, formData.value)
     await axios.post(`${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/insert/`, dataToSave)
 
+    window.location.href=data.gw_url
     // emit('submit', true)
   } catch (error) {
     console.error(error)
   } finally {
-    // formElement.value.resetForm()
+    formElement.value.resetForm()
   }
 }
 

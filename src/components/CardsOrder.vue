@@ -1,8 +1,9 @@
 <script type="module" setup lang="ts">
-import { ref } from 'vue'
+import {ref, watchEffect} from 'vue'
 import OrderForm from '@/components/OrderForm.vue'
 import OrderModal from '@/components/OrderModal.vue'
 import type {ChceteNasPodporit, KartyPetPlusDvaPopis, KartyBalicek} from "@/views/CardsOrder.vue";
+import http from "@/server/api";
 
 const showModal = ref(false)
 
@@ -11,6 +12,19 @@ const props = defineProps<{
   balicek: KartyBalicek | undefined
   support: ChceteNasPodporit | undefined
 }>()
+
+const cardsIcon = ref()
+
+const parseAsset = async (asset: any) => {
+  const response = await http.get(`/media/${asset}`)
+  return response.data.source_url
+}
+
+watchEffect(async () => {
+  if(props.karty?.ikona) {
+    cardsIcon.value = await parseAsset(props.karty?.ikona)
+  }
+})
 </script>
 
 <template>
@@ -24,9 +38,12 @@ const props = defineProps<{
 
       <div class="flex flex-col gap-4 md:flex-row md:gap-20">
         <img
-          src="https://nevypustdusi.cz/wp-content/uploads/2024/03/karty_52.png"
+          :src="cardsIcon"
           alt="náhled karet 5 + 2 kroků"
-          class="w-1/2 self-center"
+          class="object-contain"
+          loading="lazy"
+          height="200px"
+          width="200px"
         />
 
         <div class="flex flex-col gap-4 py-4 md:py-0">

@@ -53,6 +53,11 @@ export const router = createRouter({
       path: '/objednat-karty',
       name: 'cardsOrder',
       component: () => import('./views/CardsOrder.vue')
+    },
+    {
+      path: '/objednat-karty/platba',
+      name: 'cardsOrderPaymentStatus',
+      component: () => import('./views/OrderPayment.vue')
     }
   ]
 })
