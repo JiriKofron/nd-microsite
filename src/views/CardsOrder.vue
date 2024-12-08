@@ -4,6 +4,10 @@ import SupportUs from "@/components/CardsOrder.vue";
 import http from "@/server/api";
 import {onMounted, ref} from "vue";
 
+export interface KartyBalicekFormular {
+  cena: number
+}
+
 export interface KartyPetPlusDvaPopis {
   ikona: string
   nadpis: string
@@ -13,6 +17,7 @@ export interface KartyPetPlusDvaPopis {
 export interface KartyBalicek {
   nadpis: string
   popis: string
+  formular: KartyBalicekFormular
 }
 
 export interface ChceteNasPodporit {

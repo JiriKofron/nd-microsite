@@ -88,7 +88,7 @@ TODO: Makes no sense to have support qr code in money order page, but I suppose 
       </div>
     </article>
 
-    <OrderForm @submit="(value) => (showModal = value)" />
+    <OrderForm :details="props.balicek?.formular" @submit="(value) => (showModal = value)" />
 
     <section class="relative">
       <OrderModal v-model="showModal" />

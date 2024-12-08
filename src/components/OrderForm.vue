@@ -3,6 +3,11 @@ import { ref } from 'vue'
 import { Form, Field, useForm, ErrorMessage } from 'vee-validate'
 import { object, string, number } from 'yup'
 import axios from 'axios'
+import type {KartyBalicekFormular} from "@/views/CardsOrder.vue";
+
+const {details} = defineProps<{
+  details: KartyBalicekFormular | undefined
+}>()
 
 const emit = defineEmits<{
   (e: 'submit', value: boolean): void
@@ -53,17 +58,38 @@ const schema = object({
 
 const { isSubmitting } = useForm()
 
+
+/*TODO: Submit process
+ - send request to create paymyent with form data
+ - get the response with paymentId and payment gateway - save the order to the wordpress table with paymentId and rest data and redirect user to the gateway
+ - rest is on the redirect url
+*/
+
 const submitForm = async () => {
+  console.log('submit', formData.value)
   try {
-    await axios.post(`${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/order/`, formData.value)
+    const {data} = await axios.post(`${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/place_order/`, {
+      ...formData.value,
+      total: formData.value.mistastrachu * (details?.cena ?? 600) * 100
+    })
+    console.log(data)
 
-    await axios.post(`${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/insert/`, formData.value)
+    const dataToSave = {
+      ...formData.value,
+      orderId: data.order_number,
+      paymentId: data.id,
+      paymentStatus: data.state,
+      total: data.amount / 100,
+    }
 
-    emit('submit', true)
+    //await axios.post(`${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/order/`, formData.value)
+    await axios.post(`${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/insert/`, dataToSave)
+
+    // emit('submit', true)
   } catch (error) {
     console.error(error)
   } finally {
-    formElement.value.resetForm()
+    // formElement.value.resetForm()
   }
 }
 
@@ -308,9 +334,9 @@ const handleErrors = ({ errors }: any) => {
               <div class="flex items-center justify-between md:justify-start gap-4 md:gap-8">
                 <p class="text-base font-roboto font-normal m-0">Cena:</p>
 
-                <p class="font-bold font-baloo text-20 m-0">{{ formData.mistastrachu * 600 }} Kč</p>
+                <p class="font-bold font-baloo text-20 m-0">{{ formData.mistastrachu * (details?.cena ?? 600) }} Kč</p>
               </div>
-              <p class="text-base font-roboto font-normal m-0">(600 Kč/ks)</p>
+              <p class="text-base font-roboto font-normal m-0">( {{(details?.cena ?? 600)}} Kč/ks)</p>
             </div>
           </div>
         </div>
@@ -345,7 +371,7 @@ const handleErrors = ({ errors }: any) => {
         </div>
       </div>
 
-      <div class="flex flex-col">
+      <div class="flex flex-col gap-4">
         <h4 class="text-primary text-20 font-baloo font-semibold m-0 md:basis-4/12">
           Způsob platby
         </h4>
@@ -357,10 +383,10 @@ const handleErrors = ({ errors }: any) => {
               name="payment"
               type="radio"
               value="GoPay"
-              class="m-0"
+              class="m-0 before:!w-7 before:!h-7 before:!top-[5px] after:!bg-primary after:!w-4 after:!h-4 after:!left-[0.28em] after:!top-[0.6em]"
           />
 
-          <p class="text-primary text-base font-baloo font-semibold">GoPay - online platba</p>
+          <p class="text-primary text-17 font-baloo font-semibold m-0">GoPay - online platba</p>
         </div>
 
       </div>

@@ -21,5 +21,5 @@ export default defineConfig({
     },
     outDir: 'dist',
   },
-  base: 'dist'
+  base: '/dist'
 })
