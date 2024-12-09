@@ -3,14 +3,10 @@ import { ref } from 'vue'
 import { Form, Field, useForm, ErrorMessage } from 'vee-validate'
 import { object, string, number } from 'yup'
 import axios from 'axios'
-import type {KartyBalicekFormular} from "@/views/CardsOrder.vue";
+import type { KartyBalicekFormular } from '@/views/CardsOrder.vue'
 
-const {details} = defineProps<{
+const { details } = defineProps<{
   details: KartyBalicekFormular | undefined
-}>()
-
-const emit = defineEmits<{
-  (e: 'submit', value: boolean): void
 }>()
 
 interface FormData {
@@ -57,19 +53,18 @@ const schema = object({
 })
 
 const { isSubmitting } = useForm()
-
-
-/*TODO: Submit process
- - redirect user to the gateway
- - rest is on the redirect url
-*/
+const isSending = ref(false)
 
 const submitForm = async () => {
+  isSending.value = true
   try {
-    const {data} = await axios.post(`${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/place_order/`, {
-      ...formData.value,
-      total: formData.value.mistastrachu * (details?.cena ?? 600) * 100
-    })
+    const { data } = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/place_order/`,
+      {
+        ...formData.value,
+        total: formData.value.mistastrachu * (details?.cena ?? 700) * 100
+      }
+    )
     console.log(data)
 
     const dataToSave = {
@@ -77,17 +72,21 @@ const submitForm = async () => {
       orderId: data.order_number,
       paymentId: data.id,
       paymentStatus: data.state,
-      total: data.amount / 100,
+      total: data.amount / 100
     }
 
-    await axios.post(`${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/insert/`, dataToSave)
+    await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/insert/`,
+      dataToSave
+    )
 
-    window.location.href=data.gw_url
-    // emit('submit', true)
+    // Redirect go GoPay gateway
+    window.location.href = data.gw_url
   } catch (error) {
     console.error(error)
   } finally {
     formElement.value.resetForm()
+    isSending.value = false
   }
 }
 
@@ -114,8 +113,9 @@ const handleErrors = ({ errors }: any) => {
       <p
         class="text-primary-text text-base md:text-16 font-roboto font-normal tracking-[0.01em] m-0"
       >
-        Objednávky jsou odesílány 1x za 14 dní. Po objednání vám přijde potvrzovací e-mail s dalšími
-        náležitostmi.
+        Objednávky jsou odesílány 1x za týden přes službu Balíkovna. Po objednání vám přijde
+        potvrzovací e-mail s dalšími náležitostmi.
+        <strong>Cena sady je 700 Kč včetně poštovného a DPH.</strong>
       </p>
     </div>
 
@@ -332,9 +332,13 @@ const handleErrors = ({ errors }: any) => {
               <div class="flex items-center justify-between md:justify-start gap-4 md:gap-8">
                 <p class="text-base font-roboto font-normal m-0">Cena:</p>
 
-                <p class="font-bold font-baloo text-20 m-0">{{ formData.mistastrachu * (details?.cena ?? 600) }} Kč</p>
+                <p class="font-bold font-baloo text-20 m-0">
+                  {{ formData.mistastrachu * (details?.cena ?? 700) }} Kč
+                </p>
               </div>
-              <p class="text-base font-roboto font-normal m-0">( {{(details?.cena ?? 600)}} Kč/ks)</p>
+              <p class="text-base font-roboto font-normal m-0">
+                ( {{ details?.cena ?? 700 }} Kč/ks)
+              </p>
             </div>
           </div>
         </div>
@@ -376,26 +380,25 @@ const handleErrors = ({ errors }: any) => {
 
         <div class="flex items-center gap-4">
           <Field
-              v-model="formData.payment"
-              id="payment"
-              name="payment"
-              type="radio"
-              value="GoPay"
-              class="m-0 before:!w-7 before:!h-7 before:!top-[5px] after:!bg-primary after:!w-4 after:!h-4 after:!left-[0.28em] after:!top-[0.6em]"
+            v-model="formData.payment"
+            id="payment"
+            name="payment"
+            type="radio"
+            value="GoPay"
+            class="m-0 before:!w-7 before:!h-7 before:!top-[5px] after:!bg-primary after:!w-4 after:!h-4 after:!left-[0.28em] after:!top-[0.6em]"
           />
 
           <p class="text-primary text-17 font-baloo font-semibold m-0">GoPay - online platba</p>
         </div>
-
       </div>
 
       <div class="flex flex-col gap-3">
         <button
-            class="flex items-center justify-center h-[40px] px-4 rounded-full leading-relaxed cursor-pointer bg-orange border-none text-base md:text-17 text-white font-roboto font-semibold w-2/3 md:w-1/3 hover:bg-white hover:text-orange hover:outline hover:outline-[3px] hover:outline-orange transition-all duration-300"
-            type="submit"
-            :disabled="isSubmitting"
+          class="flex items-center justify-center h-[40px] px-4 rounded-full leading-relaxed cursor-pointer bg-orange border-none text-base md:text-17 text-white font-roboto font-semibold w-2/3 md:w-1/3 hover:bg-white hover:text-orange hover:outline hover:outline-[3px] hover:outline-orange transition-all duration-300"
+          type="submit"
+          :disabled="isSubmitting || isSending"
         >
-          Závazně objednat
+          {{ isSending ? 'Odesílám...' : 'Závazně objednat' }}
         </button>
 
         <span class="text-base font-roboto text-light-gray">

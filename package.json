@@ -13,7 +13,7 @@
     "build-stage": "vite build --mode stage",
     "build-local": "vite build --mode development",
     "type-check": "vue-tsc --build --force",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "lint": "eslint --fix --ignore-pattern .gitignore",
     "format": "prettier --write src/"
   },
   "dependencies": {

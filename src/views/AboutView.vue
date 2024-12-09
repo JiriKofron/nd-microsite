@@ -172,7 +172,13 @@ onMounted(async () => {
         </p>
 
         <div v-if="oProjektu && oProjektu.loga.length > 0">
-          <img :src="logo.logo" v-for="logo in oProjektu.loga" :key="logo.logo" alt="" width="250" />
+          <img
+            :src="logo.logo"
+            v-for="logo in oProjektu.loga"
+            :key="logo.logo"
+            alt=""
+            width="250"
+          />
         </div>
       </article>
 
@@ -253,13 +259,11 @@ onMounted(async () => {
               target="_blank"
               class="flex flex-col items-center gap-4 no-underline hover:no-underline visited:no-underline w-full"
             >
-              <div
-                  class="flex items-center justify-center h-[120px]"
-              >
+              <div class="flex items-center justify-center h-[120px]">
                 <img
-                    :src="organizace.logo"
-                    :alt="organizace.nazev_instituce"
-                    class="max-w-[200px] max-h-[120px]"
+                  :src="organizace.logo"
+                  :alt="organizace.nazev_instituce"
+                  class="max-w-[200px] max-h-[120px]"
                 />
               </div>
 

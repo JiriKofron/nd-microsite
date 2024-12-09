@@ -2,7 +2,6 @@
 import http from '@/server/api'
 import { onMounted, ref } from 'vue'
 import DownloadCard from '@/components/DownloadCard.vue'
-import SupportUs from '@/components/CardsOrder.vue'
 import { useRouter } from 'vue-router'
 
 interface NahledKarty {
