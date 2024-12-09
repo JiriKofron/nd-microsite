@@ -81,6 +81,7 @@ const fetchData = async () => {
   }
 }
 
+//TODO: Notification messages from responses
 onMounted(async () => {
   await router.isReady()
 
@@ -133,9 +134,12 @@ const headingText = computed(() => {
   switch (paymentData.value?.state) {
     case 'PAID':
       return paymentDetails.value?.zaplaceno?.nadpis
-    case 'CREATED' || 'AUTHORIZED' || 'PAYMENT_METHOD_CHOSEN':
-      return paymentDetails.value?.zaplaceno?.nadpis
-    case 'CANCELED' || 'TIMEOUTED':
+    case 'CREATED':
+    case 'AUTHORIZED':
+    case 'PAYMENT_METHOD_CHOSEN':
+      return paymentDetails.value?.cekame_na_platbu?.nadpis
+    case 'CANCELED':
+    case 'TIMEOUTED':
       return paymentDetails.value?.nezaplaceno?.nadpis
     default:
       return 'Prosím počkejte na aktualizaci stavu platby'
@@ -146,9 +150,12 @@ const descriptionText = computed(() => {
   switch (paymentData.value?.state) {
     case 'PAID':
       return paymentDetails.value?.zaplaceno?.popis
-    case 'CREATED' || 'AUTHORIZED' || 'PAYMENT_METHOD_CHOSEN':
-      return paymentDetails.value?.zaplaceno?.popis
-    case 'CANCELED' || 'TIMEOUTED':
+    case 'CREATED':
+    case 'AUTHORIZED':
+    case 'PAYMENT_METHOD_CHOSEN':
+      return paymentDetails.value?.cekame_na_platbu?.popis
+    case 'CANCELED':
+    case 'TIMEOUTED':
       return paymentDetails.value?.nezaplaceno?.popis
     default:
       return ''
@@ -170,11 +177,11 @@ const descriptionText = computed(() => {
 
     <p v-html="descriptionText" class="text-16 font-roboto text-text-gray m-0" />
 
-    <section v-if="isPaid" class="flex flex-col shadow-warning-sign w-full py-8 text-text-gray">
+    <section v-if="isPaid || waitingForPayment" class="flex flex-col items-center justify-center shadow-warning-sign w-full py-8 text-text-gray ga-12">
       <h2 class="text-primary font-baloo text-clamp text-center">
         Shrnutí objednávky č. {{ orderData?.orderId }}
       </h2>
-      <div class="flex flex-col p-8 md:p-12 gap-12">
+      <div class="flex flex-col p-8 md:p-12 gap-12 w-full">
         <article class="flex flex-col gap-4">
           <h3 class="text-20 m-0 font-roboto">Zakoupené produkty:</h3>
 
@@ -217,21 +224,9 @@ const descriptionText = computed(() => {
           </span>
         </article>
       </div>
-    </section>
-
-    <section
-      v-else-if="waitingForPayment"
-      class="flex flex-col items-center justify-center shadow-warning-sign w-full py-12 text-text-gray"
-    >
-      <h2 class="text-primary font-baloo text-clamp text-center">
-        Proveďte prosím platbu vámi zvoleným způsobem.
-      </h2>
-
-      <span class="text-16 text-text-gray text-center py-4"
-        >Případně můžete využít tlačítko níže pro dokončení platby.</span
-      >
 
       <button
+        v-if="waitingForPayment"
         class="flex items-center justify-center px-6 py-2 border-none bg-orange text-white rounded-full text-base tracking-[0.05em] font-roboto font-bold w-fit cursor-pointer hover:bg-white hover:text-orange hover:outline hover:outline-[3px] hover:outline-orange hover:no-underline transition-all duration-300"
         type="button"
         @click="retryPayment"
