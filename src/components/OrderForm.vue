@@ -107,16 +107,13 @@ const handleErrors = ({ errors }: any) => {
   <section class="flex flex-col p-8 md:p-16 gap-8 md:gap-16 bg-white rounded-10">
     <div class="flex flex-col gap-8 md:gap-16">
       <h4 class="text-orange text-heading md:text-30 font-baloo font-semibold m-0">
-        Objednat karty
+        {{details?.nadpis}}
       </h4>
 
       <p
+        v-html="details?.popis"
         class="text-primary-text text-base md:text-16 font-roboto font-normal tracking-[0.01em] m-0"
-      >
-        Objednávky jsou odesílány 1x za týden přes službu Balíkovna. Po objednání vám přijde
-        potvrzovací e-mail s dalšími náležitostmi.
-        <strong>Cena sady je 700 Kč včetně poštovného a DPH.</strong>
-      </p>
+      />
     </div>
 
     <Form

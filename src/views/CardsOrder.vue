@@ -4,6 +4,8 @@ import { onMounted, ref, watchEffect } from 'vue'
 import OrderForm from '@/components/OrderForm.vue'
 
 export interface KartyBalicekFormular {
+  nadpis: string
+  popis: string
   cena: number
 }
 
