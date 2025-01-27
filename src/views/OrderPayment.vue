@@ -72,10 +72,6 @@ const fetchData = async () => {
     const response = await http.get('pages?slug=platba')
     const [data] = response.data
     paymentDetails.value = data?.acf
-    console.log('payment details', {
-      data,
-      acf: data?.acf
-    })
   } catch (error) {
     console.error(error)
   }
@@ -85,7 +81,6 @@ const fetchData = async () => {
 onMounted(async () => {
   await router.isReady()
 
-  console.log('route query', router.currentRoute.value.query)
   if (router.currentRoute.value.query) {
     const { data } = await axios.post(
       `${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/payment_status/`,
@@ -95,8 +90,6 @@ onMounted(async () => {
     )
 
     paymentData.value = JSON.parse(data.body)
-
-    console.log('payment data', paymentData.value)
   }
 
   await fetchData()
@@ -108,10 +101,7 @@ onMounted(async () => {
     }
   )
 
-  console.log('confirmation', response)
-
   orderData.value = response.data
-  console.log('orderData', orderData.value)
 })
 
 const isPaid = computed(() => {
@@ -127,7 +117,7 @@ const waitingForPayment = computed(() => {
 })
 
 const retryPayment = () => {
-  window.location.href = paymentData.value?.gw_url || 'https://test.nevypustdusi.cz/objednat-karty'
+  window.location.href = paymentData.value?.gw_url || 'https://www.nevypustdusi.cz/objednat-karty'
 }
 
 const headingText = computed(() => {

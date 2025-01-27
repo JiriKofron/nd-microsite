@@ -8,10 +8,12 @@
     "build": "run-p type-check \"build-only {@}\" --",
     "build:dev": "run-p type-check \"build-local {@}\" --",
     "build:stage": "run-p type-check \"build-stage {@}\" --",
+    "build:prod": "run-p type-check \"build-prod {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
     "build-stage": "vite build --mode stage",
-    "build-local": "vite build --mode development",
+    "build-local": "vite build",
+    "build-prod": "vite build --mode prod",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint --fix --ignore-pattern .gitignore",
     "format": "prettier --write src/"

@@ -47,7 +47,7 @@ const schema = object({
   company: string(),
   invoice: string(),
   petplusdva: number(),
-  mistastrachu: number().required('Vyplňte prosím počet kusů'),
+  mistastrachu: number().positive('Počet kusů musí být větší jak 0').required('Vyplňte prosím počet kusů'),
   payment: string().nullable(),
   note: string().max(250, 'Maximální délka poznámky je 250 znaků')
 })
@@ -320,7 +320,7 @@ const handleErrors = ({ errors }: any) => {
                 @change="errors.mistastrachu = ''"
               />
 
-              <ErrorMessage name="mistastrachu" class="text-sm font-roboto text-danger pl-8 pt-1" />
+              <ErrorMessage name="mistastrachu" class="text-sm font-roboto text-danger pl-8 pt-1 text-nowrap" />
             </div>
 
             <div
