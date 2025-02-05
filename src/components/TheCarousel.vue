@@ -14,7 +14,7 @@ const fetchData = async () => {
     references.value = data?.acf?.reference
     loading.value = false
   } catch (error) {
-    console.error(error)
+    console.log(error)
   }
 }
 
@@ -68,7 +68,7 @@ onMounted(() => {
       loading.value = false
     })
     .catch((error) => {
-      console.error(error)
+      console.log(error)
     })
 })
 </script>
@@ -139,8 +139,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-@import 'node_modules/@glidejs/glide/src/assets/sass/glide.core';
-
 .reference-wrapper {
   display: flex;
   flex-flow: column nowrap;

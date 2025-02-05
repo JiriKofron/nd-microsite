@@ -3,14 +3,18 @@ import { ref } from 'vue'
 import { Form, Field, useForm, ErrorMessage } from 'vee-validate'
 import { object, string, number } from 'yup'
 import axios from 'axios'
+import type { KartyBalicekFormular } from '@/views/CardsOrder.vue'
 
-const emit = defineEmits<{
-  (e: 'submit', value: boolean): void
+const { details } = defineProps<{
+  details: KartyBalicekFormular | undefined
 }>()
 
 interface FormData {
   name: string
   address: string
+  streetName: string
+  city: string
+  zip: string
   mail: string
   phone: string
   ico?: string
@@ -18,12 +22,16 @@ interface FormData {
   invoice?: string
   petplusdva?: number
   mistastrachu: number
+  payment: string
   note?: string
 }
 
 const formData = ref<FormData>({
   name: '',
   address: '',
+  streetName: '',
+  city: '',
+  zip: '',
   mail: '',
   phone: '',
   ico: '',
@@ -31,36 +39,63 @@ const formData = ref<FormData>({
   invoice: '',
   petplusdva: 0,
   mistastrachu: 0,
+  payment: 'GoPay',
   note: ''
 })
 
 const formElement = ref()
 const schema = object({
   name: string().required('Vyplňte prosím svoje jméno').min(4, 'Minimální počet znaků jsou 4'),
-  address: string().required('Vyplňte prosím dodací adresu'),
+  streetName: string().required('Vyplňte prosím dodací adresu'),
+  city: string().required('Vyplňte prosím město'),
+  'postal-code': string().required('Vyplňte prosím PSČ'),
   email: string().required('Vyplňte prosím emailovou adresu').email('Email není validní'),
   phone: string().required('Vyplňte prosím svoje telefonní číslo'),
   ico: string(),
   company: string(),
   invoice: string(),
   petplusdva: number(),
-  mistastrachu: number(),
+  mistastrachu: number().positive('Počet kusů musí být větší jak 0').required('Vyplňte prosím počet kusů'),
+  payment: string().nullable(),
   note: string().max(250, 'Maximální délka poznámky je 250 znaků')
 })
 
 const { isSubmitting } = useForm()
+const isSending = ref(false)
 
 const submitForm = async () => {
+  isSending.value = true
   try {
-    await axios.post(`${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/order/`, formData.value)
+    const { data } = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/place_order/`,
+      {
+        ...formData.value,
+        address: `${formData.value.streetName}, ${formData.value.city}, ${formData.value.zip}`,
+        total: formData.value.mistastrachu * (details?.cena ?? 700) * 100
+      }
+    )
 
-    await axios.post(`${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/insert/`, formData.value)
+    const dataToSave = {
+      ...formData.value,
+      address: `${formData.value.streetName}, ${formData.value.city}, ${formData.value.zip}`,
+      orderId: data.order_number,
+      paymentId: data.id,
+      paymentStatus: data.state,
+      total: data.amount / 100
+    }
 
-    emit('submit', true)
+    await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/insert/`,
+      dataToSave
+    )
+
+    // Redirect go GoPay gateway
+    window.location.href = data.gw_url
   } catch (error) {
     console.error(error)
   } finally {
     formElement.value.resetForm()
+    isSending.value = false
   }
 }
 
@@ -81,15 +116,13 @@ const handleErrors = ({ errors }: any) => {
   <section class="flex flex-col p-8 md:p-16 gap-8 md:gap-16 bg-white rounded-10">
     <div class="flex flex-col gap-8 md:gap-16">
       <h4 class="text-orange text-heading md:text-30 font-baloo font-semibold m-0">
-        Objednat karty
+        {{details?.nadpis}}
       </h4>
 
       <p
+        v-html="details?.popis"
         class="text-primary-text text-base md:text-16 font-roboto font-normal tracking-[0.01em] m-0"
-      >
-        Objednávky jsou odesílány 1x za 14 dní. Po objednání vám přijde potvrzovací e-mail s dalšími
-        náležitostmi.
-      </p>
+      />
     </div>
 
     <Form
@@ -100,13 +133,13 @@ const handleErrors = ({ errors }: any) => {
       @invalid-submit="handleErrors"
       @submit="submitForm"
     >
-      <div class="flex flex-col md:flex-row gap-10 md:gap-16">
+      <div class="flex flex-col md:flex-row gap-10 md:gap-16 mb-4">
         <h4 class="text-primary text-20 md:text-heading font-baloo font-semibold m-0 md:basis-2/6">
-          Kontakt na vás
+          Kontakt na vás a dodací adresa
         </h4>
 
         <div class="flex flex-col gap-14 input__group md:basis-3/6">
-          <div class="input">
+          <div class="input mb-4">
             <label for="name" class="input__label" :class="{ 'input__label--errors': errors.name }">
               Jméno a příjmení *
             </label>
@@ -129,23 +162,69 @@ const handleErrors = ({ errors }: any) => {
             <label
               for="address"
               class="input__label"
-              :class="{ 'input__label--errors': errors.address }"
+              :class="{ 'input__label--errors': errors.streetName }"
             >
-              Adresa, kam karty zašleme *
+              Ulice a číslo popisné *
             </label>
 
             <Field
-              v-model="formData.address"
-              id="address"
-              name="address"
+              v-model="formData.streetName"
+              id="streetName"
+              name="streetName"
               type="text"
               class="input__field"
               :class="{
-                'input__field--errors focus-visible:outline-danger outline-2': errors.address
+                'input__field--errors focus-visible:outline-danger outline-2': errors.streetName
               }"
             />
 
-            <ErrorMessage name="address" class="text-sm font-roboto text-danger pl-8 pt-1" />
+            <ErrorMessage name="streetName" class="text-sm font-roboto text-danger pl-8 pt-1" />
+          </div>
+
+          <div class="input">
+            <label
+              for="city"
+              class="input__label"
+              :class="{ 'input__label--errors': errors.city }"
+            >
+              Město *
+            </label>
+
+            <Field
+              v-model="formData.city"
+              id="city"
+              name="city"
+              type="text"
+              class="input__field"
+              :class="{
+                'input__field--errors focus-visible:outline-danger outline-2': errors.city
+              }"
+            />
+
+            <ErrorMessage name="city" class="text-sm font-roboto text-danger pl-8 pt-1" />
+          </div>
+
+          <div class="input mb-4">
+            <label
+              for="postal-code"
+              class="input__label"
+              :class="{ 'input__label--errors': errors.zip }"
+            >
+              PSČ *
+            </label>
+
+            <Field
+              v-model="formData.zip"
+              id="postal-code"
+              name="postal-code"
+              type="text"
+              class="input__field"
+              :class="{
+                'input__field--errors focus-visible:outline-danger outline-2': errors.zip
+              }"
+            />
+
+            <ErrorMessage name="postal-code" class="text-sm font-roboto text-danger pl-8 pt-1" />
           </div>
 
           <div class="input">
@@ -195,7 +274,7 @@ const handleErrors = ({ errors }: any) => {
         </div>
       </div>
 
-      <div class="flex flex-col md:flex-row gap-8 md:gap-16">
+      <div class="flex flex-col md:flex-row gap-8 md:gap-16 mb-4">
         <h4 class="text-primary text-20 md:text-heading font-baloo font-semibold m-0 md:basis-2/6">
           Fakturační údaje
         </h4>
@@ -267,64 +346,8 @@ const handleErrors = ({ errors }: any) => {
       </div>
 
       <div
-        class="flex flex-col gap-8 md:gap-16 p-8 md:p-0 shadow-warning-sign md:shadow-none rounded-10"
-      >
-        <p class="text-danger text-base md:text-16 font-roboto font-normal m-0">
-          Karty 5+2 kroků v podpůrném rozhovoru aktuálně nejsou na skladě, ale můžete si je stáhnout výše na stránce ve formátu PDF.
-        </p>
-
-        <div class="flex flex-col md:flex-row gap-8 md:gap-16">
-          <p class="text-primary text-20 font-baloo font-semibold m-0 md:basis-4/12">
-            5+2 kroků k podpůrnému rozhovoru
-          </p>
-
-          <div
-            class="flex items-center justify-evenly md:justify-start gap-4 md:gap-8 md:basis-6/12"
-          >
-            <div
-              class="input max-w-48 md:max-w-none md:flex md:items-center md:justify-start md:!w-40"
-            >
-              <label
-                for="petplusdva"
-                class="input__label input__label--numbers"
-                :class="{ 'input__label--errors': errors.petplusdva }"
-              >
-                Počet
-              </label>
-
-              <Field
-                v-model="formData.petplusdva"
-                id="petplusdva"
-                name="petplusdva"
-                type="number"
-                class="w-1/3 max-w-40 input__field"
-                :class="{
-                  'input__field--errors focus-visible:outline-danger outline-2': errors.petplusdva
-                }"
-                :disabled="true"
-                @change="errors.petplusdva = ''"
-              />
-
-              <ErrorMessage name="petplusdva" class="text-sm font-roboto text-danger pl-2 pt-1" />
-            </div>
-
-            <div
-              class="flex items-center justify-between md:justify-start gap-4 md:gap-8 w-2/3 text-primary-text"
-            >
-              <p class="text-base font-roboto font-normal m-0">Cena:</p>
-              <p class="font-bold font-baloo text-20 m-0">Zdarma</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
         class="flex flex-col gap-4 p-8 md:p-0 md:gap-16 shadow-warning-sign md:shadow-none rounded-10"
       >
-        <p class="text-primary-text text-base md:text-16 font-roboto font-normal m-0">
-          Sadu 5+2 a Místa strachu si můžete předobjednat za přibližnou částku 600 Kč za balení. O
-          finální ceně a termínu doručení vás budeme informovat.
-        </p>
         <div class="flex flex-col md:flex-row gap-8 md:gap-16">
           <p class="text-primary text-20 font-baloo font-semibold m-0 md:basis-4/12">
             5+2 kroků k podpůrnému rozhovoru a Místa strachu
@@ -352,7 +375,7 @@ const handleErrors = ({ errors }: any) => {
                 @change="errors.mistastrachu = ''"
               />
 
-              <ErrorMessage name="mistastrachu" class="text-sm font-roboto text-danger pl-8 pt-1" />
+              <ErrorMessage name="mistastrachu" class="text-sm font-roboto text-danger pl-8 pt-1 text-nowrap" />
             </div>
 
             <div
@@ -361,9 +384,13 @@ const handleErrors = ({ errors }: any) => {
               <div class="flex items-center justify-between md:justify-start gap-4 md:gap-8">
                 <p class="text-base font-roboto font-normal m-0">Cena:</p>
 
-                <p class="font-bold font-baloo text-20 m-0">{{ formData.mistastrachu * 600 }} Kč</p>
+                <p class="font-bold font-baloo text-20 m-0">
+                  {{ formData.mistastrachu * (details?.cena ?? 700) }} Kč
+                </p>
               </div>
-              <p class="text-base font-roboto font-normal m-0">(600 Kč/ks)</p>
+              <p class="text-base font-roboto font-normal m-0">
+                ( {{ details?.cena ?? 700 }} Kč/ks)
+              </p>
             </div>
           </div>
         </div>
@@ -398,13 +425,38 @@ const handleErrors = ({ errors }: any) => {
         </div>
       </div>
 
-      <button
-        class="flex items-center justify-center h-[40px] px-4 rounded-full leading-relaxed cursor-pointer bg-orange border-none text-base md:text-17 text-white font-roboto font-semibold w-2/3 md:w-1/3 hover:bg-white hover:text-orange hover:outline hover:outline-[3px] hover:outline-orange transition-all duration-300"
-        type="submit"
-        :disabled="isSubmitting"
-      >
-        Odeslat objednávku
-      </button>
+      <div class="flex flex-col gap-4">
+        <h4 class="text-primary text-20 font-baloo font-semibold m-0 md:basis-4/12">
+          Způsob platby
+        </h4>
+
+        <div class="flex items-center gap-4">
+          <Field
+            v-model="formData.payment"
+            id="payment"
+            name="payment"
+            type="radio"
+            value="GoPay"
+            class="m-0 before:!w-7 before:!h-7 before:!top-[5px] after:!bg-primary after:!w-4 after:!h-4 after:!left-[0.28em] after:!top-[0.6em]"
+          />
+
+          <p class="text-primary text-17 font-baloo font-semibold m-0">GoPay - online platba</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <button
+          class="flex items-center justify-center h-[40px] px-4 rounded-full leading-relaxed cursor-pointer bg-orange border-none text-base md:text-17 text-white font-roboto font-semibold w-2/3 md:w-1/3 hover:bg-white hover:text-orange hover:outline hover:outline-[3px] hover:outline-orange transition-all duration-300"
+          type="submit"
+          :disabled="isSubmitting || isSending"
+        >
+          {{ isSending ? 'Odesílám...' : 'Závazně objednat' }}
+        </button>
+
+        <span class="text-base font-roboto text-light-gray">
+          Po kliknutí budete přesměrováni na platební bránu GoPay
+        </span>
+      </div>
     </Form>
   </section>
 </template>

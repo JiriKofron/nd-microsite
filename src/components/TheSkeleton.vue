@@ -2,10 +2,6 @@
 import { useWindowSize } from '@vueuse/core'
 
 const { width, height } = useWindowSize()
-console.log('vue use', {
-  width,
-  height
-})
 </script>
 
 <template>

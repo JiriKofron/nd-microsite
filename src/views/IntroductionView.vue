@@ -136,10 +136,7 @@ onMounted(async () => {
                 Říct si o pomoc vyžaduje odvahu. Možná tápete, kdo může pečovat o duše mladých?
               </p>
             </div>
-            <NdButton
-              variant="link"
-              link="/poslouchejme-deti/mista-pomoci-a-podpory"
-            >
+            <NdButton variant="link" link="/poslouchejme-deti/mista-pomoci-a-podpory">
               Kdo může pečovat o duše mladých?
             </NdButton>
 
