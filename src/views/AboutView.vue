@@ -131,7 +131,7 @@ const fetchData = async () => {
     )
     loading.value = false
   } catch (error) {
-    console.error(error)
+    console.log(error)
   }
 }
 

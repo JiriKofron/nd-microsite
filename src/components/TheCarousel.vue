@@ -14,7 +14,7 @@ const fetchData = async () => {
     references.value = data?.acf?.reference
     loading.value = false
   } catch (error) {
-    console.error(error)
+    console.log(error)
   }
 }
 
@@ -68,7 +68,7 @@ onMounted(() => {
       loading.value = false
     })
     .catch((error) => {
-      console.error(error)
+      console.log(error)
     })
 })
 </script>

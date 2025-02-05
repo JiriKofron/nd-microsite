@@ -12,6 +12,9 @@ const { details } = defineProps<{
 interface FormData {
   name: string
   address: string
+  streetName: string
+  city: string
+  zip: string
   mail: string
   phone: string
   ico?: string
@@ -26,6 +29,9 @@ interface FormData {
 const formData = ref<FormData>({
   name: '',
   address: '',
+  streetName: '',
+  city: '',
+  zip: '',
   mail: '',
   phone: '',
   ico: '',
@@ -40,7 +46,9 @@ const formData = ref<FormData>({
 const formElement = ref()
 const schema = object({
   name: string().required('Vyplňte prosím svoje jméno').min(4, 'Minimální počet znaků jsou 4'),
-  address: string().required('Vyplňte prosím dodací adresu'),
+  streetName: string().required('Vyplňte prosím dodací adresu'),
+  city: string().required('Vyplňte prosím město'),
+  'postal-code': string().required('Vyplňte prosím PSČ'),
   email: string().required('Vyplňte prosím emailovou adresu').email('Email není validní'),
   phone: string().required('Vyplňte prosím svoje telefonní číslo'),
   ico: string(),
@@ -62,13 +70,14 @@ const submitForm = async () => {
       `${import.meta.env.VITE_BASE_URL}/wp-json/draftspot_theme/v1/place_order/`,
       {
         ...formData.value,
+        address: `${formData.value.streetName}, ${formData.value.city}, ${formData.value.zip}`,
         total: formData.value.mistastrachu * (details?.cena ?? 700) * 100
       }
     )
-    console.log(data)
 
     const dataToSave = {
       ...formData.value,
+      address: `${formData.value.streetName}, ${formData.value.city}, ${formData.value.zip}`,
       orderId: data.order_number,
       paymentId: data.id,
       paymentStatus: data.state,
@@ -124,13 +133,13 @@ const handleErrors = ({ errors }: any) => {
       @invalid-submit="handleErrors"
       @submit="submitForm"
     >
-      <div class="flex flex-col md:flex-row gap-10 md:gap-16">
+      <div class="flex flex-col md:flex-row gap-10 md:gap-16 mb-4">
         <h4 class="text-primary text-20 md:text-heading font-baloo font-semibold m-0 md:basis-2/6">
-          Kontakt na vás
+          Kontakt na vás a dodací adresa
         </h4>
 
         <div class="flex flex-col gap-14 input__group md:basis-3/6">
-          <div class="input">
+          <div class="input mb-4">
             <label for="name" class="input__label" :class="{ 'input__label--errors': errors.name }">
               Jméno a příjmení *
             </label>
@@ -153,23 +162,69 @@ const handleErrors = ({ errors }: any) => {
             <label
               for="address"
               class="input__label"
-              :class="{ 'input__label--errors': errors.address }"
+              :class="{ 'input__label--errors': errors.streetName }"
             >
-              Adresa, kam karty zašleme *
+              Ulice a číslo popisné *
             </label>
 
             <Field
-              v-model="formData.address"
-              id="address"
-              name="address"
+              v-model="formData.streetName"
+              id="streetName"
+              name="streetName"
               type="text"
               class="input__field"
               :class="{
-                'input__field--errors focus-visible:outline-danger outline-2': errors.address
+                'input__field--errors focus-visible:outline-danger outline-2': errors.streetName
               }"
             />
 
-            <ErrorMessage name="address" class="text-sm font-roboto text-danger pl-8 pt-1" />
+            <ErrorMessage name="streetName" class="text-sm font-roboto text-danger pl-8 pt-1" />
+          </div>
+
+          <div class="input">
+            <label
+              for="city"
+              class="input__label"
+              :class="{ 'input__label--errors': errors.city }"
+            >
+              Město *
+            </label>
+
+            <Field
+              v-model="formData.city"
+              id="city"
+              name="city"
+              type="text"
+              class="input__field"
+              :class="{
+                'input__field--errors focus-visible:outline-danger outline-2': errors.city
+              }"
+            />
+
+            <ErrorMessage name="city" class="text-sm font-roboto text-danger pl-8 pt-1" />
+          </div>
+
+          <div class="input mb-4">
+            <label
+              for="postal-code"
+              class="input__label"
+              :class="{ 'input__label--errors': errors.zip }"
+            >
+              PSČ *
+            </label>
+
+            <Field
+              v-model="formData.zip"
+              id="postal-code"
+              name="postal-code"
+              type="text"
+              class="input__field"
+              :class="{
+                'input__field--errors focus-visible:outline-danger outline-2': errors.zip
+              }"
+            />
+
+            <ErrorMessage name="postal-code" class="text-sm font-roboto text-danger pl-8 pt-1" />
           </div>
 
           <div class="input">
@@ -219,7 +274,7 @@ const handleErrors = ({ errors }: any) => {
         </div>
       </div>
 
-      <div class="flex flex-col md:flex-row gap-8 md:gap-16">
+      <div class="flex flex-col md:flex-row gap-8 md:gap-16 mb-4">
         <h4 class="text-primary text-20 md:text-heading font-baloo font-semibold m-0 md:basis-2/6">
           Fakturační údaje
         </h4>
